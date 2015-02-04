@@ -7,8 +7,9 @@
  */
 window.onload = function() 
 {
-	//"use strict";
+	"use strict";
 	
+	/* Class for the Dog enemy */
 	Dog = function(index, game, person, running_direction, type)
 	{
 		var x = (game.world.randomX%(game.world.bounds.width-120))+40;
