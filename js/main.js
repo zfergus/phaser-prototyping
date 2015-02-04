@@ -10,7 +10,7 @@ window.onload = function()
 	"use strict";
 	
 	/* Class for the Dog enemy */
-	Dog = function(index, game, person, running_direction, type)
+	var Dog = function(index, game, person, running_direction, type)
 	{
 		var x = (game.world.randomX%(game.world.bounds.width-120))+40;
 		var y = (Math.random() * (game.world.height-80));
@@ -69,8 +69,8 @@ window.onload = function()
 		if(n_bones > 0)
 		{
 			n_bones -= 1;
-			bones_eaten += 1;
-			//game.add.sprite(dogs.x, dogs.y, "heart")
+			this.bones_eaten += 1;
+			create_heart(this.dog.x, this.dog.y);
 			/* Tame this dog */
 			this.alive = false;
 			this.dog.kill();
@@ -80,7 +80,8 @@ window.onload = function()
 	};
     
 	/* The game object */
-    var game = new Phaser.Game( 800, 600, Phaser.AUTO, "game", { preload: preload, create: create, update: update } );
+    var game = new Phaser.Game( 800, 600, Phaser.AUTO, "game", 
+		{ preload: preload, create: create, update: update } );
     
 	/* Load the game assets. */
     function preload() {
@@ -89,8 +90,7 @@ window.onload = function()
 		game.load.image("bone", "assets/bone.png");
 		game.load.image("ladder-huge", "assets/ladder-huge.png");
 		game.load.image("ladder-large", "assets/ladder-large.png");
-		game.load.image("heart", "assets/heart.png");
-		game.load.image("wall", "assets/wall.png")
+		game.load.image("wall", "assets/wall.png");
 		
 		/* Load Sprites */
 		game.load.spritesheet("sky", "assets/sky.png", 800, 600);
@@ -98,6 +98,7 @@ window.onload = function()
 		game.load.spritesheet("dog", "assets/dog.png", 32, 32);
 		game.load.spritesheet("dog-fast", "assets/dog-fast.png", 32, 32);
 		game.load.spritesheet("dog-heavy", "assets/dog-heavy.png", 32, 32);
+		game.load.spritesheet("heart", "assets/heart-sheet.png", 22, 22);
 		
 		/* Load Music */
 		game.load.audio("day-music", "assets/day.mp3");
@@ -135,10 +136,8 @@ window.onload = function()
 	/* Howl sound effect */
 	var howl;
 	
-	/* Text for the bone count the player has collected */
-	var boneCount;
-	/* Text for the health count the player has collected */
-	var healthCount;
+	/* Text for the bone count and player's health */
+	var status
 	
 	/* Number of bones the player collected */
 	var n_bones = 0;	
@@ -193,25 +192,14 @@ window.onload = function()
 		
 		/* Create the dogs */
 		dogs = [];
-		
-		for(var i = 0; i < 20; i++)
-		{
-			var dog;
-			do
-			{
-				var dog = new Dog(i, game, player, i%2, i%3);
-			}
-			while(game.physics.arcade.overlap(platforms, dogs))
-			dogs.push(dog);
-		}
+		create_dogs(25);
 		
 		/* Create the arrow keys */
 		cursors = game.input.keyboard.createCursorKeys();
 		
-		/* Display number of bones */
-		boneCount = game.add.text(16, 16, "Bones: 0", { fontSize: "32px", fill: "#fff"});
-		/* Display amount of health */
-		healthCount = game.add.text(game.world.width-256, 16, "Health: " + health, { fontSize: "32px", fill: "#fff"});
+		/* Display the bone count and health */
+		status = game.add.text(game.world.camera.x + 16, 16, "Health: " + 
+			health + "  Bones: " + n_bones, { fontSize: "32px", fill: "#fff"});
 		
     }
 	
@@ -278,11 +266,26 @@ window.onload = function()
 		player.body.gravity.y = 300;
 		player.body.collideWorldBounds = true;
 	
-		/* Walk left and right animations */
+		/* Add player animations */
 		player.animations.add( "left", [0, 1, 2, 3], 10, true);
 		player.animations.add("right", [6, 7, 8, 9], 10, true);
 		player.animations.add("climb", [10, 11], 5, true);
+		player.animations.add("death", [12, 13, 14, 15], 10, false);
 		
+	}
+	
+	function create_dogs(n_dogs)
+	{
+		for(var i = 0; i < n_dogs; i++)
+		{
+			var dog;
+			do
+			{
+				var dog = new Dog(i, game, player, i%2, i%3);
+			}
+			while(game.physics.arcade.overlap(platforms, dogs))
+			dogs.push(dog);
+		}
 	}
 	
 	/* Creates a bone at the x and y coordinates given. */
@@ -304,8 +307,20 @@ window.onload = function()
 		ladder.body.immovable = true;
 	}
 	
+	/* Creates a heart particle at the given x and y */
+	function create_heart(x, y)
+	{
+		var heart = game.add.sprite(x, y, "heart", 0);
+		
+		/* Play beating heart animation */
+		heart.animations.add("beat", [0, 1, 2, 3], 4, true);
+		heart.animations.play("beat", 8, false, true);
+	}
+	
 	function update()
 	{	
+		/* Move the text */
+		redraw_text();
 		/* Collision between player and walls */
 		game.physics.arcade.collide(walls, player);
 		/* Check overlap of bone and player */
@@ -370,7 +385,8 @@ window.onload = function()
 			player.body.velocity.x = 300;
 			player.animations.play("right");
 		}
-		else if(!((cursors.up.isDown ||  cursors.down.isDown) && game.physics.arcade.overlap(player, ladders)))
+		else if(!((cursors.up.isDown ||  cursors.down.isDown) && 
+				game.physics.arcade.overlap(player, ladders)))
 		{
 			/* Stand still */
 			player.animations.stop();
@@ -384,7 +400,8 @@ window.onload = function()
 			player.body.velocity.y = -100;
 		}
 		/* Allow the player to move down if they are touching the ladder */
-		else if(cursors.down.isDown && game.physics.arcade.overlap(player, ladders))
+		else if(cursors.down.isDown && 
+				game.physics.arcade.overlap(player, ladders))
 		{
 			player.animations.play("climb");
 			player.body.velocity.y = 100;
@@ -466,41 +483,54 @@ window.onload = function()
 		}
 	}
 	
-
+	/* Collect the given bone */
 	function collect_bone(p, bone)
 	{
-		/* Removes the star from the screen */
-		bone.kill();
-		create_bone(Math.random()*game.world.width, Math.random()*(game.world.height - 80));
+		/* Moves the the bone to a random point */
+		bone.reset(Math.random()*game.world.width, 
+				   Math.random()*(game.world.height - 80));
 	 
 		/* Add an update the score */
 		n_bones += 1;
 		redraw_text();
 	}
 
+	/* Deal the given damage to the player's health */
 	function damagePlayer(damage)
 	{
 		health -= damage;
 		if(health <= 0)
 		{
+			health = 0;
 			end_game();
 		}
 		redraw_text();
 	}
 	
+	/* Redraw the text relative to the camera */
 	function redraw_text()
 	{
-		boneCount.text = "Bones: " + n_bones;
-		healthCount.text = "Health: " + health;
+		status.text = "Health: " + health + "  Bones: " + n_bones;
+		status.x = game.world.camera.x + 16;
 	}
 
+	/* End the game kill the player */
 	function end_game() 
 	{
-		/* Reset the players position */
+		/* Move the player back to the spawn point */
+		player.reset(40, game.world.height - 150);
+		/* Reset the player's health */
 		health = 100;
-		night_music.stop();
-		player.kill();
-		game.add.text(game.world.centerX, game.world.centerY, "GAME OVER!", { fontSize: "72px", fill: "#fff"})
+		/* Reset the player's inventory */
+		n_bones = 0;
+		/* Create an additional 10 dogs */
+		create_dogs(10);
+		
+		/* Move the camera to the origin */
+		game.world.camera.x = 0;
+		game.world.camera.y = 0;
+		
+		/* Redraw the text */
 		redraw_text();
 	}
 };
