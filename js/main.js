@@ -42,6 +42,7 @@ window.onload = function()
 		this.bones_eaten = 0;
 		this.player = player;
 		this.alive = true;
+		n_dogs++;
 
 		this.dog = game.add.sprite(x, y, this.type_string);
 		
@@ -66,15 +67,24 @@ window.onload = function()
 	/* Feed a bone to this dog and tame it */
 	Dog.prototype.feed_bone = function()
 	{
+		/* If the player has more than 1 bone */
 		if(n_bones > 0)
 		{
+			/* Take away a bone */
 			n_bones -= 1;
+			/* Give bone to dog */
 			this.bones_eaten += 1;
-			create_heart(this.dog.x, this.dog.y);
+			
+			/* Play bark sound */
+			bark.play("", 0, 5, false);
+			
 			/* Tame this dog */
 			this.alive = false;
 			this.dog.kill();
+			n_dogs--;
+			create_heart(this.dog.x, this.dog.y);
 			
+			/* Update the status text */
 			redraw_text();
 		}
 	};
@@ -84,13 +94,15 @@ window.onload = function()
 		{ preload: preload, create: create, update: update } );
     
 	/* Load the game assets. */
-    function preload() {
+    function preload() 
+	{
         /* Load the assets */
 		game.load.image("ground", "assets/ground-tile.png");
+		game.load.image("wall", "assets/wall.png");
 		game.load.image("bone", "assets/bone.png");
+		//game.load.image("med", "assets/stimpak.png");
 		game.load.image("ladder-huge", "assets/ladder-huge.png");
 		game.load.image("ladder-large", "assets/ladder-large.png");
-		game.load.image("wall", "assets/wall.png");
 		
 		/* Load Sprites */
 		game.load.spritesheet("sky", "assets/sky.png", 800, 600);
@@ -104,7 +116,8 @@ window.onload = function()
 		game.load.audio("day-music", "assets/day.mp3");
 		game.load.audio("night-music", "assets/night.mp3");
 		game.load.audio("howl", "assets/howl.wav");
-		
+		game.load.audio("ouch", "assets/ouch.mp3");
+		game.load.audio("bark", "assets/bark.mp3");
 	}
 	
 	/* A date object for getting the time */
@@ -135,6 +148,10 @@ window.onload = function()
 	var night_music;
 	/* Howl sound effect */
 	var howl;
+	/* Ouch sound effect */
+	var ouch;
+	/* Dog bark sound effect */
+	var bark;
 	
 	/* Text for the bone count and player's health */
 	var status
@@ -143,8 +160,8 @@ window.onload = function()
 	var n_bones = 0;	
 	/* Player's current health */
 	var health = 100;
-	/* Dogs bones consumed */
-	var bones_eaten = 0;
+	/* Number of dogs in the world */
+	var n_dogs = 0;
 	
     function create() 
 	{
@@ -158,6 +175,13 @@ window.onload = function()
 		
 		/* Load howl */
 		howl = game.add.audio("howl", 1, true);
+		
+		/* Load ouch sound effect */
+		ouch = game.add.audio("ouch", 1, true);
+		
+		/* Load bark */
+		bark = game.add.audio("bark", 1, true);
+
 
 		/* Draw the sky */
 		sky = game.add.sprite(0, 0, "sky");
@@ -167,7 +191,7 @@ window.onload = function()
 		create_platform();
 		
 		/* Create boundary walls */
-		creat_walls();
+		create_walls();
 
 		/* Create the bones of the world */
 		bones = game.add.group();
@@ -181,6 +205,7 @@ window.onload = function()
 		create_ladder(740, 240, "ladder-large");
 		create_ladder(740, 160, "ladder-large");
 		
+		/* Create ladders spaced 400 pixels apart */
 		for(var i = 1200; i < game.world.bounds.width; i+= 400)
 		{
 			create_ladder(i, 160, "ladder-huge");
@@ -188,18 +213,20 @@ window.onload = function()
 		
 		/* Create the player */
 		create_player();
+		/* Set the camera to follow the player */
 		game.camera.follow(player);
 		
-		/* Create the dogs */
+		/* Create the 25 initial dogs */
 		dogs = [];
 		create_dogs(25);
 		
 		/* Create the arrow keys */
 		cursors = game.input.keyboard.createCursorKeys();
 		
-		/* Display the bone count and health */
-		status = game.add.text(game.world.camera.x + 16, 16, "Health: " + 
-			health + "  Bones: " + n_bones, { fontSize: "32px", fill: "#fff"});
+		/* Text to display the bone count and health */
+		status = game.add.text(player.x+20,  player.y-20, "Health: " + 
+			health + "\nBones: " + n_bones, { fontSize: "72px", fill: "#fff", font: "courier"});
+		status.align = "center"
 		
     }
 	
@@ -216,24 +243,25 @@ window.onload = function()
 			ground.body.immovable = true;
 		}
 		
-		/* Create the first ledge */
+		/* Create the first level */
 		for(var x = 0; x < game.world.width; x += 40)
 		{
-			var ledge = platforms.create(x, 400, "ground");
+			var ledge = platforms.create(x, game.world.height - 200, "ground");
 			ledge.body.immovable = true;
 		}
 		
-		/* Create the first ledge */
+		/* Create the second level */
 		for(var x = 0; x < game.world.width; x += 40)
 		{
-			var ledge = platforms.create(x, 160, "ground");
+			var ledge = platforms.create(x, game.world.height - 440, "ground");
 			ledge.body.immovable = true;
 		}
 	}
 	
 	/* Creates wall tiles at the edges of the world */
-	function creat_walls()
+	function create_walls()
 	{
+		/* Initializes the wall group */
 		walls = game.add.group();
 		walls.enableBody = true;
 		
@@ -270,10 +298,11 @@ window.onload = function()
 		player.animations.add( "left", [0, 1, 2, 3], 10, true);
 		player.animations.add("right", [6, 7, 8, 9], 10, true);
 		player.animations.add("climb", [10, 11], 5, true);
-		player.animations.add("death", [12, 13, 14, 15], 10, false);
 		
 	}
 	
+	/* Creates n dogs where n is the given integer. */
+	/* Creates the dogs at random coordinates.      */
 	function create_dogs(n_dogs)
 	{
 		for(var i = 0; i < n_dogs; i++)
@@ -292,9 +321,9 @@ window.onload = function()
 	function create_bone(x, y)
 	{
 		var bone = bones.create(x, y, "bone");
-		//bone.body.immovable = true;
 		game.physics.arcade.enable(bone);
 		
+		/* Add physics so the bones fall */
 		bone.body.bounce.y = 0.2;
 		bone.body.gravity.y = 300;
 		bone.body.collideWorldBounds = true;
@@ -312,23 +341,33 @@ window.onload = function()
 	{
 		var heart = game.add.sprite(x, y, "heart", 0);
 		
-		/* Play beating heart animation */
+		/* Play beating heart animation and kill afterwards */
 		heart.animations.add("beat", [0, 1, 2, 3], 4, true);
 		heart.animations.play("beat", 8, false, true);
 	}
 	
+	/* Run this every frame */
 	function update()
 	{	
 		/* Move the text */
 		redraw_text();
+		
+		/**********************************************/
+		/************Collision and Overlaps************/  
+		/**********************************************/
+		
 		/* Collision between player and walls */
 		game.physics.arcade.collide(walls, player);
 		/* Check overlap of bone and player */
 		game.physics.arcade.overlap(player, bones, collect_bone, null, this);
 		/* Collision between bone and ground */
 		game.physics.arcade.collide(bones, platforms);
-		/* Reset the players velocity */
+		/* Collision between bone and ground */
 		player.body.velocity.x = 0;
+		
+		/**********************************************/
+		/* Detect Collisions and Events with the Dogs */  
+		/**********************************************/
 		
 		/* Collision between dogs and other */
 		for (var i = 0; i < dogs.length; i++)
@@ -373,6 +412,13 @@ window.onload = function()
 			}
 		}
 		
+		
+		/**********************************************/
+		/*************** Player controls **************/  
+		/**********************************************/
+		
+		/**************** Left or Right ***************/
+		
 		if(cursors.left.isDown)
 		{
 			/* Move to the left */
@@ -385,6 +431,7 @@ window.onload = function()
 			player.body.velocity.x = 300;
 			player.animations.play("right");
 		}
+		/* If all the cursors are NOT down */ 
 		else if(!((cursors.up.isDown ||  cursors.down.isDown) && 
 				game.physics.arcade.overlap(player, ladders)))
 		{
@@ -392,94 +439,42 @@ window.onload = function()
 			player.animations.stop();
 			player.frame = 4;
 		}
-	
+		
+		/***************** Up or Down *****************/
+		
 		/* Allow the player to move up if they are touching the ladder */
 		if(cursors.up.isDown && game.physics.arcade.overlap(player, ladders))
 		{
+			/* Climb animation */
 			player.animations.play("climb");
+			/* Move up */
 			player.body.velocity.y = -100;
 		}
 		/* Allow the player to move down if they are touching the ladder */
 		else if(cursors.down.isDown && 
-				game.physics.arcade.overlap(player, ladders))
+				game.physics.arcade.overlap(player, ladders) && 
+				player.y < game.world.height-90)
 		{
+			/* Climb animation */
 			player.animations.play("climb");
+			/* Move down */
 			player.body.velocity.y = 100;
 		}
-		else{
+		/* Turns collision with ground on if not on a ladder */
+		else
+		{
 			/* Collision between the player and the platforms */
 			game.physics.arcade.collide(player, platforms);
 		}
 		
+		/**********************************************/
+		/******* Control the Day and Night Cycle ******/  
+		/**********************************************/
+		
 		/* If 30 sec have elapsed switch the day or night */
 		if(((new Date()).getTime() - startTime)/1000 >= 30)
 		{
-			if(!isNight) /* If it is day time */
-			{
-				howl.play("", 0, 10, false);
-				/* Change to night time */
-				document.body.style.background = "black";
-				/* Change the music */
-				day_music.pause("",0,1,true);
-				night_music.play("",0,1,true);
-				/* Change the background */
-				sky.frame = 1;
-				
-				for (var i = 0; i < dogs.length; i++)
-				{
-					if(dogs[i].alive)
-					{
-						if(dogs[i].running_direction === 0)
-						{
-							/* Move to the left */
-							dogs[i].dog.body.velocity.x = -(dogs[i].speed);
-							dogs[i].dog.animations.play("left");
-							dogs[i].running_direction = 1;
-						}
-						else
-						{
-							/* Move to the right */
-							dogs[i].dog.body.velocity.x = dogs[i].speed;
-							dogs[i].dog.animations.play("right");
-							dogs[i].running_direction = 0;
-						}
-					}	
-				}
-				isNight = true;
-			}
-			else /* If it is night time */
-			{
-				/* Change to day time */
-				document.body.style.background = "white";
-				/* Change the music */
-				night_music.pause("",0,1,true);
-				day_music.play("",0,1,true);
-				/* Change the background */
-				sky.frame = 0;
-				
-				for (var i = 0; i < dogs.length; i++)
-				{					
-					if(dogs[i].alive)
-					{
-						dogs[i].dog.body.velocity.x = 0;
-						dogs[i].dog.animations.stop();
-						if(dogs[i].running_direction === 0)
-						{
-							/* Stand facing left */
-							dogs[i].dog.frame = 1;
-						}
-						else
-						{
-							/* Stand facing right */
-							dogs[i].dog.frame = 2;
-						}
-					}
-				}
-				
-				isNight = false;
-			}
-			
-			startTime = (new Date()).getTime();
+			change_time();
 		}
 	}
 	
@@ -490,32 +485,34 @@ window.onload = function()
 		bone.reset(Math.random()*game.world.width, 
 				   Math.random()*(game.world.height - 80));
 	 
-		/* Add an update the score */
+		/* Add an update the number of bones collected */
 		n_bones += 1;
 		redraw_text();
 	}
-
+	
 	/* Deal the given damage to the player's health */
 	function damagePlayer(damage)
 	{
 		health -= damage;
+		ouch.play("", 0, 10, false);
 		if(health <= 0)
 		{
 			health = 0;
-			end_game();
+			reset_game();
 		}
-		redraw_text();
 	}
 	
 	/* Redraw the text relative to the camera */
 	function redraw_text()
 	{
-		status.text = "Health: " + health + "  Bones: " + n_bones;
-		status.x = game.world.camera.x + 16;
+		status.text = "Health: " + health + "\nBones: " + n_bones + "  Dogs: "
+		+ n_dogs;
+		status.x = player.x-30;
+		status.y = player.y-25;
 	}
 
 	/* End the game kill the player */
-	function end_game() 
+	function reset_game() 
 	{
 		/* Move the player back to the spawn point */
 		player.reset(40, game.world.height - 150);
@@ -532,5 +529,78 @@ window.onload = function()
 		
 		/* Redraw the text */
 		redraw_text();
+		change_time();
+	}
+
+	/* Switch from day to night or night to day depending on what the */
+	/* current state is.                                              */
+	function change_time()
+	{
+		if(!isNight) /* If it is day time */
+		{
+			howl.play("", 0, 10, false);
+			/* Change to night time */
+			document.body.style.background = "black";
+			/* Change the music */
+			day_music.pause("",0,1,true);
+			night_music.play("",0,1,true);
+			/* Change the background */
+			sky.frame = 1;
+			
+			for (var i = 0; i < dogs.length; i++)
+			{
+				if(dogs[i].alive)
+				{
+					if(dogs[i].running_direction === 0)
+					{
+						/* Move to the left */
+						dogs[i].dog.body.velocity.x = -(dogs[i].speed);
+						dogs[i].dog.animations.play("left");
+						dogs[i].running_direction = 1;
+					}
+					else
+					{
+						/* Move to the right */
+						dogs[i].dog.body.velocity.x = dogs[i].speed;
+						dogs[i].dog.animations.play("right");
+						dogs[i].running_direction = 0;
+					}
+				}	
+			}
+			isNight = true;
+		}
+		else /* If it is night time */
+		{
+			/* Change to day time */
+			document.body.style.background = "white";
+			/* Change the music */
+			night_music.pause("",0,1,true);
+			day_music.play("",0,1,true);
+			/* Change the background */
+			sky.frame = 0;
+			
+			for (var i = 0; i < dogs.length; i++)
+			{					
+				if(dogs[i].alive)
+				{
+					dogs[i].dog.body.velocity.x = 0;
+					dogs[i].dog.animations.stop();
+					if(dogs[i].running_direction === 0)
+					{
+						/* Stand facing left */
+						dogs[i].dog.frame = 1;
+					}
+					else
+					{
+						/* Stand facing right */
+						dogs[i].dog.frame = 2;
+					}
+				}
+			}
+			
+			isNight = false;
+		}
+			
+		startTime = (new Date()).getTime();
 	}
 };
