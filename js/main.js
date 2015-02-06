@@ -113,8 +113,8 @@ window.onload = function()
 		game.load.spritesheet("heart", "assets/heart-sheet.png", 22, 22);
 		
 		/* Load Music */
-		game.load.audio("day-music", "assets/day.mp3");
-		game.load.audio("night-music", "assets/night.mp3");
+		game.load.audio("day-music", "assets/day_short.mp3");
+		game.load.audio("night-music", "assets/night_short.mp3");
 		game.load.audio("howl", "assets/howl.wav");
 		game.load.audio("ouch", "assets/ouch.mp3");
 		game.load.audio("bark", "assets/bark.mp3");
