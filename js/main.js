@@ -1,9 +1,8 @@
 /*
  * Doggies!
  * Created by Zachary Ferguson
- * Last edited: 02/03/2015
+ * Last edited: 02/07/2015
  * Main JavaScript code for the game Doggies!
- *
  */
 window.onload = function() 
 {
