@@ -11,6 +11,8 @@ function NPC(x, y, game, sprite, dialogue)
 	this.dialogue = dialogue;
 	this.n_lines = countNewLines(dialogue);
 	
+	this.text_box = undefined;
+	
 	this.direction = 0;
 	
 	this.game = game;
@@ -22,12 +24,15 @@ function NPC(x, y, game, sprite, dialogue)
 	this.npc.body.immovable = true;
 	
 	this.text = this.game.add.text(this.x - 28, this.y - 16, "", 
-		{fill: "blue", font: "bold 12px Courier New", align: "center", stroke: "black"});
+		{fill: "blue", font: "bold 12px Courier New", align: "center", 
+		stroke: "black"});
 }
 
 /* Display the dialogue above the NPC */
 NPC.prototype.speak = function()
 {
+	this.textbox = this.game.add.sprite(this.game.camera.x, 
+		this.game.camera.y+472, "text_box");
 	this.text.text = this.dialogue;
 	this.text.x = this.x - (this.dialogue.length * 3)/this.n_lines;
 	this.text.y = this.y - 16*this.n_lines;
@@ -37,6 +42,11 @@ NPC.prototype.speak = function()
 NPC.prototype.mute = function()
 {
 	this.text.text = "";
+	if(this.text_box !== undefined)
+	{
+		this.text_box.destroy();
+		this.text_box = undefined;
+	}
 }
 
 /* Counts the number of lines the given string covers */
