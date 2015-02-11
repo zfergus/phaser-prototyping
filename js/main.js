@@ -51,6 +51,9 @@ window.onload = function()
 	var kittensY = Math.random() * 1024;
 	var box;
 	
+	/* Background music */
+	var music;
+	
 	function preload() 
 	{
 		/* Load tile map */
@@ -69,12 +72,17 @@ window.onload = function()
 		game.load.spritesheet("npc3", "assets/npc3.png", 34, 52);
 		game.load.spritesheet("female_npc", "assets/female_npc.png", 34, 52);
 		/* Load Sounds */
-		game.load.audio("meow", "assets/kittens.wav");
+		game.load.audio("meow", "assets/kittens.ogg");
+		game.load.audio("bg_music", "assets/bg_music.ogg");
 	}
     
     
     function create() 
 	{
+		/*  */
+		music = game.add.audio("bg_music", .05, true);
+		music.play();
+		
 		/* Stretch out the world */
 		game.world.setBounds(0, 0, 1280, 1280);
 		
