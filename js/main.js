@@ -79,7 +79,7 @@ window.onload = function()
     
     function create() 
 	{
-		/*  */
+		/* Play the background music */
 		music = game.add.audio("bg_music", .25, true);
 		music.play();
 		
