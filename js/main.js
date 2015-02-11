@@ -31,6 +31,8 @@ window.onload = function()
 	var nesha;
 	var preist;
 	var clyde;
+	var cleo;
+	var mage;
 	
 	/* World text */
 	var door_text;
@@ -64,6 +66,8 @@ window.onload = function()
 		game.load.spritesheet("nesha", "assets/nesha.png", 34, 52);
 		game.load.spritesheet("npc1", "assets/npc1.png", 34, 52);
 		game.load.spritesheet("npc2", "assets/npc2.png", 34, 52);
+		game.load.spritesheet("npc3", "assets/npc3.png", 34, 52);
+		game.load.spritesheet("female_npc", "assets/female_npc.png", 34, 52);
 		/* Load Sounds */
 		game.load.audio("meow", "assets/kittens.wav");
 	}
@@ -110,6 +114,8 @@ window.onload = function()
 		/* Create NPC's */
 		nesha = new NPC(634, 352, game, "nesha", "Nesha: Hi, have some cake?");
 		preist = new NPC(793, 480, game, "npc2", "Priest: May God have mercy on your soul.");
+		cleo = new NPC(330, 480, game, "female_npc", "Cleo: Ohh...I hope you find those kittens.");
+		mage = new NPC(672, 248, game, "npc3", "Mage: How dare you accuse me!");
 		clyde = new NPC(442, 480, game, "npc1", "Clyde: Kittens...hmm...\n" +
 			"I don't think I have seen any kittens lately, but\n" + 
 			"we did get a new shipment of livestock.");
@@ -146,7 +152,7 @@ window.onload = function()
 		player.animations.add( "down", [ 1,  2,  3,  0], 5, true);
 		player.animations.add(   "up", [12, 13, 14, 15], 5, true);
 	}
-	var text_box;	
+	
     function update() 
 	{
 		console.log("X: "+player.x+", Y: "+player.y);
@@ -209,21 +215,31 @@ window.onload = function()
 		{
 			preist.mute();
 		}
+		if(game.physics.arcade.collide(player, cleo.npc))
+		{
+			cleo.speak();
+		}
+		else
+		{
+			cleo.mute();
+		}		
+		if(game.physics.arcade.collide(player, mage.npc))
+		{
+			mage.speak();
+		}
+		else
+		{
+			mage.mute();
+		}		
 		if(game.physics.arcade.collide(player, clyde.npc))
 		{
 			clyde.speak();
 			console.log("Clue found, YAY!!!");
 			clueTwoFound = true;
-			text_box = game.add.image(this.game.camera.x, this.game.camera.y+472, "text_box");
 		}
 		else
 		{
 			clyde.mute();
-			if(text_box !== undefined)
-			{
-				text_box.visibility = false;
-				console.log("kill");
-			}
 		}
 		/* Reset the player's velocity */
 		player.body.velocity.x = 0;
