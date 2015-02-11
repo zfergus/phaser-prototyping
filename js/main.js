@@ -80,7 +80,7 @@ window.onload = function()
     function create() 
 	{
 		/*  */
-		music = game.add.audio("bg_music", .05, true);
+		music = game.add.audio("bg_music", .25, true);
 		music.play();
 		
 		/* Stretch out the world */
