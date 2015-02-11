@@ -2,11 +2,16 @@
  * Class for Non-Playable Characters
  * Created by Zachary Ferguson
  */
-function NPC(x, y, game, sprite, dialoge)
+ 
+ /* Create a non-playable character */
+function NPC(x, y, game, sprite, dialogue)
 {
 	this.x = x;
 	this.y = y;
-	this.dialoge = dialoge;
+	this.dialogue = dialogue;
+	this.n_lines = countNewLines(dialogue);
+	
+	this.direction = 0;
 	
 	this.game = game;
 	this.npc = game.add.sprite(x, y, sprite);
@@ -20,14 +25,22 @@ function NPC(x, y, game, sprite, dialoge)
 		{fill: "blue", font: "bold 12px Courier New", align: "center", stroke: "black"});
 }
 
+/* Display the dialogue above the NPC */
 NPC.prototype.speak = function()
 {
-	this.text.text = this.dialoge;
-	this.text.x = this.x - 28;
-	this.text.y = this.y - 16;
+	this.text.text = this.dialogue;
+	this.text.x = this.x - (this.dialogue.length * 3)/this.n_lines;
+	this.text.y = this.y - 16*this.n_lines;
 }
 
+/* Turns of the text of the characters dialogue */
 NPC.prototype.mute = function()
 {
 	this.text.text = "";
+}
+
+/* Counts the number of lines the given string covers */
+function countNewLines(str)
+{
+	return str.split(/\r\n|\r|\n/).length;
 }

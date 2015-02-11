@@ -5,7 +5,8 @@
  * Main JavaScript code for the game Kittens!
  */
  
-window.onload = function() {
+window.onload = function() 
+{
     
     "use strict";
 
@@ -28,6 +29,8 @@ window.onload = function() {
 	
 	/* NPC's */
 	var nesha;
+	var preist;
+	var clyde;
 	
 	/* World text */
 	var door_text;
@@ -37,12 +40,13 @@ window.onload = function() {
 	/* Arrow key objects */
 	var cursors;
 	
-	var clueFound = false;
+	var clueOneFound = false;
+	var clueTwoFound = false;
 	var kittensAdded = false;
 	var kittensFound = false;
 	var meow;
-	var kittensX = 64;
-	var kittensY = 64;
+	var kittensX = Math.random() * 1024;
+	var kittensY = Math.random() * 1024;
 	var box;
 	
 	function preload() 
@@ -54,9 +58,12 @@ window.onload = function() {
 		game.load.tilemap("desert_map", "assets/desert.json", null, Phaser.Tilemap.TILED_JSON);
 		/* Load images */
 		game.load.image("kittens", "assets/kittens.png");
+		game.load.image("text_box", "assets/text_box.png");
 		/* Load sprites */
 		game.load.spritesheet("player", "assets/player.png", 34, 52);
 		game.load.spritesheet("nesha", "assets/nesha.png", 34, 52);
+		game.load.spritesheet("npc1", "assets/npc1.png", 34, 52);
+		game.load.spritesheet("npc2", "assets/npc2.png", 34, 52);
 		/* Load Sounds */
 		game.load.audio("meow", "assets/kittens.wav");
 	}
@@ -96,11 +103,17 @@ window.onload = function() {
 		/* Set the camera to follow the player */
 		game.camera.follow(player);
 		
-		nesha = new NPC(640, 640, game, "nesha", "Hi, have some cake?");
-		
 		tree = desert_tilemap.createLayer("tree");
 		var tree_indices = [61, 145, 146, 147, 148, 150];
 		desert_tilemap.setCollision(tree_indices, true, tree);
+		
+		/* Create NPC's */
+		nesha = new NPC(634, 352, game, "nesha", "Nesha: Hi, have some cake?");
+		preist = new NPC(793, 480, game, "npc2", "Priest: May God have mercy on your soul.");
+		clyde = new NPC(442, 480, game, "npc1", "Clyde: Kittens...hmm...\n" +
+			"I don't think I have seen any kittens lately, but\n" + 
+			"we did get a new shipment of livestock.");
+		
 		
 		/* Create the arrow keys */
 		cursors = game.input.keyboard.createCursorKeys();
@@ -133,8 +146,10 @@ window.onload = function() {
 		player.animations.add( "down", [ 1,  2,  3,  0], 5, true);
 		player.animations.add(   "up", [12, 13, 14, 15], 5, true);
 	}
-	
-    function update() {
+	var text_box;	
+    function update() 
+	{
+		console.log("X: "+player.x+", Y: "+player.y);
 		/**********************************************/
 		/************Collision and Overlaps************/  
 		/**********************************************/		
@@ -179,11 +194,36 @@ window.onload = function() {
 		if(game.physics.arcade.collide(player, nesha.npc))
 		{
 			nesha.speak();
-			clueFound = true;
+			console.log("Clue found, YAY!!!");
+			clueOneFound = true;
 		}
 		else
 		{
 			nesha.mute();
+		}
+		if(game.physics.arcade.collide(player, preist.npc))
+		{
+			preist.speak();
+		}
+		else
+		{
+			preist.mute();
+		}
+		if(game.physics.arcade.collide(player, clyde.npc))
+		{
+			clyde.speak();
+			console.log("Clue found, YAY!!!");
+			clueTwoFound = true;
+			text_box = game.add.image(this.game.camera.x, this.game.camera.y+472, "text_box");
+		}
+		else
+		{
+			clyde.mute();
+			if(text_box !== undefined)
+			{
+				text_box.visibility = false;
+				console.log("kill");
+			}
 		}
 		/* Reset the player's velocity */
 		player.body.velocity.x = 0;
@@ -192,7 +232,7 @@ window.onload = function() {
 		/**********************************************/
 		/***************** Add Kittens ****************/  
 		/**********************************************/
-		if(clueFound && !kittensAdded && !kittensFound)
+		if(clueOneFound && clueTwoFound && !kittensAdded && !kittensFound)
 		{
 			addKittens();
 			kittensAdded = true;
@@ -201,7 +241,6 @@ window.onload = function() {
 		if(kittensAdded && !kittensFound)
 		{
 			meow.volume = (50/(playerDistance(kittensX, kittensY)+1));
-			console.log(meow.volume);
 		}
 		
 		/**********************************************/
@@ -257,10 +296,10 @@ window.onload = function() {
 	
 	function display_kittens_text()
 	{
-		kittens_text.text = "You have found the kittens,\nYAY!!!"
+		kittens_text.text = "You found the kittens,\nYAY!!!"
 		kittens_text.x = box.x - 48;
 		kittens_text.y = box.y - 32;
-		//console.log("Kittens found, YAY!!!")
+		console.log("Kittens found, YAY!!!");
 	}
 	
 	function addKittens()
@@ -272,7 +311,6 @@ window.onload = function() {
 		/* Play meow sound */
 		meow = game.add.audio("meow", 1, true);
 		meow.play();
-		console.log("Clue found, YAY!!!");
 	}
 	
 	function playerDistance(objectX, objectY)
