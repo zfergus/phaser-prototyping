@@ -5,7 +5,7 @@ IntroState.prototype = {
 	{
 		/* Play the intro */
 		var intro = this.game.add.sprite(0, 0, "title");
-		intro.animations.add("role", [0, 1, 2], 0.2);
+		intro.animations.add("role", [0, 1, 2, 3], 0.2);
 		intro.animations.play("role");
 		this.startTime = (new Date()).getTime();
 		
@@ -17,7 +17,7 @@ IntroState.prototype = {
 	update: function()
 	{
 		var deltaTime = (new Date()).getTime() - this.startTime;
-		if(deltaTime > (20*1000))
+		//if(deltaTime > (20*1000))
 		{
 			/* Wait for animation to end */
 			this.game.state.start("overworld");

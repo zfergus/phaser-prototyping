@@ -100,7 +100,7 @@ OverworldState.prototype =
 		clyde = new NonPlayerCharacter(442, 480, this.game, "npc1", "Clyde: Kittens...hmm...\n" +
 			"I don't think I have seen any kittens lately, but\n" + 
 			"we did get a new shipment of livestock.");
-		mage = new NonPlayerCharacter(672, 248, this.game, "npc3", "Mage: How dare you accuse me!");
+		mage = new NonPlayerCharacter(672 + 64, 248, this.game, "npc3", "Mage: How dare you accuse me!");
 		nesha = new NonPlayerCharacter(kittensX, kittensY-64, this.game, "nesha", "Princess: Thank you for saving my kittens!");
 		nesha.npc.visible = false;
 		
@@ -138,6 +138,7 @@ OverworldState.prototype =
 	/* Update the game every frame */
     update: function() 
 	{
+
 		if(nesha.npc.visible && this.deltaTime > 5*1000)
 		{
 			
@@ -211,38 +212,46 @@ OverworldState.prototype =
 		if(this.game.physics.arcade.collide(player, preist.npc))
 		{
 			preist.speak();
+			preist.stop(player.x);
 		}
 		else
 		{
 			preist.mute();
+			preist.move();
 		}
 		if(this.game.physics.arcade.collide(player, cleo.npc))
 		{
 			cleo.speak();
+			cleo.stop(player.x);
 			console.log("Clue found, YAY!!!");
 			clueOneFound = true;
 		}
 		else
 		{
 			cleo.mute();
+			cleo.move();
 		}		
 		if(this.game.physics.arcade.collide(player, mage.npc))
 		{
 			mage.speak();
+			mage.stop(player.x);
 		}
 		else
 		{
 			mage.mute();
+			mage.move();
 		}		
 		if(this.game.physics.arcade.collide(player, clyde.npc))
 		{
 			clyde.speak();
+			clyde.stop(player.x);
 			console.log("Clue found, YAY!!!");
 			clueTwoFound = true;
 		}
 		else
 		{
 			clyde.mute();
+			clyde.move();
 		}
 		/* Reset the player's velocity */
 		player.body.velocity.x = 0;

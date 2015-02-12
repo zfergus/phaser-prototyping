@@ -8,6 +8,7 @@ function NonPlayerCharacter(x, y, game, sprite, dialogue)
 {
 	this.x = x;
 	this.y = y;
+	this.velocity = Math.random() * 64; 
 	this.dialogue = dialogue;
 	this.n_lines = countNewLines(dialogue);
 	
@@ -18,10 +19,29 @@ function NonPlayerCharacter(x, y, game, sprite, dialogue)
 	this.text_box = this.game.add.sprite(this.game.camera.x, this.game.camera.y+472, "text_box");
 	this.text_box.visible = false;
 	
+	/* Add NPC animations */
+	this.npc.animations.add( "left", [ 4,  5,  6,  7], 5, true);
+	this.npc.animations.add("right", [ 8,  9, 10, 11], 5, true);
+	
 	/* Enable physics on the npc */
-	game.physics.arcade.enable(this.npc, Phaser.Physics.ARCADE);
 	game.physics.arcade.enable(this.npc);
 	this.npc.body.immovable = true;
+	
+	/* Start moving */
+	if(sprite !== "nesha")
+	{
+		if(Math.random() > .5)
+		{
+			this.npc.body.velocity.x = -this.velocity;
+			this.npc.animations.play("left");
+		}
+		else
+		{
+			this.npc.body.velocity.x = this.velocity;
+			this.npc.animations.play("right");
+		}
+	}
+	
 	
 	this.text = this.game.add.text(this.x - 28, this.y - 16, "", 
 		{fill: "black", font: "bold 20px Courier New", align: "center", 
@@ -53,4 +73,46 @@ NonPlayerCharacter.prototype.mute = function()
 function countNewLines(str)
 {
 	return str.split(/\r\n|\r|\n/).length;
+}
+
+NonPlayerCharacter.prototype.move = function()
+{
+	if(this.npc.x + 32 < this.x)
+	{
+		this.npc.animations.play("right");
+		this.npc.body.velocity.x = this.velocity;
+	}
+	else if(this.x + 32 < this.npc.x)
+	{
+		this.npc.animations.play("left");
+		this.npc.body.velocity.x = -this.velocity;
+	}
+	else if(this.npc.body.velocity.x === 0)
+	{
+		/* Start moving */
+		if(Math.random() > .5)
+		{
+			this.npc.body.velocity.x = -this.velocity;
+			this.npc.animations.play("left");
+		}
+		else
+		{
+			this.npc.body.velocity.x = this.velocity;
+			this.npc.animations.play("right");
+		}
+	}
+}
+
+NonPlayerCharacter.prototype.stop = function(playerX)
+{
+	if(playerX > this.npc.x)
+	{
+		this.npc.animations.play("right");
+	}
+	else
+	{
+		this.npc.animations.play("left");
+	}
+	this.npc.animations.stop();
+	this.npc.body.velocity.x = 0;
 }
