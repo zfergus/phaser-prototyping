@@ -3,6 +3,8 @@
  * Created by Zachary Ferguson
  */
 
+"use strict";
+ 
 var BootState = function(){};
   
 BootState.prototype = 

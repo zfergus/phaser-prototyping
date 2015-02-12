@@ -3,6 +3,8 @@
  * Created by Zachary Ferguson
  */
  
+ "use strict";
+ 
  /* Create a non-player character */
 function NonPlayerCharacter(x, y, game, sprite, dialogue)
 {
@@ -103,8 +105,10 @@ NonPlayerCharacter.prototype.move = function()
 	}
 }
 
+/* Stop the NPC from moving */
 NonPlayerCharacter.prototype.stop = function(playerX)
 {
+	/* Face the player */
 	if(playerX > this.npc.x)
 	{
 		this.npc.animations.play("right");
@@ -113,6 +117,8 @@ NonPlayerCharacter.prototype.stop = function(playerX)
 	{
 		this.npc.animations.play("left");
 	}
+	/* Stop animations */
 	this.npc.animations.stop();
+	/* Stop moving */
 	this.npc.body.velocity.x = 0;
 }

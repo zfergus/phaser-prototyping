@@ -2,6 +2,9 @@
  * Class for creating and starting the game
  * Created by Zachary Ferguson
  */
+ 
+"use strict";
+ 
 function Game() {};
  
 Game.prototype = 

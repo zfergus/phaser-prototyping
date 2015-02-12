@@ -3,6 +3,8 @@
  * Created by Zachary Ferguson
  */
 
+//"use strict";
+ 
 function OverworldState() {
 	/* Tile map variable an layers */
 	var desert_tilemap;
@@ -147,7 +149,6 @@ OverworldState.prototype =
 
 		if(nesha.npc.visible && this.deltaTime > 5*1000)
 		{
-			console.warn("true");
 			nesha.mute();
 			nesha.npc.visible = false;
 		}
@@ -246,7 +247,7 @@ OverworldState.prototype =
 			player.animations.stop();
 			cleo.speak();
 			cleo.stop(player.x);
-			console.log("Clue found, YAY!!!");
+			console.log("Clue 2 found, YAY!!!");
 			clueOneFound = true;
 		}
 		else
@@ -270,7 +271,7 @@ OverworldState.prototype =
 			player.animations.stop();
 			clyde.speak();
 			clyde.stop(player.x);
-			console.log("Clue found, YAY!!!");
+			console.log("Clue 1 found, YAY!!!");
 			clueTwoFound = true;
 		}
 		else

@@ -3,6 +3,8 @@
  * Created by Zachary Ferguson
  */
 
+"use strict";
+ 
 function PreloadState() {};
 
 PreloadState.prototype = 
@@ -40,6 +42,6 @@ PreloadState.prototype =
 	/* Play the intro */
 	create: function()
 	{
-		this.game.state.start("intro")
+		this.game.state.start("intro");
 	}
 };
