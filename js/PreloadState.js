@@ -1,7 +1,13 @@
+/*
+ * State Class for preloading game assets
+ * Created by Zachary Ferguson
+ */
+
 function PreloadState() {};
 
 PreloadState.prototype = 
 {
+	/* Load assets */
 	preload: function()
 	{ 
 		var loadingBar = this.add.sprite(400,300,"loading");
@@ -30,6 +36,8 @@ PreloadState.prototype =
 		this.game.load.audio("ouch", "assets/ouch.ogg");
 		this.game.load.audio("bg_music", "assets/western.ogg");
 	},
+	
+	/* Play the intro */
 	create: function()
 	{
 		this.game.state.start("intro")

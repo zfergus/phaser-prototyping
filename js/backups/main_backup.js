@@ -141,7 +141,7 @@ window.onload = function()
 			{fill: "blue", font: "12px Courier New", align: "center"});
 	}
     
-		/* Creates the players character sprite */
+	/* Creates the players character sprite */
 	function create_player()
 	{
 		/* The player and its settings */

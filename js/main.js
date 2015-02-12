@@ -1,6 +1,11 @@
+/*
+ * Class for creating and starting the game
+ * Created by Zachary Ferguson
+ */
 function Game() {};
  
-Game.prototype = {
+Game.prototype = 
+{
   start: function() 
   {
     var game = new Phaser.Game(800, 600, Phaser.AUTO, "game");

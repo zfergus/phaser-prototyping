@@ -8,7 +8,7 @@ function NonPlayerCharacter(x, y, game, sprite, dialogue)
 {
 	this.x = x;
 	this.y = y;
-	this.velocity = Math.random() * 64; 
+	this.velocity = Math.random() * 32+32; 
 	this.dialogue = dialogue;
 	this.n_lines = countNewLines(dialogue);
 	

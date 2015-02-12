@@ -1,3 +1,8 @@
+/*
+ * Class for Outside game world
+ * Created by Zachary Ferguson
+ */
+
 function OverworldState() {
 	/* Tile map variable an layers */
 	var desert_tilemap;
@@ -43,6 +48,7 @@ function OverworldState() {
 
 OverworldState.prototype = 
 {	
+	/* Create the overworld */
 	create: function() 
 	{
 		/* Define variables */
@@ -141,7 +147,6 @@ OverworldState.prototype =
 
 		if(nesha.npc.visible && this.deltaTime > 5*1000)
 		{
-			
 			console.warn("true");
 			nesha.mute();
 			nesha.npc.visible = false;
@@ -159,6 +164,7 @@ OverworldState.prototype =
 		
 		if(kittensAdded && this.game.physics.arcade.collide(box, player))
 		{
+			player.animations.stop();
 			meow.stop();
 			this.display_kittens_text();
 			
@@ -179,29 +185,44 @@ OverworldState.prototype =
 		}
 			
 		/* Collision between player and buildings */
-		this.game.physics.arcade.collide(player, buildings);
-		/* Collision between player and shrubs */
-		if(this.game.physics.arcade.collide(player, shrubs) && !ouch.isPlaying )
+		if(this.game.physics.arcade.collide(player, buildings))
 		{
-			ouch.play();
+			player.animations.stop();
 		}
+		/* Collision between player and shrubs */
+		if(this.game.physics.arcade.collide(player, shrubs))
+		{
+			player.animations.stop();
+			if(!ouch.isPlaying)
+			{
+				ouch.play();
+			}
+		}
+		/* Collision between player and sign */
 		if(this.game.physics.arcade.collide(player, signs))
 		{
+			player.animations.stop();
 			this.display_sign_text();
 		}
 		else
 		{
 			sign_text.text = "";
 		}
-		if(this.game.physics.arcade.collide(player, tree) && !ouch.isPlaying )
+		/* Collision between player and trees */
+		if(this.game.physics.arcade.collide(player, tree))
 		{
-			ouch.play();
+			player.animations.stop();
+			if(!ouch.isPlaying)
+			{
+				ouch.play();
+			}
 		}
 		/* Collision between player and doors */
 		if(this.game.physics.arcade.collide(player, door1) ||
 		   this.game.physics.arcade.collide(player, door2) ||
 		   this.game.physics.arcade.collide(player, door3))
 		{
+			player.animations.stop();
 			this.display_door_text();
 		}
 		else
@@ -211,6 +232,7 @@ OverworldState.prototype =
 		/* Collision between NPC and player */
 		if(this.game.physics.arcade.collide(player, preist.npc))
 		{
+			player.animations.stop();
 			preist.speak();
 			preist.stop(player.x);
 		}
@@ -221,6 +243,7 @@ OverworldState.prototype =
 		}
 		if(this.game.physics.arcade.collide(player, cleo.npc))
 		{
+			player.animations.stop();
 			cleo.speak();
 			cleo.stop(player.x);
 			console.log("Clue found, YAY!!!");
@@ -233,6 +256,7 @@ OverworldState.prototype =
 		}		
 		if(this.game.physics.arcade.collide(player, mage.npc))
 		{
+			player.animations.stop();
 			mage.speak();
 			mage.stop(player.x);
 		}
@@ -243,6 +267,7 @@ OverworldState.prototype =
 		}		
 		if(this.game.physics.arcade.collide(player, clyde.npc))
 		{
+			player.animations.stop();
 			clyde.speak();
 			clyde.stop(player.x);
 			console.log("Clue found, YAY!!!");
@@ -308,6 +333,7 @@ OverworldState.prototype =
 		}
 	},
 	
+	/* Display text above the door */
 	display_door_text: function()
 	{
 		door_text.text = "This door is locked.";
@@ -315,6 +341,7 @@ OverworldState.prototype =
 		door_text.y = player.y - 64;
 	},
 	
+	/* Display text above the sign */
 	display_sign_text: function()
 	{
 		sign_text.text = "This is a sign.";
@@ -322,6 +349,7 @@ OverworldState.prototype =
 		sign_text.y = player.y - 16;	
 	},
 	
+	/* Display text above the kitten box */
 	display_kittens_text: function()
 	{
 		kittens_text.text = "You found the kittens,\nYAY!!!"
@@ -330,6 +358,7 @@ OverworldState.prototype =
 		console.log("Kittens found, YAY!!!");
 	},
 	
+	/* Create the box of kittens */
 	addKittens: function()
 	{
 		box = this.game.add.sprite(kittensX, kittensY, "kittens");
@@ -341,10 +370,11 @@ OverworldState.prototype =
 		meow.play();
 	},
 	
+	/* Calculate the distance from the given point, (x,y).  */
 	playerDistance: function(objectX, objectY)
 	{
-		var deltaX = Math.abs(objectX-player.x);
-		var deltaY = Math.abs(objectY-player.y);
+		var deltaX = objectX - player.x;
+		var deltaY = objectY - player.y;
 	
 		var dist = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
 		
