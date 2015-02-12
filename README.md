@@ -1,12 +1,20 @@
-# GMU CS325 Introduction to Game Design
+# Mystery of the Stolen Kittens
 
-This repository is a simple "hello, world!" template for a game made with Phaser.
-All the code lives in the `gh-pages` branch. This lets you run your games directly from github!
-Check it out: http://gmu-cs325.github.io/digital-template/
-Fork this repository, checkout the `gh-pages` branch, and start making your own game!
+URL: http://zfergus2.github.io/digital02
 
-You can't run the `index.html` directly from your local machine without a local webserver.
-If you try, the images won't load (your browser will prevent it, thinking it is malicious).
-To get around this, use python (enter the directory and type `python -m SimpleHTTPServer`)
-or install [`node.js`](http://nodejs.org/) and the `http-server` package,
-and then type `http-server` from inside the directory.
+You are an retired general for the federation military. After seeing the horrors
+of war, you wanted nothing but to live your last days in peace at the local 
+tavern. When the princess' new born kittens go missing you decide to sober up 
+for one last good deed. Hired as a royal mercenary, you travel to the desert town
+to the east, the entrance to the black silk road. You figure you might be 
+able to find some leads. Little do you know, this case is just the beginning and 
+soon you cannot just stand by, you must put a stop to the cruelties of this world.
+
+The goal of this game is to have the player interact with the NPC's in order to 
+solve mysteries and complete the game.
+
+To play this game use the arrow keys to move around the world and approach 
+characters to interact with them. Talk to the various character of the world to 
+gain clues about who stole the kittens. Once enough clues have been found you 
+can find the little ones. In future developments more playable area may be added
+as well as more characters and mysteries.
