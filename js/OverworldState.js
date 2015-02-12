@@ -94,13 +94,13 @@ OverworldState.prototype =
 		desert_tilemap.setCollision(tree_indices, true, tree);
 		
 		/* Create NPC's */
-		nesha = new NPC(634, 352, this.game, "nesha", "Nesha: Hi, have some cake?");
-		preist = new NPC(793, 480, this.game, "npc2", "Priest: May God have mercy on your soul.");
-		cleo = new NPC(330, 480, this.game, "female_npc", "Cleo: Ohh...I hope you find those kittens.");
-		clyde = new NPC(442, 480, this.game, "npc1", "Clyde: Kittens...hmm...\n" +
+		nesha = new NonPlayerCharacter(634, 352, this.game, "nesha", "Nesha: Hi, have some cake?");
+		preist = new NonPlayerCharacter(793, 480, this.game, "npc2", "Priest: May God have mercy on your soul.");
+		cleo = new NonPlayerCharacter(330, 480, this.game, "female_npc", "Cleo: Ohh...I hope you find those kittens.");
+		clyde = new NonPlayerCharacter(442, 480, this.game, "npc1", "Clyde: Kittens...hmm...\n" +
 			"I don't think I have seen any kittens lately, but\n" + 
 			"we did get a new shipment of livestock.");
-		mage = new NPC(672, 248, this.game, "npc3", "Mage: How dare you accuse me!");
+		mage = new NonPlayerCharacter(672, 248, this.game, "npc3", "Mage: How dare you accuse me!");
 		
 		
 		/* Create the arrow keys */

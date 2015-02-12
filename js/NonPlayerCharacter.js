@@ -3,8 +3,8 @@
  * Created by Zachary Ferguson
  */
  
- /* Create a non-playable character */
-function NPC(x, y, game, sprite, dialogue)
+ /* Create a non-player character */
+function NonPlayerCharacter(x, y, game, sprite, dialogue)
 {
 	this.x = x;
 	this.y = y;
@@ -30,7 +30,7 @@ function NPC(x, y, game, sprite, dialogue)
 }
 
 /* Display the dialogue above the NPC */
-NPC.prototype.speak = function()
+NonPlayerCharacter.prototype.speak = function()
 {
 	/* Draw text bow */
 	this.text_box.visible = true;
@@ -43,7 +43,7 @@ NPC.prototype.speak = function()
 }
 
 /* Turns of the text of the characters dialogue */
-NPC.prototype.mute = function()
+NonPlayerCharacter.prototype.mute = function()
 {
 	this.text.text = "";
 	this.text_box.visible = false;
