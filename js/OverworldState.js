@@ -37,15 +37,15 @@ function OverworldState() {
 	var kittensY = Math.random() * 1024;
 	var box;
 	
-	/* Background music */
-	var music;
+	/* SFX */
+	var ouch;
 };
 
 OverworldState.prototype = 
 {	
 	create: function() 
 	{
-		/* Declare variables */
+		/* Define variables */
 		player_speed = 256;
 		
 		clueOneFound = false;
@@ -55,12 +55,13 @@ OverworldState.prototype =
 		kittensX = Math.random() * 1024;
 		kittensY = Math.random() * 1024;
 	
+		this.startTime = 0;
+		this.deltaTime = 0;
+	
+		ouch = this.game.add.audio("ouch", 0.025, false);
+	
 		/* Stretch out the world */
 		this.game.world.setBounds(0, 0, 1280, 1280);
-		
-		/* Play the background music */
-		//music = this.game.add.audio("bg_music", .25, true);
-		//music.play();
 		
 		/* Create tile map */
 		desert_tilemap = this.game.add.tilemap("desert_map");
@@ -94,14 +95,14 @@ OverworldState.prototype =
 		desert_tilemap.setCollision(tree_indices, true, tree);
 		
 		/* Create NPC's */
-		nesha = new NonPlayerCharacter(634, 352, this.game, "nesha", "Nesha: Hi, have some cake?");
-		preist = new NonPlayerCharacter(793, 480, this.game, "npc2", "Priest: May God have mercy on your soul.");
-		cleo = new NonPlayerCharacter(330, 480, this.game, "female_npc", "Cleo: Ohh...I hope you find those kittens.");
+		preist = new NonPlayerCharacter(818, 480, this.game, "npc2", "Priest: May God have mercy on your soul.");
+		cleo = new NonPlayerCharacter(634, 352, this.game, "female_npc", "Cleo: Ohh...I hope you find those kittens.");
 		clyde = new NonPlayerCharacter(442, 480, this.game, "npc1", "Clyde: Kittens...hmm...\n" +
 			"I don't think I have seen any kittens lately, but\n" + 
 			"we did get a new shipment of livestock.");
 		mage = new NonPlayerCharacter(672, 248, this.game, "npc3", "Mage: How dare you accuse me!");
-		
+		nesha = new NonPlayerCharacter(kittensX, kittensY-64, this.game, "nesha", "Princess: Thank you for saving my kittens!");
+		nesha.npc.visible = false;
 		
 		/* Create the arrow keys */
 		cursors = this.game.input.keyboard.createCursorKeys();
@@ -134,18 +135,41 @@ OverworldState.prototype =
 		player.animations.add(   "up", [12, 13, 14, 15], 5, true);
 	},
 	
+	/* Update the game every frame */
     update: function() 
 	{
-		//console.log("X: "+player.x+", Y: "+player.y + "\nclyde.z: " + clyde.npc.z);
+		if(nesha.npc.visible && this.deltaTime > 5*1000)
+		{
+			
+			console.warn("true");
+			nesha.mute();
+			nesha.npc.visible = false;
+		}
+		else
+		{
+			this.deltaTime = (new Date()).getTime() - this.startTime;
+		}
+		
+		//console.log("X: "+player.x+", Y: "+player.y);
+		
 		/**********************************************/
 		/************Collision and Overlaps************/  
 		/**********************************************/		
 		
-		if(kittensAdded && 
-		   this.game.physics.arcade.collide(box, player))
+		if(kittensAdded && this.game.physics.arcade.collide(box, player))
 		{
 			meow.stop();
 			this.display_kittens_text();
+			
+			/* Display Angel */
+			if(!kittensFound)
+			{
+				nesha.npc.visible = true;
+				nesha.speak();
+				this.startTime = (new Date()).getTime();
+				this.deltaTime = (new Date()).getTime() - this.startTime;
+			}
+			
 			kittensFound = true;
 		}
 		else
@@ -156,7 +180,10 @@ OverworldState.prototype =
 		/* Collision between player and buildings */
 		this.game.physics.arcade.collide(player, buildings);
 		/* Collision between player and shrubs */
-		this.game.physics.arcade.collide(player, shrubs);
+		if(this.game.physics.arcade.collide(player, shrubs) && !ouch.isPlaying )
+		{
+			ouch.play();
+		}
 		if(this.game.physics.arcade.collide(player, signs))
 		{
 			this.display_sign_text();
@@ -165,7 +192,10 @@ OverworldState.prototype =
 		{
 			sign_text.text = "";
 		}
-		this.game.physics.arcade.collide(player, tree);
+		if(this.game.physics.arcade.collide(player, tree) && !ouch.isPlaying )
+		{
+			ouch.play();
+		}
 		/* Collision between player and doors */
 		if(this.game.physics.arcade.collide(player, door1) ||
 		   this.game.physics.arcade.collide(player, door2) ||
@@ -178,16 +208,6 @@ OverworldState.prototype =
 			door_text.text = "";
 		}
 		/* Collision between NPC and player */
-		if(this.game.physics.arcade.collide(player, nesha.npc))
-		{
-			nesha.speak();
-			console.log("Clue found, YAY!!!");
-			clueOneFound = true;
-		}
-		else
-		{
-			nesha.mute();
-		}
 		if(this.game.physics.arcade.collide(player, preist.npc))
 		{
 			preist.speak();
@@ -199,6 +219,8 @@ OverworldState.prototype =
 		if(this.game.physics.arcade.collide(player, cleo.npc))
 		{
 			cleo.speak();
+			console.log("Clue found, YAY!!!");
+			clueOneFound = true;
 		}
 		else
 		{

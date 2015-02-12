@@ -47,14 +47,6 @@ NonPlayerCharacter.prototype.mute = function()
 {
 	this.text.text = "";
 	this.text_box.visible = false;
-	/*
-	if(this.text_box !== undefined)
-	{
-		this.text_box.destroy();
-		this.text_box = undefined;
-		console.log("killed;");
-	}
-	*/
 }
 
 /* Counts the number of lines the given string covers */

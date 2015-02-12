@@ -27,7 +27,8 @@ PreloadState.prototype =
 		
 		/* Load Sounds */
 		this.game.load.audio("meow", "assets/kittens.ogg");
-		this.game.load.audio("bg_music", "assets/bg_music.ogg");
+		this.game.load.audio("ouch", "assets/ouch.ogg");
+		this.game.load.audio("bg_music", "assets/western.ogg");
 	},
 	create: function()
 	{
