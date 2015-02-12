@@ -26,7 +26,7 @@ IntroState.prototype = {
 	update: function()
 	{
 		var deltaTime = (new Date()).getTime() - this.startTime;
-		//if(deltaTime > (20*1000))
+		if(deltaTime > (20*1000))
 		{
 			/* Wait for animation to end */
 			this.game.state.start("overworld");
