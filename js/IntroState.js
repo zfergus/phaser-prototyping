@@ -22,6 +22,7 @@ IntroState.prototype =
 	/* Wait 20 seconds to continue */
 	update: function()
 	{
+		console.log("Test");
 		//this.game.state.start("overworld");
 	}
 };
