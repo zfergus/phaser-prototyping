@@ -50,8 +50,8 @@ PlayState.prototype =
 			this.meteorStrike, null, this);
 			
 		/* End game if the enemy reaches the player */
-		//this.game.physics.arcade.collide(this.enemies, this.wall, 
-		//	function(){this.game.state.start("game over")}, null, this);
+		if(this.game.physics.arcade.collide(this.enemies, this.wall))		
+			this.game.state.start("game over");
 		
 		/* Increase attack points if applicable */
 		this.attackCount += (((new Date()).getTime()%2000 < 20 && 
