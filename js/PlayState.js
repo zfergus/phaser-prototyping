@@ -14,9 +14,9 @@ PlayState.prototype =
 		console.log("Play");
 		
 		// Make the world a bit bigger than the stage so we can shake the camera
-		//this.game.world.setBounds(-10, -10, this.game.width + 20, this.game.height + 20);
+		this.game.world.setBounds(-10, -10, this.game.width + 20, this.game.height + 20);
 		
-		//this.game.stage.backgroundColor = 0x142849;
+		this.game.stage.backgroundColor = 0x142849;
 		this.game.add.image(0,0,"sky");
 		
 		this.startTime = (new Date()).getTime();
@@ -72,8 +72,8 @@ PlayState.prototype =
 		this.count.text  =   "Attack Count: " + this.attackCount;
 		this.killed.text = "Enemies Killed: " + this.enemiesKilled;
 		
-		if((new Date()).getTime() - this.startTime > 8000/(this.enemiesKilled+1) &&
-			this.enemies.length < 24)
+		if((new Date()).getTime() - this.startTime > 8000/((this.enemiesKilled%16)+1) &&
+			this.enemies.length < 16)
 		{
 			this.create_enemy();
 			this.startTime = (new Date()).getTime();
@@ -104,7 +104,7 @@ PlayState.prototype =
 		var meteor = this.game.add.sprite(Math.random()*800, 0, "meteor");
 		this.game.physics.arcade.enable(meteor);
 		
-		meteor.animations.add( "spin", [0, 1], 10, true);
+		meteor.animations.add("spin", [0, 1], 10, true);
 		meteor.animations.play("spin");
 		
 		/* Compute XY Velocity  */
@@ -123,16 +123,22 @@ PlayState.prototype =
 	meteorStrike: function(meteor, enemy)
 	{
 		this.enemies = this.enemies.slice(this.enemies.indexOf(enemy));
+		enemy.visible = false;
 		enemy.destroy();
 		this.meteors = this.meteors.slice(this.meteors.indexOf(meteor));
+		meteor.visible = false;
+		var explosion = this.game.add.sprite(meteor.x, 504, "explosion");
+		explosion.animations.add("explode", [0,1,2,3,4,5,6,7], 32, false);
+		explosion.animations.play("explode", 32, false, true);
+		
 		meteor.destroy();
 		this.enemiesKilled++;
 		//console.log(this.enemiesKilled);
 		//console.log(this.enemies);
 		/* Shake the camera by moving it up and down 5 times really fast*/
-		//this.game.camera.y = 0;
-		//this.game.add.tween(this.game.camera)
-		//	.to({ y: -10 }, 40, Phaser.Easing.Sinusoidal.InOut, false, 0, 5, true)
-		//	.start();
+		this.game.camera.y = 0;
+		this.game.add.tween(this.game.camera)
+			.to({ y: -10 }, 10, Phaser.Easing.Sinusoidal.InOut, false, 0, 5, true)
+			.start();
 	}
 };

@@ -25,9 +25,6 @@ IntroState.prototype =
 		/* Center text */
 		this.text.anchor.setTo(0.5,0.5);
 		
-		/* Play the background music */
-		this.game.add.audio("music", .05, true).play();
-		
 		/* Load controls */
 		this.cursors = this.game.input.keyboard.createCursorKeys();
 	},

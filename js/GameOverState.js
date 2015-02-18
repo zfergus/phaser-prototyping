@@ -12,11 +12,12 @@ GameOverState.prototype =
 	/* Create the intro sprite */
 	create: function()
 	{
+		this.game.stage.backgroundColor = 0x000000;
 		console.log("Game Over");
 		/* Play the intro */
 		
 		/* Create text */
-		this.text = this.game.add.text(400, 300, "GAME OVER\n\nPress -> to continue.", 
+		this.text = this.game.add.text(400, 300, "GAME OVER\n\nPress to continue.", 
 		{fill:"white", font: "36px Courier", align: "center"});
 		/* Center text */
 		this.text.anchor.setTo(0.5,0.5);
