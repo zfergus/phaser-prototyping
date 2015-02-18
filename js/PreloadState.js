@@ -30,7 +30,7 @@ PreloadState.prototype =
 		this.game.load.spritesheet("meteor", "assets/meteor.png", 32, 32);
 		
 		/* Load Sounds */
-
+		this.game.load.audio("fireball", "assets/fireball.ogg");
 	},
 	
 	/* Play the intro */

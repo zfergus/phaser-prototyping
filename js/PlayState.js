@@ -100,6 +100,7 @@ PlayState.prototype =
 		meteor.body.velocity.y = Math.sin(theta) * 1000;
 		
 		this.meteors[this.meteors.length] = meteor;
+		this.game.add.audio("fireball", 1, false).play();
 		
 		this.attackCount--;
 	},
