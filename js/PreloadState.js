@@ -28,7 +28,7 @@ PreloadState.prototype =
 		this.game.load.spritesheet("player", "assets/player.png", 34, 52);
 		this.game.load.spritesheet("enemy", "assets/enemy.png", 34, 52);
 		this.game.load.spritesheet("meteor", "assets/meteor.png", 32, 32);
-		
+		//this.game.load.spritesheet("explosion", "assets/explosion.png", 36, 36);
 		/* Load Sounds */
 		this.game.load.audio("fireball", "assets/fireball.ogg");
 	},

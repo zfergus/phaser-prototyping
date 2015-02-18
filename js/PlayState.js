@@ -41,6 +41,8 @@ PlayState.prototype =
 			{fill:"white", font: "16px Courier", align: "center"});
 			
 		this.game.input.onTap.add(this.attack, this);
+		
+		this.attack_audio = this.game.add.audio("fireball", 1, false);
 	},
 	
 	update: function()
@@ -56,6 +58,10 @@ PlayState.prototype =
 		/* Increase attack points if applicable */
 		this.attackCount += (((new Date()).getTime()%2000 < 20 && 
 							   this.attackCount < 16) ? 1:0);
+		if(this.attackCount===0)
+			this.count.fill = "red";
+		else
+			this.count.fill = "white";
 		this.count.text = "Attack Count: " + this.attackCount;
 		
 		if((new Date()).getTime() - this.startTime > 8000/(this.enemiesKilled+1) &&
@@ -100,7 +106,8 @@ PlayState.prototype =
 		meteor.body.velocity.y = Math.sin(theta) * 1000;
 		
 		this.meteors[this.meteors.length] = meteor;
-		this.game.add.audio("fireball", 1, false).play();
+		if(!this.attack_audio.isPlaying)
+			this.attack_audio.play();
 		
 		this.attackCount--;
 	},
