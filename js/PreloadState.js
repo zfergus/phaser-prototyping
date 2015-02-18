@@ -17,11 +17,17 @@ PreloadState.prototype =
         this.load.setPreloadSprite(loadingBar);
 		  
 		/* Load tile map */
-
+		this.game.load.image("tileset", "assets/tileset.png");
+		this.game.load.tilemap("world", "assets/world.json", null, 
+			Phaser.Tilemap.TILED_JSON);
+		
 		/* Load images */
-
+		this.game.load.image("sky", "assets/sky.png");
+		
 		/* Load sprites */
-
+		this.game.load.spritesheet("player", "assets/player.png", 34, 52);
+		this.game.load.spritesheet("enemy", "assets/enemy.png", 34, 52);
+		this.game.load.spritesheet("meteor", "assets/meteor.png", 32, 32);
 		
 		/* Load Sounds */
 
@@ -30,6 +36,7 @@ PreloadState.prototype =
 	/* Play the intro */
 	create: function()
 	{
+		console.log("Preload");
 		this.game.state.start("intro");
 	}
 };

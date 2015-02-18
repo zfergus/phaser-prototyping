@@ -1,22 +1,22 @@
 /*
- * State Class for the introduction text
+ * State Class for the kill screen
  * Created by Zachary Ferguson
  */
 
 "use strict";
  
-function IntroState() {};
+function GameOverState() {};
 
-IntroState.prototype = 
+GameOverState.prototype = 
 {	
 	/* Create the intro sprite */
 	create: function()
 	{
-		console.log("Intro");
+		console.log("Game Over");
 		/* Play the intro */
 		
 		/* Create text */
-		this.text = this.game.add.text(400, 300, "This is the intro text for\n\nThe Last Elemental\n\nPress -> to continue.", 
+		this.text = this.game.add.text(400, 300, "GAME OVER\n\nPress -> to continue.", 
 		{fill:"white", font: "36px Courier", align: "center"});
 		/* Center text */
 		this.text.anchor.setTo(0.5,0.5);
@@ -32,7 +32,7 @@ IntroState.prototype =
 	{
 		if(this.cursors.right.isDown)
 		{
-			this.game.state.start("play");
+			this.game.state.start("intro");
 		}
 	}
 };
