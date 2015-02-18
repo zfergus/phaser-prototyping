@@ -30,7 +30,7 @@ IntroState.prototype =
 	/* Wait for control to continue */
 	update: function()
 	{
-		if(this.cursors.right.isDown)
+		//if(this.cursors.right.isDown)
 		{
 			this.game.state.start("play");
 		}
