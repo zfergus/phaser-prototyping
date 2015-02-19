@@ -43,8 +43,8 @@ PlayState.prototype =
 		
 		this.enemies = this.game.add.group();
 		this.enemies.enableBody = true;
-		this.create_enemy();
 		this.enemiesKilled = 0;
+		this.create_enemy();
 		this.killed = this.game.add.text(800-200, 20, "Enemies Killed: "+
 			this.enemiesKilled,{fill:"white", font: "16px Courier", 
 			align: "center"});
