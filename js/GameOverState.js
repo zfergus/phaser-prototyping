@@ -17,7 +17,9 @@ GameOverState.prototype =
 		/* Play the intro */
 		
 		/* Create text */
-		this.text = this.game.add.text(400, 300, "GAME OVER\n\nPress to continue.", 
+		var gameovertext = "GAME OVER\n\nScore: " + this.game.score + 
+						   "\n\nPress to continue"
+		this.text = this.game.add.text(400, 300, gameovertext, 
 		{fill:"white", font: "36px Courier", align: "center"});
 		/* Center text */
 		this.text.anchor.setTo(0.5,0.5);

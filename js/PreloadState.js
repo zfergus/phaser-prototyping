@@ -31,6 +31,7 @@ PreloadState.prototype =
 		this.game.load.spritesheet("explosion", "assets/explosion.png", 64, 64);
 		/* Load Sounds */
 		this.game.load.audio("fireball", "assets/fireball.ogg");
+		this.game.load.audio("explosion", "assets/explosion.ogg");
 		this.game.load.audio("music", "assets/music.ogg");
 	},
 	
