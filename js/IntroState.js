@@ -20,7 +20,7 @@ IntroState.prototype =
 		var introtext = "You are the last elemental\n"+
 						"sorcerer. Defend your self against\n"+
 						"the oncoming waves of enemies.\n\n\n\n"+
-						"Press to continue"
+						"Press to continue";
 		this.text = this.game.add.text(400, 300, introtext,
 			{fill:"white", font: "36px Courier", align: "center"});
 		/* Center text */
