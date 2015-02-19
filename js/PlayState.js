@@ -1,6 +1,7 @@
 /*
- * State Class for the main game
+ * Digital 03: PlayState.js
  * Created by Zachary Ferguson
+ * Game State Class for playing the main game
  */
 
 "use strict";
@@ -9,12 +10,14 @@ function PlayState() {};
 
 PlayState.prototype = 
 {	
+	/* Create the tilemap, player, and groups */
 	create: function()
 	{
 		console.log("Play");
 		
-		// Make the world a bit bigger than the stage so we can shake the camera
-		this.game.world.setBounds(-10, -10, this.game.width + 20, this.game.height + 20);
+		/* Increase the bounds to allow for the camera shake */
+		this.game.world.setBounds(-10, -10, this.game.width + 20, 
+			this.game.height + 20);
 		
 		this.game.stage.backgroundColor = 0x142849;
 		this.game.add.image(0,0,"sky");
@@ -30,9 +33,10 @@ PlayState.prototype =
 		this.tilemap.setCollision(1, true, this.ground);
 		this.tilemap.setCollision(2, true, this.wall);
 		
-		/* Create sprites and groups */
-		this.player = this.game.add.sprite(46, 428, "player");
-		this.player.frame = 8;
+		/** Create sprites and groups **/
+		
+		this.player = this.game.add.sprite(46, this.game.camera.height-172, 
+			"player", 8);
 
 		this.meteors = this.game.add.group();
 		this.meteors.enableBody = true;
@@ -51,13 +55,17 @@ PlayState.prototype =
 			
 		this.game.input.onTap.add(this.attack, this);
 		
+		/* Create sound effects */
 		this.attack_audio = this.game.add.audio("fireball", 1, false);
 		this.explosion_audio = this.game.add.audio("explosion", .05, false);
 	},
 	
+	/* Update game every frame */
 	update: function()
 	{
-		//console.log(this.enemy);
+		/** Check for collisions **/
+		
+		/* Loop through collision check until no exceptions thrown */
 		var passed = false
 		while(!passed)
 		{
@@ -68,84 +76,90 @@ PlayState.prototype =
 					this.meteorStrike, this.checkAlive, this);
 				passed = true;
 			}
-			catch(err){console.log("err");}
+			catch(err)
+			{
+				//console.log("err");
+			}
 		}
 			
 		/* End game if the enemy reaches the player */
 		if(this.game.physics.arcade.collide(this.enemies, this.wall))		
 		{
+			/* Update the player's score to the number of enemy kills */
 			this.game.score = this.enemiesKilled;
 			this.game.state.start("game over");
 		}
 		
-		/* Increase attack points if applicable */
-		this.attackCount += (((new Date()).getTime()%2000 < 20 && 
-							   this.attackCount < 16) ? 1:0);
-		if(this.attackCount===0)
-			this.count.fill = "red";
-		else
-			this.count.fill = "white";
-		this.count.text  =   "Attack Count: " + this.attackCount;
+		/* Get the current time in ms */
+		var currentTime = (new Date()).getTime();
+		
+		/* Increase spell points every two seconds */
+		this.attackCount += (currentTime%2000<20 && this.attackCount<16) ? 1:0;
+		/* Change color if attackCount == 0 */
+		this.count.fill = (this.attackCount===0) ? "red":"white";
+		/* Update the attack and kill count texts */
+		this.count.text  = "Attack Count: "   + this.attackCount;
 		this.killed.text = "Enemies Killed: " + this.enemiesKilled;
 		
 		/* Spawn new enemies */
-		if((new Date()).getTime() - this.startTime > 8000/((this.enemiesKilled%16)+1) &&
+		if(currentTime - this.startTime > (8000/((this.enemiesKilled%16)+1)) && 
 			this.enemies.length < 16)
 		{
 			this.create_enemy();
-			this.startTime = (new Date()).getTime();
+			this.startTime = currentTime;
 		}
 	},
 	
+	/* Creates an enemy right of the world */
 	create_enemy: function()
 	{
-		var enemy = this.enemies.create(801, 508, "enemy");
+		var enemy = this.enemies.create(this.game.world.width+1, 
+			this.game.camera.height-92, "enemy");
+		/* Add walk left animation */
 		enemy.animations.add( "left", [ 4,  5,  6,  7], 5, true);
 		
-		/* Start moving */
-		enemy.body.velocity.x = -128;
+		/* Start moving to the left */
+		enemy.body.velocity.x = -128 - (32 * Math.floor(this.enemiesKilled/16));
 		enemy.animations.play("left");
 	},
 	
+	/* Cast a spell towards the pointer */
 	attack: function()
 	{
 		/* Check for enough attack power */
 		if(this.attackCount <= 0) return;
 
-		/* Create a meteor */
+		/* Create a meteor at a random x value */
 		var meteor = this.meteors.create(Math.random()*800, 0, "meteor");
 		
+		/* Spin animation */
 		meteor.animations.add("spin", [0, 1], 10, true);
 		meteor.animations.play("spin");
 		
-		/* Compute XY Velocity  */
+		/** Compute XY Velocity from the magnitude and angle **/
+		/* Compute angle */
 		var theta = this.game.physics.arcade.angleToPointer(meteor);
-		//console.log(theta);
+		/* Compute components of the velocity */
 		meteor.body.velocity.x = Math.cos(theta) * 1000;
 		meteor.body.velocity.y = Math.sin(theta) * 1000;
 		
+		/* Kill the meteor outside of the world */
 		meteor.checkWorldBounds = true;
 		meteor.outOfBoundsKill = true;
 		
+		/* Play attack_audio if not already */
 		if(!this.attack_audio.isPlaying)
 			this.attack_audio.play();
 		
+		/* Decrement the attack count */
 		this.attackCount--;
 	},
 	
+	/* Function for colliding a meteor with a enemy.      */
+	/* Must be given the meteor and enemy to collide.     */
+	/* Destroys both parameters and creates an explosion. */
 	meteorStrike: function(meteor, enemy)
 	{
-		/* Create dead enemy */
-		/*
-		enemy.visible = false;
-		var dead_enemy = this.game.add.sprite(enemy.body.x, enemy.body.y, "enemy", 0);
-		dead_enemy.enableBody = true;
-		game.physics.arcade.enable(dead_enemy);
-        dead_enemy.body.velocity.y = this.game.rnd.integerInRange(-400, -800);
-        dead_enemy.body.velocity.x = this.game.rnd.integerInRange(-250, 250);
-        dead_enemy.body.acceleration.y = 3000;
-        dead_enemy.angle = 180;
-		*/
 		/* Remove the enemy */
 		this.enemies.remove(enemy, true);
 		
@@ -159,9 +173,11 @@ PlayState.prototype =
 		/* Remove the meteor */
 		this.meteors.remove(meteor, true);
 		
+		/* Increment the kill count/score */
 		this.enemiesKilled++;
 		
-		/* Shake the camera if not on mobile */
+		/* Shake the camera if not on a mobile device. */
+		/* Shake can break slower mobile browsers.     */
 		if(!this.mobilecheck())
 		{
 			this.game.camera.y = 0;
