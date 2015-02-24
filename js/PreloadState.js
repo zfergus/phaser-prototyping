@@ -21,8 +21,12 @@ PreloadState.prototype =
 		/* Load tile map */
 		
 		/* Load images */
+		this.game.load.image("road", "assets/road.png");
+		this.game.load.spritesheet("car", "assets/car.png");
 		
 		/* Load sprites */
+		this.game.load.spritesheet("zombie", "assets/zombie.png", 42, 42);
+		this.game.load.spritesheet("fighter", "assets/fighter.png", 42, 42);
 		
 		/* Load Sounds */
 		
