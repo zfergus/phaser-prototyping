@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<! Created by Zachary Ferguson >
 <html>
 <head>
     <meta charset="utf-8">
-    <title>The Last Elementalist</title>
+    <title>DigitalN</title>
     <script src="js/phaser.js"></script>
 	<script src="js/BootState.js"></script>
 	<script src="js/PreloadState.js"></script>
@@ -15,8 +14,8 @@
 <style>
 body
 {
-    color: #d0d0d0;
-    font-family: "Courier", "Avenir", Verdana, sans-serif;
+    color: #777;
+    font-family: "Avenir", Verdana, sans-serif;
 }
 #readme
 {
@@ -28,136 +27,77 @@ canvas
    display : block;
    margin : auto;
 }
-a:link {color:#738FFF;}    /* unvisited link  */
-a:visited {color:#4187B2;} /* visited link    */ 
-a:hover {color:#BFCCFF;}   /* mouse over link */
-a:active {color:#99A3CC;}  /* selected link   */
 </style>
 
 </head>
-<body bgcolor="#292E2E">
+<body>
 <div id="game"></div>
 <div id="readme">
-<center><h2>The Last Elementalist</h2>
-<strong>Controls:<strong> Click or press where you want to cast a spell. </center>
+<center><h2>DigitalN</h2>
+<strong>Controls:<strong> How to control the character and/or game. </center>
 <ul>
+
 <li><strong>High Concept:</strong>
-Defend yourself from the waves of on coming enemies using your elemental powers.
+A one-sentence summary of your game.
 </li>
 
 <li><strong>Player Experience Goals:</strong>
-The goal of this game is to have the player strategize to balance limited 
-resources, limited attack count, with the impending threat of losing the game
-if they do not attack.
+What experience do you want players to have when playing your game?
 </li>
 
 <li><strong>Genre:</strong>
-This game is a action game that involves waves of enemies coming towards the 
-player.
+A single sentence that places the game within a game genre or a hybrid of 
+genres.
 </li>
 
 <li><strong>Game play:</strong>
-During the course of this game enemies will come from the right side of the 
-screen towards you. If they reach the tower you stand on you will die (lose the
-game). In order to defend yourself cast elemental spells towards the enemies.
-Hit the a enemy with your spell and you kill him.<br>
-This game can be played exclusively with a pointing device, mouse or touch 
-screen. Click or press on the world to cast a spell towards that point. Spells
-start in the sky and move towards the point pressed.<br>
-Future updates will expand upon the available spells adding a upgrade system. 
-True waves of enemies are also planned to be added, replacing the quacking spawn
-mechanic. 
+A paragraph describing the actions the player can perform, the system dynamics, 
+and the core mechanic. Include a concise explanation of the prototype’s inputs 
+and their expected effects (how to play). You can also describe game play that 
+is not in the prototype. You may include mock-up images for parts of the game 
+not in the prototype.
 </li>
 
 <li><strong>Prototype goal:</strong>
-The main mechanic of this game is an increasing difficulty with each kill. Every
-kill causes enemies to spawn faster and consequently drain your spells faster 
-leaving you vulnerable.
+What game mechanic is this prototype evaluating?
 </li>
 
 <li><strong>Features:</strong>
-The increasing difficulty as an effect of the number of enemies killed is a 
-unique feature of this game. That paired with the limited number of spell and 
-the random spell spawn point makes for a fun and intensive game.
+What are the unique aspects of your game that set it apart?
 </li>
 
 <li><strong>Setting/Premise:</strong>
-You are the last elemental sorcerer, a breed of sorcerers who can control the 
-four elements. You kind has been wiped out by the federation army, a group of 
-mortal nations banded together to wipe magic kind from the face of Hosthus. 
-Defend yourself against the waves of oncoming enemies and try to wound the 
-federation as much as possible.
+A paragraph about the world your game is set in and who the characters are. What
+ makes the game world and its occupants unique and interesting? Do the tokens 
+ represent something? If the game has a backstory, put it here. If the game is 
+ abstract, then say so.
 </li>
 
 <li><strong>Story:</strong>
-Being the last elemental sorcerer you have seen your whole kind wiped from the 
-face of Hosthus. Now, when your time is upon you, you choose to stand against 
-all odds and face the oncoming storm. Fight for your people, fight for all magic
-kind.<br>
-These men killed your friends and family it is time for some payback.
+If the game has a story, summarize it in a paragraph. How will the dramatic 
+tension interact with the gameplay tension?
 </li>
 
 <li><strong>Target Audience:</strong>
-This game targets fans of action games as well as fantasy and elemental magic.
-Fun and quick, this game is great for anyone who wants to blow of some steam 
-and blow up some enemies.
+A single sentence that describes the demographic you're trying to reach.
 </li>
 
 <li><strong>Play time:</strong>
-The play time of this game varies depending on the proficiency of the player.
-If the player is well trained he/she could last many waves (~1min each).
+How long does your game take to play?
 </li>
 
 <li><strong>Strategies:</strong>
-The player needs to be mindful of the number of spells he has at any time. 
-Spells will regenerate every two seconds, but if the player runs out they will 
-be defenceless. The player also needs to compensate for the enemies' velocities
-when aiming and consider that the spell spawn is random.
+What player strategies do you expect will be effective at playing this game?
 </li>
 
-<li><strong>Prototype Assets:</strong><br>
-The majority of the assets used, including the tileset, sound effects, and spell
- sprites, are self-created. <br>
- Other assets used are:
-<ul>
-<li>
-	Music provided by Akashic Records: 
-	<a href = "https://www.jamendo.com/en/artist/375935/akashic-records" 
-		target = "blank">
-	https://www.jamendo.com/en/artist/375935/akashic-records</a>
-</li>
-<li>
-	Explosion sound effect modified from Staberxpert's original:
-	<a href = "http://goo.gl/pmHwYX" target = "blank">
-	http://www.flashkit.com/soundfx/Cartoon/Explosions/Nuklear_-Staberxp-8147/
-	index.php</a>
-</li>
-<li>
-	Background modified from original image: 
-	<a href = "https://www.pinterest.com/pin/215046950929114705/" 
-		target = "blank">
-	https://www.pinterest.com/pin/215046950929114705/</a>
-</li>
-<li>
-	Character sprites created using the following online tool:
-	<a href = "http://www.geocities.jp/kurororo4/looseleaf/" target = "blank">
-	http://www.geocities.jp/kurororo4/looseleaf/</a>
-</li>
-<li>
-	Some code and mechanics borrowed from the the Game Mechanic Explorer:
-	<a href = "http://gamemechanicexplorer.com/#lightning-5" target = "blank">
-	Lightning (You are Zeus)</a> and 
-	<a href = "http://gamemechanicexplorer.com/#bullets-3" target = "blank">
-	Bullets (Aiming)</a>
-</li>
-</ul>
+<li><strong>Prototype Assets:</strong>
+Did you make your prototype assets from scratch? Did you borrow them? Cite your 
+sources here.
 </li>
 
 <li><strong>Prototype Closest Other Game:</strong>
-This game draws heavily from the wave action genre of games. The original idea 
-was inspired by and uses some mechanics of the Game Mechanic Explorer: 
-<a href = "http://gamemechanicexplorer.com/#lightning-5" target = "blank">
-Lightning (You are Zeus)</a>
+Which other game most closely resembles your game? If you are borrowing from a 
+Phaser Example, you must say so here.
 </li>
 
 </ul>
