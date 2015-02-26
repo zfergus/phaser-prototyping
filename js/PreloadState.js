@@ -28,10 +28,16 @@ PreloadState.prototype =
 		/* Load sprites */
 		this.game.load.spritesheet("zombie", "assets/zombie.png", 42, 42);
 		this.game.load.spritesheet("fighter", "assets/fighter.png", 42, 42);
+		this.game.load.spritesheet("civilian", "assets/civilian.png", 42, 42);
 		this.game.load.spritesheet("health", "assets/health.png", 40, 10);
 		this.game.load.spritesheet("blood", "assets/blood.png", 10, 20);
+		this.game.load.spritesheet("blood2", "assets/blood2.png", 20, 20);
 		
 		/* Load Sounds */
+		this.game.load.audio("gunshot", "assets/gunshot.ogg");
+		this.game.load.audio("attack", "assets/attack.ogg");
+		this.game.load.audio("music", "assets/music.ogg");
+		this.game.load.audio("car_sound", "assets/car.ogg");
 		
 	},
 	
@@ -41,6 +47,7 @@ PreloadState.prototype =
 		console.log("Preload");
 		
 		/* Play the background music */
+		this.game.add.audio("music", .5, true).play();
 		
 		this.game.state.start("intro");
 	}

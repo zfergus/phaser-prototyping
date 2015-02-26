@@ -18,7 +18,7 @@ IntroState.prototype =
 		
 		/* Create intro text */
 		var introtext = "Collect Brains to get a high score.\n\n\n\n"+
-			"Click to continue.";
+			"Press -> to continue";
 		this.text = this.game.add.text(400, 300, introtext,
 			{fill:"white", font: "36px Courier", align: "center"});
 		/* Center text */
