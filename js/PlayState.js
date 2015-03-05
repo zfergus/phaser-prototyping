@@ -1,5 +1,5 @@
 /*
- * Digital N: PlayState.js
+ * Digital 04: PlayState.js
  * Created by Zachary Ferguson
  * Game State Class for playing the main game
  */

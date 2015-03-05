@@ -1,5 +1,5 @@
 /*
- * Digital 03: PreloadState.js
+ * Digital 04: PreloadState.js
  * Created by Zachary Ferguson
  * Game State Class for preloading game assets
  */

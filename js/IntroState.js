@@ -1,5 +1,5 @@
 /*
- * Digital N: IntroState.js
+ * Digital 04: IntroState.js
  * Created by Zachary Ferguson
  * State Class for the introduction text
  */

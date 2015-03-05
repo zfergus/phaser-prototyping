@@ -1,5 +1,5 @@
 /*
- * Digital 03: GameOverState.js
+ * Digital 04: GameOverState.js
  * Created by Zachary Ferguson
  * Game State Class for displaying the Game Over screen and the player's score
  */
