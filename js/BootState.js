@@ -15,6 +15,7 @@ BootState.prototype =
 	{
         this.game.load.image("loading","assets/loading.png"); 
 		this.game.load.audio("mix", "assets/mix.ogg");
+		this.game.load.audio("music", "assets/music.ogg");
 	},
 	
 	/* Move on to the preload state */
@@ -24,6 +25,9 @@ BootState.prototype =
 		
 		var mix = this.game.add.audio("mix");
 		mix.play();
+		
+		var music = this.game.add.audio("music");
+		music.play("", 0, 1, true);
 		
 		this.game.state.start("preload");
 	}

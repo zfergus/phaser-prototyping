@@ -14,15 +14,21 @@ IntroState.prototype =
 	create: function()
 	{
 		console.log("Intro");
-		/* Play the intro */
-		var music = this.game.add.audio("music");
-		music.play();
+		/** Play the intro **/		
 		
+		/* Create Background */
+		this.game.add.image(0, 0, "intro-bg");
 		
 		/* Create intro text */
-		var introtext = "Click to Continue";
+		var introtext = "\"Ugh...another traffic jam,\n" +
+			"and I just got this new sports car.\n"+
+			"Time to make my own route.\"\n\n"+
+			"Speed through traffic avoiding\n"+
+			"collisions.\n\n"+
+			"Press -> to continue";
 		this.text = this.game.add.text(400, 300, introtext,
-			{fill:"white", font: "36px Courier", align: "center"});
+			{fill:"white", stroke: "black", strokeThickness: 2, 
+			font: "36px Courier", align: "center"});
 		/* Center text */
 		this.text.anchor.setTo(0.5,0.5);
 		

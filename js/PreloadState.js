@@ -26,11 +26,14 @@ PreloadState.prototype =
 		/* Load images */
 		this.game.load.image("road", "assets/road.png");
 		this.game.load.image("car", "assets/car.png");
+		this.game.load.spritesheet("smoke", "assets/smoke-sheet.png", 40, 80);
+		this.game.load.image("intro-bg", "assets/intro.png");
+		this.game.load.image("end-bg", "assets/traffic.png");
 		
 		/* Load sprites */
 		
 		/* Load Sounds */
-		this.game.load.audio("music", "assets/music.ogg");
+		this.game.load.audio("crash", "assets/crash.ogg");
 	},
 	
 	/* Play the intro state */
