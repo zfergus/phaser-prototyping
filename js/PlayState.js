@@ -1,5 +1,5 @@
 /*
- * Digital N: PlayState.js
+ * Digital 05: PlayState.js
  * Created by Zachary Ferguson
  * Game State Class for playing the main game
  */
@@ -59,7 +59,7 @@ PlayState.prototype =
 	createPlayer: function(x, y)
 	{
 		/* Create the player sprite. */
-		var player = this.game.add.sprite(x+20, y-40, "car");
+		var player = this.game.add.sprite(x+20, y+80, "car");
 		player.anchor.setTo(0.5, 1.0);
 		
 		/* Set the camera to follow the player */
@@ -81,7 +81,7 @@ PlayState.prototype =
 		this.game.physics.arcade.enable(player);
 		
 		/* Collide the player with the world bounds */
-		player.body.collideWorldBounds = true;
+		//player.body.collideWorldBounds = true;
 		
 		/* Create base physics values for the player */
 		player.acceleration = 200;
@@ -137,17 +137,13 @@ PlayState.prototype =
 		this.updateText();
 		
 		/* Finish line win */
-		this.game.physics.arcade.overlap(this.player, this.finish, 
-			function()
-			{
-				var startTime = (new Date()).getTime();
-				this.player.body.blocked.down = false;
-				this.game.gameOverText = "Congratulations, You Win!\n\n\n\n" + 
-										  "Press -> to play again";
-				this.game.endY = this.game.camera.y;
-				this.game.state.start("game over");
-			}, 
-			null, this);
+		if(this.player.y > this.game.world.height)
+		{
+			this.game.gameOverText = "Congratulations, You Win!\n\n\n\n" + 
+									  "Press -> to play again";
+			this.game.endY = this.game.camera.y;
+			this.game.state.start("game over");
+		}
 		
 		/* Collide Cars */
 		this.game.physics.arcade.collide(this.cars, this.player);

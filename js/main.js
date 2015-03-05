@@ -1,5 +1,5 @@
 /*
- * Digital N: main.js
+ * Digital 05: main.js
  * Created by Zachary Ferguson 
  * Class for creating and starting the game
  */

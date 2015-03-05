@@ -1,5 +1,5 @@
 /*
- * Digital N: BootState.js
+ * Digital 05: BootState.js
  * Created by Zachary Ferguson
  * Game State Class for booting the main game
  */
@@ -14,6 +14,8 @@ BootState.prototype =
 	preload: function()
 	{
         this.game.load.image("loading","assets/loading.png"); 
+		
+		/* Load the intro sounds */
 		this.game.load.audio("mix", "assets/mix.ogg");
 		this.game.load.audio("music", "assets/music.ogg");
 	},

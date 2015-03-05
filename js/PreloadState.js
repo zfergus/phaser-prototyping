@@ -1,5 +1,5 @@
 /*
- * Digital 03: PreloadState.js
+ * Digital 05: PreloadState.js
  * Created by Zachary Ferguson
  * Game State Class for preloading game assets
  */
@@ -26,11 +26,11 @@ PreloadState.prototype =
 		/* Load images */
 		this.game.load.image("road", "assets/road.png");
 		this.game.load.image("car", "assets/car.png");
-		this.game.load.spritesheet("smoke", "assets/smoke-sheet.png", 40, 80);
 		this.game.load.image("intro-bg", "assets/intro.png");
 		this.game.load.image("end-bg", "assets/traffic.png");
 		
 		/* Load sprites */
+		this.game.load.spritesheet("smoke", "assets/smoke-sheet.png", 40, 80);
 		
 		/* Load Sounds */
 		this.game.load.audio("crash", "assets/crash.ogg");
