@@ -16,16 +16,16 @@ PlayState.prototype =
 		console.log("Play");
 		
 		/* Stretch the world vertically */
-		this.game.world.setBounds(0, 0, 800, 9600);
+		this.game.world.setBounds(0, 0, 800, 7200);
 		/* Reposition the camera */
 		this.game.camera.y = this.game.world.height-600;
 		
 		/* Add the background image */
-		this.game.add.image(0, 0, "sky");
+		this.game.add.image(0, 0, "earth-sky");
 		
 		/* Create a ground sprite */
 		this.ground = this.game.add.sprite(0, this.game.world.height-40, 
-			"ground");
+			"earth-ground");
 		/* Enable physics on the ground */
 		this.game.physics.arcade.enable(this.ground);
 		this.ground.body.immovable = true;
@@ -35,8 +35,15 @@ PlayState.prototype =
 		
 		/* Create the ship on the ground */
 		this.ship = this.game.add.existing(new Ship(this.game, 
-			this.game.world.width/2, this.ground.y, initialFuel, EARTH_GRAVITY,
+			this.game.world.width/2, this.ground.y-18, initialFuel, EARTH_GRAVITY,
 			EARTH_DRAG));
+		
+		this.launchPad = this.game.add.sprite(this.game.world.width/2, 
+			this.ground.y+6, "launch-pad");
+		this.launchPad.anchor.setTo(0.5, 1.0);
+		/* Enable physics on the LaunchPad */
+		//this.game.physics.arcade.enable(this.launchPad);
+		//this.launchPad.body.immovable = true;
 		
 		/* Enable the arrow keys for controls */
 		this.controls = this.game.input.keyboard.createCursorKeys();
@@ -48,9 +55,9 @@ PlayState.prototype =
 	{
 		var hud = this.game.add.image(0, this.game.camera.y + 
 			this.game.camera.height-20, "control-bar");
-		(new Phaser.Group(this.game, null)).add(hud);
+		//(new Phaser.Group(this.game, null)).add(hud);
 		
-		this.fuelDisplay = this.game.add.text(10, 5, "Fuel"+this.ship.fuel,
+		this.fuelDisplay = this.game.add.text(10, 2, "Fuel: "+this.ship.fuel,
 			{fill:"white", font: "18px Courier", align: "center"});
 		hud.addChild(this.fuelDisplay);
 	},
@@ -60,6 +67,7 @@ PlayState.prototype =
 	{
 		/* Collide the ground and ship */
 		this.game.physics.arcade.collide(this.ground, this.ship);
+		//this.game.physics.arcade.collide(this.launchPad, this.ship);
 		
 		if(this.ship.y < 0)
 		{

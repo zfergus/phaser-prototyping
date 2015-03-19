@@ -10,13 +10,13 @@ function Ship(game, x, y, fuel, gravity, drag)
 {
 	/* Create the ship sprite. */
 	Phaser.Sprite.call(this, game, x, y, "ship");
-	this.anchor.setTo(0.5, 1.0);
+	this.anchor.setTo(0.5, 0.55);
 	
 	/* Set the camera to follow the ship */
 	this.game.camera.follow(this);
 	
 	/* Create the flame as a child sprite of the ship. */
-	this.burn = game.add.sprite(0, 0, "burn");
+	this.burn = game.add.sprite(0, 18, "burn");
 	this.burn.anchor.setTo(0.5,0);
 	/* Make the burn invisible*/
 	this.burn.alpha = 0;
@@ -41,7 +41,7 @@ function Ship(game, x, y, fuel, gravity, drag)
 	this.body.maxVelocity.setTo(500, 1000);
 	this.body.drag.setTo(drag, drag);
 	/* Angular velocity */
-	this.OMEGA = 30;
+	this.OMEGA = 90;
 }
 
  /* Ships are a type of Phaser.Sprite */
@@ -89,7 +89,11 @@ Ship.prototype.consumeFuel = function()
 /* Creates an exhaust fume that dies after on compete. */
 Ship.prototype.addExhaust = function()
 {
-	var exhaust = this.game.add.sprite(this.x, this.y+5, "exhaust");
+	/* Calculate the exhaust point to create the new exhaust at. */
+	var exhaustX = Math.cos(this.rotation + Math.PI/2) * 23 + this.x;
+	var exhaustY = Math.sin(this.rotation + Math.PI/2) * 23 + this.y;
+	
+	var exhaust = this.game.add.sprite(exhaustX, exhaustY, "exhaust");
 	exhaust.anchor.setTo(0.5, 0.5);
 	exhaust.rotation = Math.random() * 2*Math.PI;
 	exhaust.animations.add("fade");

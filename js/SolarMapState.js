@@ -21,6 +21,8 @@ SolarMapState.prototype =
 	
 		this.game.world.setBounds(0, 0, 800, 600);
 		
+		this.game.add.image(0, 0, "stars");
+		
 		/* Set up the collision groups */
 		this.shipCollisionGroup = this.game.physics.p2.createCollisionGroup();
 		this.game.physics.p2.updateBoundsCollisionGroup();
@@ -48,23 +50,34 @@ SolarMapState.prototype =
 		/****************/
 		/* SolarMapShip */
 		/****************/
+		
 		/* Create the ship near earth */
 		this.ship = this.game.add.existing(
 			new SolarMapShip(this.game, this.earth.x, this.earth.y+25, 
 			this.shipCollisionGroup)
 		);
+		this.ship.rotation = Math.PI;
+		
 		/* Set-up the collisions with the celestial bodies */
-		this.ship.body.collides(this.earth.collisionGroup, function(){}, this);
-		this.ship.body.collides(this.moon.collisionGroup, function(){console.log("moon")}, this);
+		this.ship.body.collides(this.earth.collisionGroup, 
+			function()
+			{
+				this.explore("explore_earth");
+			}, this);
+		this.ship.body.collides(this.moon.collisionGroup, 
+			function()
+			{
+				this.explore("explore_moon");
+			}, this);
 		this.ship.body.collides(this.mars.collisionGroup, 
 			function()
 			{
-				this.game.state.start("explore_mars");
+				this.explore("explore_mars");
 			}, this);
 		this.ship.body.collides(this.neptune.collisionGroup, 
 			function()
 			{
-				this.game.state.start("explore_neptune");
+				this.explore("explore_neptune");
 			}, this);
 			
 		this.ship.rotation = Math.PI;
@@ -75,13 +88,15 @@ SolarMapState.prototype =
 	
 	/* Update game every frame */
 	update: function()
-	{
-		// /* Collide the CelestialBodies and the ship */
-		// this.game.physics.p2.collide(this.earth, this.ship);
-		// this.game.physics.p2.collide(this.moon, this.ship);
-		// this.game.physics.p2.collide(this.mars, this.ship);
-		// this.game.physics.p2.collide(this.neptune, this.ship);
-		
+	{	
 		PlayState.prototype.controlShip.call(this);
+	},
+	
+	/* Sets the initial velocities and goes to the specified state. */
+	explore: function(statename)
+	{
+		this.game.initialVelocityX = this.ship.body.velocity.x;
+		this.game.initialVelocityY = this.ship.body.velocity.Y;
+		this.game.state.start(statename);
 	}
 };

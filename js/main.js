@@ -21,6 +21,9 @@ Game.prototype =
 		game.state.add("play", PlayState);
 		game.state.add("solar map", SolarMapState);
 		game.state.add("explore_mars", MarsExploreState);
+		game.state.add("explore_neptune", NeptuneExploreState);
+		game.state.add("explore_moon", MoonExploreState);
+		game.state.add("explore_earth", EarthExploreState);
 		game.state.add("game over", GameOverState);
 
 		game.state.start("boot");

@@ -21,20 +21,27 @@ PreloadState.prototype =
 		/* Load tile map */
 		
 		/* Load images */
-		this.game.load.image("ship", "assets/rocket.png");
 		this.game.load.image("burn", "assets/burn.png");
-		this.game.load.image("SolarMapShip", "assets/SolarMapShip.png");
-		this.game.load.image("SolarMapBurn", "assets/SolarMapBurn.png");
-		this.game.load.image("sky", "assets/earth_sky.png");
-		this.game.load.image("mars-sky", "assets/earth_sky.png");
-		this.game.load.image("ground", "assets/earth_ground.png");
 		this.game.load.image("control-bar", "assets/control-bar.png");
-		
+		this.game.load.image("earth-ground", "assets/earth_ground.png");
+		this.game.load.image("earth-sky", "assets/earth_sky.png");
+		this.game.load.image("mars-ground", "assets/mars_ground.png");
+		this.game.load.image("mars-sky", "assets/mars_sky.png");
+		this.game.load.image("moon-ground", "assets/moon_ground.png");
+		this.game.load.image("moon-sky", "assets/moon_sky.png");
+		this.game.load.image("neptune-ground", "assets/neptune_ground.png");
+		this.game.load.image("neptune-sky", "assets/neptune_sky.png");
+		this.game.load.image("ship", "assets/rocket.png");
+		this.game.load.image("SolarMapBurn", "assets/SolarMapBurn.png");
+		this.game.load.image("SolarMapShip", "assets/SolarMapShip.png");
+		this.game.load.image("stars", "assets/stars.png");
+
 		/* Load sprites */
-		this.game.load.spritesheet("exhaust", "assets/exhaust.png", 10, 10);
-		this.game.load.spritesheet("explosion", "assets/explosion.png", 64, 64);
 		this.game.load.spritesheet("celestial bodies", 
 			"assets/celestial-bodies.png", 80, 80);
+		this.game.load.spritesheet("exhaust", "assets/exhaust.png", 10, 10);
+		this.game.load.spritesheet("explosion", "assets/explosion.png", 64, 64);
+		this.game.load.spritesheet("launch-pad", "assets/launchpad.png", 80, 80);
 				
 		/* Load Sounds */
 		
