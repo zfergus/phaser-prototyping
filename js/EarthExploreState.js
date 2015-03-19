@@ -46,6 +46,7 @@ EarthExploreState.prototype =
 		this.endMessage = "You died as billions watched for your return.";
 		
 		PlayState.prototype.create_hud.call(this);
+		this.thrusterSound = this.game.add.audio("thrusters");
 	},
 	
 	/* Update game every frame */

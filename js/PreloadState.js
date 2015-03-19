@@ -45,7 +45,7 @@ PreloadState.prototype =
 				
 		/* Load Sounds */
 		this.game.load.audio("thrusters", "assets/shuttle_launch.ogg");
-		this.game.load.audio("spaceMusic", "assets/gas_off.ogg");
+		this.game.load.audio("spaceMusic", "assets/music.ogg");
 	},
 	
 	/* Play the intro state */

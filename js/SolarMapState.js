@@ -51,9 +51,15 @@ SolarMapState.prototype =
 		/* SolarMapShip */
 		/****************/
 		
+		if(this.game.solarX == undefined || this.game.solarY == undefined)
+		{
+			this.game.solarX = this.earth.x;
+			this.game.solarY = this.earth.y+35;
+		}
+		
 		/* Create the ship near earth */
 		this.ship = this.game.add.existing(
-			new SolarMapShip(this.game, this.earth.x, this.earth.y+25, 
+			new SolarMapShip(this.game, this.game.solarX, this.game.solarY, 
 			this.shipCollisionGroup)
 		);
 		this.ship.rotation = Math.PI;
@@ -86,6 +92,9 @@ SolarMapState.prototype =
 		this.controls = this.game.input.keyboard.createCursorKeys();
 		
 		PlayState.prototype.create_hud.call(this);
+		
+		this.music = this.game.add.audio("spaceMusic");
+		this.music.play("", 0, 1, true);
 	},
 	
 	/* Update game every frame */
@@ -99,8 +108,14 @@ SolarMapState.prototype =
 	/* Sets the initial velocities and goes to the specified state. */
 	explore: function(statename)
 	{
+		if(this.game.solarX === this.ship.x || this.game.solarY === this.ship.y)
+		{
+			return;
+		}
 		this.game.initialVelocityX = this.ship.body.velocity.x;
 		this.game.initialVelocityY = this.ship.body.velocity.Y;
+		this.game.solarX = this.ship.x;
+		this.game.solarY = this.ship.y;
 		this.game.state.start(statename);
 	}
 };

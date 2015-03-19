@@ -46,6 +46,7 @@ MarsExploreState.prototype =
 		this.endMessage = "You died of dehydration in a dried riverbed.";
 		
 		PlayState.prototype.create_hud.call(this);
+		this.thrusterSound = this.game.add.audio("thrusters");
 	},
 	
 	/* Update game every frame */
@@ -59,6 +60,7 @@ MarsExploreState.prototype =
 					Math.abs(this.ship.body.velocity.x) > 30)
 				{
 					/* explode */
+					this.thrusterSound.stop();
 					this.game.endMessage = this.endMessage;
 					this.game.state.start("game over");
 				} 
@@ -74,6 +76,7 @@ MarsExploreState.prototype =
 		
 		if(this.ship.y < 0)
 		{
+			this.thrusterSound.stop();
 			this.game.remainingFuel = this.ship.fuel;
 			this.game.state.start("solar map");
 		}

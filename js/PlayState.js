@@ -74,6 +74,7 @@ PlayState.prototype =
 		
 		if(this.ship.y < 0)
 		{
+			this.thrusterSound.stop();
 			this.game.remainingFuel = this.ship.fuel;
 			this.game.state.start("solar map");
 		}

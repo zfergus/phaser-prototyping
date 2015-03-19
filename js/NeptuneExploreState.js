@@ -47,6 +47,7 @@ NeptuneExploreState.prototype =
 			dense atmospheric pressure.";
 			
 		PlayState.prototype.create_hud.call(this);
+		this.thrusterSound = this.game.add.audio("thrusters");
 	},
 	
 	/* Update game every frame */

@@ -47,6 +47,7 @@ MoonExploreState.prototype =
 			then burnt to a crisp in the sunlight.";
 			
 		PlayState.prototype.create_hud.call(this);
+		this.thrusterSound = this.game.add.audio("thrusters");
 	},
 	
 	/* Update game every frame */
