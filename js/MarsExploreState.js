@@ -20,6 +20,9 @@ MarsExploreState.prototype =
 		/* Reposition the camera */
 		this.game.camera.y = 0;
 		
+		/* Add the background image */
+		this.game.add.image(0, 0, "sky");
+		
 		/* Create a ground sprite */
 		this.ground = this.game.add.sprite(0, this.game.world.height-40, 
 			"ground");
