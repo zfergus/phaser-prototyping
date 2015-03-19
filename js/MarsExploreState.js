@@ -97,5 +97,7 @@ MarsExploreState.prototype =
 		PlayState.prototype.controlShip.call(this);
 		
 		this.fuelDisplay.text = "Fuel: "+ Math.floor((this.ship.fuel));
+		this.altDisplay.text =  "Altitude: " + Math.floor(this.ground.y-
+			this.ship.y);
 	}
 };

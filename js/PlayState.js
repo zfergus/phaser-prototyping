@@ -59,18 +59,17 @@ PlayState.prototype =
 			"control-bar");
 		//(new Phaser.Group(this.game, null)).add(hud);
 		hud.fixedToCamera = true;
-		
+
+		if(this.ground != undefined)
+		{
+			this.altDisplay =  this.game.add.text(200, 2, "Altitude: " + 
+				Math.floor(this.ground.y-this.ship.y), {fill:"white", 
+				font: "18px Courier", align: "center"});
+			hud.addChild(this.altDisplay);
+		}
 		this.fuelDisplay = this.game.add.text(10, 2, "Fuel: "+this.ship.fuel,
 			{fill:"white", font: "18px Courier", align: "center"});
 		hud.addChild(this.fuelDisplay);
-		
-		if(this.ground != undefined)
-		{
-			this.altDisplay =  this.game.add.text(200, 2, "Altitude: "+
-				this.ship.y-this.ground.y,
-				{fill:"white", font: "18px Courier", align: "center"});
-			hud.addChild(this.altDisplay);
-		}
 	},
 	
 	/* Update game every frame */
@@ -98,7 +97,9 @@ PlayState.prototype =
 		}
 		
 		this.fuelDisplay.text = "Fuel: "+ Math.floor((this.ship.fuel));
-		
+		this.altDisplay.text =  "Altitude: " + Math.floor(this.ground.y-
+			this.ship.y);
+
 		this.controlShip();
 	},
 	
