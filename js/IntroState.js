@@ -41,7 +41,7 @@ IntroState.prototype =
 		/* On right arrow or pointer press */
 		if(this.cursors.right.isDown || this.game.input.activePointer.isDown)
 		{
-			this.game.state.start("play");
+			this.game.state.start("resources");
 		}
 	}
 };

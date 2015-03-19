@@ -53,6 +53,9 @@ Ship.prototype.engageEngines = function()
 {
 	if(this.fuel > 0)
 	{
+		/* Mass = amount_of_fuel * mass_of_fuel + mass_of_ship */
+		this.mass = this.fuel*5.0 + 1000.0; /* Kg */
+		
 		if(Math.floor(Math.random()*4) === 0) this.addExhaust();
 		this.fuelConsumption = 0.5;
 		this.burn.alpha = 1;

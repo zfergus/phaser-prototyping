@@ -31,7 +31,7 @@ PlayState.prototype =
 		this.ground.body.immovable = true;
 		
 		var EARTH_GRAVITY = 9.81, EARTH_DRAG = 50;
-		var initialFuel = 1000; /*~~~ Add input here ~~~*/
+		var initialFuel = this.game.initialFuel;
 		
 		/* Create the ship on the ground */
 		this.ship = this.game.add.existing(new Ship(this.game, 

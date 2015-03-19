@@ -41,7 +41,10 @@ PreloadState.prototype =
 			"assets/celestial-bodies.png", 80, 80);
 		this.game.load.spritesheet("exhaust", "assets/exhaust.png", 10, 10);
 		this.game.load.spritesheet("explosion", "assets/explosion.png", 64, 64);
-		this.game.load.spritesheet("launch-pad", "assets/launchpad.png", 80, 80);
+		this.game.load.spritesheet("launch-pad", "assets/launchpad.png", 80, 
+			80);
+		this.game.load.spritesheet("buttons", "assets/button_sheet.png", 120, 
+			80);
 				
 		/* Load Sounds */
 		this.game.load.audio("thrusters", "assets/shuttle_launch.ogg");

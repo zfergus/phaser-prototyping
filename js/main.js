@@ -18,6 +18,7 @@ Game.prototype =
 		game.state.add("boot", BootState);
 		game.state.add("preload", PreloadState);
 		game.state.add("intro", IntroState);
+		game.state.add("resources", ResourceState);
 		game.state.add("play", PlayState);
 		game.state.add("solar map", SolarMapState);
 		game.state.add("explore_mars", MarsExploreState);
