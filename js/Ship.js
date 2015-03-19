@@ -5,8 +5,8 @@
  */
 
 "use strict";
- 
-var Ship = function(game, x, y)
+
+function Ship(game, x, y, fuel, gravity, drag)
 {
 	/* Create the ship sprite. */
 	Phaser.Sprite.call(this, game, x, y, "ship");
@@ -28,14 +28,20 @@ var Ship = function(game, x, y)
 	
 	/* Create base physics values for the ship */
 	this.METERSTOPIXELS = 10;
-	this.mass = 3110; /* Kg */
-	this.fuel = 500;
+	
+	this.fuel = fuel;
 	this.fuelConsumption = 0;
+	/* Mass of the ship */
+	/* Mass = amount_of_fuel * mass_of_fuel + mass_of_ship */
+	this.mass = this.fuel*5.0 + 1000.0; /* Kg */
 	this.thrust = 100000.0; /* Kg*meters/s/s */
-	this.body.gravity.y = 9.8 * this.METERSTOPIXELS; /* pixels/s/s */
+	/* Physics body values */
+	this.body.gravity.y = gravity * this.METERSTOPIXELS; /* pixels/s/s */
 	this.body.bounce.setTo(0.05, 0.05);
 	this.body.maxVelocity.setTo(500, 1000);
-	this.body.drag.setTo(20, 20);
+	this.body.drag.setTo(drag, drag);
+	/* Angular velocity */
+	this.OMEGA = 30;
 }
 
  /* Ships are a type of Phaser.Sprite */

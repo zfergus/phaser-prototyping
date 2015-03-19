@@ -18,8 +18,8 @@ var CelestialBody = function(game, x, y, type, otherCollisionGroups)
 	this.setBounds();
 	
 	//this.body.fixedRotation = true;
-	this.body.angularVelocity = -Math.random()/2;
-	this.body.angularDamping = 0;
+	//this.body.angularVelocity = -Math.random()/2;
+	//this.body.angularDamping = 0;
 	
 	/* Create a new collision group for this body */
 	this.collisionGroup = game.physics.p2.createCollisionGroup();

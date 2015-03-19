@@ -17,9 +17,17 @@ IntroState.prototype =
 		/* Play the intro */
 		
 		/* Create intro text */
-		var introtext = "SpaceSim\n\n\n\nPress -> to continue";
+		var introtext = "SpaceSim\n\n\
+		You are a Space Ship pilot who has been trained by the ESP, Earth\n\
+		Space Program, to fly the solar explorer the Earth Space Ship, ESS\n\
+		for short. You mission is to explore the solar system and claim the\n\
+		bodies in it for Science!\n\
+		You have a deadly secret, however. One you would dare never tell any\n\
+		of your supervisors. YOU NEVER LEARNED HOW TO USE THE AUTOMATED \n\
+		LANDING COMPUTER!\
+		\n\nPress -> to continue";
 		this.text = this.game.add.text(400, 300, introtext,
-			{fill:"white", font: "36px Courier", align: "center"});
+			{fill:"white", font: "18px Courier", align: "center"});
 		/* Center text */
 		this.text.anchor.setTo(0.5,0.5);
 		

@@ -37,8 +37,11 @@ var SolarMapShip = function(game, x, y, shipCollisionGroup)
 	this.fuelConsumption = 0;
 	this.thrust = 100000.0; /* Kg*meters/s/s */
 	this.body.damping = 0;
+	this.OMEGA = 5;
 	//this.body.gravity.y = 9.8 * this.METERSTOPIXELS; /* pixels/s/s */
 	//this.body.maxVelocity.setTo(500, 500);
+	
+	console.log(this.game.ship);
 }
 
  /* SolarMapShips are a type of Phaser.Sprite */

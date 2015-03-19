@@ -17,6 +17,7 @@ SolarMapState.prototype =
 	
 		/* Enable p2 physics */
 		this.game.physics.startSystem(Phaser.Physics.P2JS);
+		this.game.physics.p2.setImpactEvents(true);
 	
 		this.game.world.setBounds(0, 0, 800, 600);
 		
@@ -33,9 +34,10 @@ SolarMapState.prototype =
 			new CelestialBody(this.game, 40, 240, 0, this.shipCollisionGroup)
 		);
 		this.moon = this.game.add.existing(
-			new CelestialBody(this.game, 30, -30, 2, this.shipCollisionGroup)
+			new CelestialBody(this.game, this.earth.x+30, this.earth.y-30, 2, 
+			this.shipCollisionGroup)
 		);
-		this.earth.addChild(this.moon);
+		//this.earth.addChild(this.moon);
 		this.mars = this.game.add.existing(
 			new CelestialBody(this.game, 400, 500, 1, this.shipCollisionGroup)
 		);
@@ -54,9 +56,16 @@ SolarMapState.prototype =
 		/* Set-up the collisions with the celestial bodies */
 		this.ship.body.collides(this.earth.collisionGroup, function(){}, this);
 		this.ship.body.collides(this.moon.collisionGroup, function(){console.log("moon")}, this);
-		this.ship.body.collides(this.mars.collisionGroup, function(){}, this);
-		this.ship.body.collides(this.neptune.collisionGroup, function(){}, 
-			this);
+		this.ship.body.collides(this.mars.collisionGroup, 
+			function()
+			{
+				this.game.state.start("explore_mars");
+			}, this);
+		this.ship.body.collides(this.neptune.collisionGroup, 
+			function()
+			{
+				this.game.state.start("explore_neptune");
+			}, this);
 			
 		this.ship.rotation = Math.PI;
 		

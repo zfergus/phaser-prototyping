@@ -26,7 +26,9 @@ PreloadState.prototype =
 		this.game.load.image("SolarMapShip", "assets/SolarMapShip.png");
 		this.game.load.image("SolarMapBurn", "assets/SolarMapBurn.png");
 		this.game.load.image("sky", "assets/earth_sky.png");
+		this.game.load.image("mars-sky", "assets/earth_sky.png");
 		this.game.load.image("ground", "assets/earth_ground.png");
+		this.game.load.image("control-bar", "assets/control-bar.png");
 		
 		/* Load sprites */
 		this.game.load.spritesheet("exhaust", "assets/exhaust.png", 10, 10);

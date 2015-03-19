@@ -1,27 +1,24 @@
 /*
- *SpaceSim: PlayState.js
+ * SpaceSim: ExploreState.js
  * Created by Zachary Ferguson
- * Game State Class for playing the main game
+ * Game State Class for exploring the different celestial bodies.
  */
 
 "use strict";
  
-function PlayState() {};
+function MarsExploreState() {};
 
-PlayState.prototype = 
-{	
-	/* Create the tilemap, player, and groups */
+MarsExploreState.prototype = 
+{
+/* Create the tilemap, player, and groups */
 	create: function()
 	{
-		console.log("Play");
+		console.log("MarsExploreState");
 		
 		/* Stretch the world vertically */
 		this.game.world.setBounds(0, 0, 800, 9600);
 		/* Reposition the camera */
-		this.game.camera.y = this.game.world.height-600;
-		
-		/* Add the background image */
-		this.game.add.image(0, 0, "sky");
+		this.game.camera.y = 0;
 		
 		/* Create a ground sprite */
 		this.ground = this.game.add.sprite(0, this.game.world.height-40, 
@@ -30,40 +27,34 @@ PlayState.prototype =
 		this.game.physics.arcade.enable(this.ground);
 		this.ground.body.immovable = true;
 		
-		var EARTH_GRAVITY = 9.81, EARTH_DRAG = 50;
-		var initialFuel = 1000; /*~~~ Add input here ~~~*/
+		var MARS_GRAVITY = 3.77, MARS_DRAG = 0.5; 
 		
 		/* Create the ship on the ground */
 		this.ship = this.game.add.existing(new Ship(this.game, 
-			this.game.world.width/2, this.ground.y, initialFuel, EARTH_GRAVITY,
-			EARTH_DRAG));
+			this.game.width/2, 10, this.game.fuelLeft, 
+			MARS_GRAVITY, MARS_DRAG));
+		this.ship.rotation = Math.PI;
+		/* Enable physics on the ship */
+		this.game.physics.arcade.enable(this.ship);
 		
 		/* Enable the arrow keys for controls */
 		this.controls = this.game.input.keyboard.createCursorKeys();
-		
-		this.create_hud();
-	},
-	
-	create_hud: function()
-	{
-		var hud = this.game.add.image(0, this.game.camera.y + 
-			this.game.camera.height-20, "control-bar");
-		(new Phaser.Group(this.game, null)).add(hud);
-		
-		this.fuelDisplay = this.game.add.text(10, 5, "Fuel"+this.ship.fuel,
-			{fill:"white", font: "18px Courier", align: "center"});
-		hud.addChild(this.fuelDisplay);
 	},
 	
 	/* Update game every frame */
 	update: function()
 	{
 		/* Collide the ground and ship */
-		this.game.physics.arcade.collide(this.ground, this.ship);
+		this.game.physics.arcade.collide(this.ground, this.ship, 
+			function()
+			{
+				this.game.state.start("game over");
+			}, 
+			null, this);
 		
 		if(this.ship.y < 0)
 		{
-			this.game.fuelLeft = this.ship.fuel;
+			this.game.ship = this.ship;
 			this.game.state.start("solar map");
 		}
 		
@@ -88,11 +79,11 @@ PlayState.prototype =
 		//{
 			if(this.controls.right.isDown)
 			{
-				theta = this.ship.OMEGA;
+				theta = 15;
 			}
 			else if(this.controls.left.isDown)
 			{
-				theta = -this.ship.OMEGA;
+				theta = -15;
 			}
 		//}
 		this.ship.body.angularVelocity = theta;
