@@ -34,7 +34,7 @@ MoonExploreState.prototype =
 		
 		/* Create the ship on the ground */
 		this.ship = this.game.add.existing(new Ship(this.game, 
-			this.game.width/2, 10, this.game.fuelLeft, 
+			this.game.width/2, 10, this.game.remainingFuel, 
 			MOON_GRAVITY, MOON_DRAG));
 		this.ship.rotation = Math.PI;
 		/* Enable physics on the ship */
@@ -42,6 +42,11 @@ MoonExploreState.prototype =
 		
 		/* Enable the arrow keys for controls */
 		this.controls = this.game.input.keyboard.createCursorKeys();
+		
+		this.endMessage = "You first froze to death on the dark side\n\
+			then burnt to a crisp in the sunlight.";
+			
+		PlayState.prototype.create_hud.call(this);
 	},
 	
 	/* Update game every frame */

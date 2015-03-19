@@ -34,7 +34,7 @@ NeptuneExploreState.prototype =
 		
 		/* Create the ship on the ground */
 		this.ship = this.game.add.existing(new Ship(this.game, 
-			this.game.width/2, 10, this.game.fuelLeft, 
+			this.game.width/2, 10, this.game.remainingFuel, 
 			NEPTUNE_GRAVITY, NEPTUNE_DRAG));
 		this.ship.rotation = Math.PI;
 		/* Enable physics on the ship */
@@ -42,6 +42,11 @@ NeptuneExploreState.prototype =
 		
 		/* Enable the arrow keys for controls */
 		this.controls = this.game.input.keyboard.createCursorKeys();
+		
+		this.endMessage = "You were crushed to death by the\n\
+			dense atmospheric pressure.";
+			
+		PlayState.prototype.create_hud.call(this);
 	},
 	
 	/* Update game every frame */

@@ -84,12 +84,16 @@ SolarMapState.prototype =
 		
 		/* Enable the arrow keys for controls */
 		this.controls = this.game.input.keyboard.createCursorKeys();
+		
+		PlayState.prototype.create_hud.call(this);
 	},
 	
 	/* Update game every frame */
 	update: function()
 	{	
 		PlayState.prototype.controlShip.call(this);
+		
+		this.fuelDisplay.text = "Fuel: "+ Math.floor((this.ship.fuel));
 	},
 	
 	/* Sets the initial velocities and goes to the specified state. */

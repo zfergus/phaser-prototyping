@@ -49,13 +49,16 @@ PlayState.prototype =
 		this.controls = this.game.input.keyboard.createCursorKeys();
 		
 		this.create_hud();
+		
+		this.thrusterSound = this.game.add.audio("thrusters");
 	},
 	
 	create_hud: function()
 	{
-		var hud = this.game.add.image(0, this.game.camera.y + 
-			this.game.camera.height-20, "control-bar");
+		var hud = this.game.add.image(0, this.game.camera.height-20, 
+			"control-bar");
 		//(new Phaser.Group(this.game, null)).add(hud);
+		hud.fixedToCamera = true;
 		
 		this.fuelDisplay = this.game.add.text(10, 2, "Fuel: "+this.ship.fuel,
 			{fill:"white", font: "18px Courier", align: "center"});
@@ -71,7 +74,7 @@ PlayState.prototype =
 		
 		if(this.ship.y < 0)
 		{
-			this.game.fuelLeft = this.ship.fuel;
+			this.game.remainingFuel = this.ship.fuel;
 			this.game.state.start("solar map");
 		}
 		
@@ -84,6 +87,8 @@ PlayState.prototype =
 		{
 			this.ship.x = this.game.width;
 		}
+		
+		this.fuelDisplay.text = "Fuel: "+ Math.floor((this.ship.fuel));
 		
 		this.controlShip();
 	},
@@ -109,10 +114,19 @@ PlayState.prototype =
 		if(this.controls.up.isDown && this.ship.fuel > 0)
 		{
 			this.ship.engageEngines();
+			if(this.thrusterSound != undefined && 
+			 !(this.thrusterSound.isPlaying))
+			{
+				this.thrusterSound.play();
+			}
 		}
 		else
 		{
 			this.ship.disengageEngines();
+			if(this.thrusterSound != undefined && this.thrusterSound.isPlaying)
+			{
+				this.thrusterSound.stop();
+			}
 		}
 	}
 };

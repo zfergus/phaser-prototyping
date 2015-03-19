@@ -34,7 +34,7 @@ EarthExploreState.prototype =
 		
 		/* Create the ship on the ground */
 		this.ship = this.game.add.existing(new Ship(this.game, 
-			this.game.width/2, 10, this.game.fuelLeft, 
+			this.game.width/2, 10, this.game.remainingFuel, 
 			EARTH_GRAVITY, EARTH_DRAG));
 		this.ship.rotation = Math.PI;
 		/* Enable physics on the ship */
@@ -42,6 +42,10 @@ EarthExploreState.prototype =
 		
 		/* Enable the arrow keys for controls */
 		this.controls = this.game.input.keyboard.createCursorKeys();
+		
+		this.endMessage = "You died as billions watched for your return.";
+		
+		PlayState.prototype.create_hud.call(this);
 	},
 	
 	/* Update game every frame */

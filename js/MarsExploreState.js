@@ -34,7 +34,7 @@ MarsExploreState.prototype =
 		
 		/* Create the ship on the ground */
 		this.ship = this.game.add.existing(new Ship(this.game, 
-			this.game.width/2, 10, this.game.fuelLeft, 
+			this.game.width/2, 10, this.game.remainingFuel, 
 			MARS_GRAVITY, MARS_DRAG));
 		this.ship.rotation = Math.PI;
 		/* Enable physics on the ship */
@@ -42,6 +42,10 @@ MarsExploreState.prototype =
 		
 		/* Enable the arrow keys for controls */
 		this.controls = this.game.input.keyboard.createCursorKeys();
+		
+		this.endMessage = "You died of dehydration in a dried riverbed.";
+		
+		PlayState.prototype.create_hud.call(this);
 	},
 	
 	/* Update game every frame */
@@ -55,6 +59,7 @@ MarsExploreState.prototype =
 					Math.abs(this.ship.body.velocity.x) > 30)
 				{
 					/* explode */
+					this.game.endMessage = this.endMessage;
 					this.game.state.start("game over");
 				} 
 				else
@@ -69,7 +74,7 @@ MarsExploreState.prototype =
 		
 		if(this.ship.y < 0)
 		{
-			this.game.ship = this.ship;
+			this.game.remainingFuel = this.ship.fuel;
 			this.game.state.start("solar map");
 		}
 		
@@ -84,5 +89,7 @@ MarsExploreState.prototype =
 		}
 		
 		PlayState.prototype.controlShip.call(this);
+		
+		this.fuelDisplay.text = "Fuel: "+ Math.floor((this.ship.fuel));
 	}
 };
