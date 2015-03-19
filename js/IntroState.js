@@ -18,12 +18,12 @@ IntroState.prototype =
 		
 		/* Create intro text */
 		var introtext = "SpaceSim\n\n\
-		You are a Space Ship pilot who has been trained by the ESP, Earth\n\
-		Space Program, to fly the solar explorer the Earth Space Ship, ESS\n\
-		for short. You mission is to explore the solar system and claim the\n\
-		bodies in it for Science!\n\
-		You have a deadly secret, however. One you would dare never tell any\n\
-		of your supervisors. YOU NEVER LEARNED HOW TO USE THE AUTOMATED \n\
+		You are a space ship pilot who has been trained by the ESP, Earth\n\
+		Space Program, to fly the ESS, the most advanced solar explorer.\n\
+		Your mission is to explore the solar system and claim the\n\
+		celestial bodies within it for SCIENCE!\n\
+		You have a deadly secret, however.\n\
+		YOU NEVER LEARNED HOW TO USE THE AUTOMATED \n\
 		LANDING COMPUTER!\
 		\n\nPress -> to continue";
 		this.text = this.game.add.text(400, 300, introtext,

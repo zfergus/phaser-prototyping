@@ -63,6 +63,14 @@ PlayState.prototype =
 		this.fuelDisplay = this.game.add.text(10, 2, "Fuel: "+this.ship.fuel,
 			{fill:"white", font: "18px Courier", align: "center"});
 		hud.addChild(this.fuelDisplay);
+		
+		if(this.ground != undefined)
+		{
+			this.altDisplay =  this.game.add.text(200, 2, "Altitude: "+
+				this.ship.y-this.ground.y,
+				{fill:"white", font: "18px Courier", align: "center"});
+			hud.addChild(this.altDisplay);
+		}
 	},
 	
 	/* Update game every frame */
@@ -72,7 +80,7 @@ PlayState.prototype =
 		this.game.physics.arcade.collide(this.ground, this.ship);
 		//this.game.physics.arcade.collide(this.launchPad, this.ship);
 		
-		if(this.ship.y < 0)
+		if(this.ship.y <= 0)
 		{
 			this.thrusterSound.stop();
 			this.game.remainingFuel = this.ship.fuel;
@@ -116,7 +124,8 @@ PlayState.prototype =
 		{
 			this.ship.engageEngines();
 			if(this.thrusterSound != undefined && 
-			 !(this.thrusterSound.isPlaying))
+			 !(this.thrusterSound.isPlaying)&&
+			 this.ship.y > 0)
 			{
 				this.thrusterSound.play();
 			}
@@ -124,7 +133,7 @@ PlayState.prototype =
 		else
 		{
 			this.ship.disengageEngines();
-			if(this.thrusterSound != undefined && this.thrusterSound.isPlaying)
+			if(this.thrusterSound != undefined)
 			{
 				this.thrusterSound.stop();
 			}

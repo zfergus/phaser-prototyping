@@ -37,6 +37,8 @@ GameOverState.prototype =
 		/* On right arrow or pointer press */
 		if(this.cursors.right.isDown || this.game.input.activePointer.isDown)
 		{
+			this.game.solarX = undefined;
+			this.game.solarY = undefined;
 			this.game.state.start("intro");
 		}
 	}

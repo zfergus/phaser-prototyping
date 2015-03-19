@@ -33,10 +33,12 @@ NeptuneExploreState.prototype =
 		var NEPTUNE_GRAVITY = 14.07, NEPTUNE_DRAG = 150; 
 		
 		/* Create the ship on the ground */
-		this.ship = this.game.add.existing(new Ship(this.game, 
-			this.game.width/2, 10, this.game.remainingFuel, 
-			NEPTUNE_GRAVITY, NEPTUNE_DRAG));
-		this.ship.rotation = Math.PI;
+		this.ship = this.game.add.existing(new Ship(this.game, this.game.rnd.
+			integerInRange(0, this.game.world.width), 40, 
+			this.game.remainingFuel, NEPTUNE_GRAVITY, NEPTUNE_DRAG));
+		this.ship.angle = this.game.rnd.integerInRange(-180, 180);
+		this.ship.body.velocity.setTo(this.game.rnd.integerInRange(50, 150), 
+			this.game.rnd.integerInRange(50, 100));
 		/* Enable physics on the ship */
 		this.game.physics.arcade.enable(this.ship);
 		

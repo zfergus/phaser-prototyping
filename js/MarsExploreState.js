@@ -33,10 +33,12 @@ MarsExploreState.prototype =
 		var MARS_GRAVITY = 3.77, MARS_DRAG = 0.5; 
 		
 		/* Create the ship on the ground */
-		this.ship = this.game.add.existing(new Ship(this.game, 
-			this.game.width/2, 10, this.game.remainingFuel, 
-			MARS_GRAVITY, MARS_DRAG));
-		this.ship.rotation = Math.PI;
+		this.ship = this.game.add.existing(new Ship(this.game, this.game.rnd.
+			integerInRange(0, this.game.world.width), 40, 
+			this.game.remainingFuel, MARS_GRAVITY, MARS_DRAG));
+		this.ship.angle = this.game.rnd.integerInRange(-180, 180);
+		this.ship.body.velocity.setTo(this.game.rnd.integerInRange(50, 150), 
+			this.game.rnd.integerInRange(50, 100));
 		/* Enable physics on the ship */
 		this.game.physics.arcade.enable(this.ship);
 		
@@ -66,6 +68,7 @@ MarsExploreState.prototype =
 				} 
 				else
 				{
+					this.thrusterSound.stop();
 					/* Successfully landed */
 					this.ship.body.angularVelocity = 0;
 					this.ship.body.velocity.setTo(0, 0);
@@ -74,7 +77,7 @@ MarsExploreState.prototype =
 			}, 
 			null, this);
 		
-		if(this.ship.y < 0)
+		if(this.ship.y <= 0)
 		{
 			this.thrusterSound.stop();
 			this.game.remainingFuel = this.ship.fuel;
