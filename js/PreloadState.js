@@ -1,5 +1,5 @@
 /*
- * Digital N: PreloadState.js
+ * Digital 07: PreloadState.js
  * Created by Zachary Ferguson
  * Game State Class for preloading game assets
  */
@@ -21,11 +21,13 @@ PreloadState.prototype =
 		/* Load tile map */
 		
 		/* Load images */
+		this.game.load.image("blob", "assets/blob.png");
 		
 		/* Load sprites */
+		this.game.load.spritesheet("blocks", "assets/blocks.png", 40, 40);
 		
 		/* Load Sounds */
-		
+		this.game.load.audio("slime_move", "assets/slime_movement.ogg");
 	},
 	
 	/* Play the intro state */

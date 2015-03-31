@@ -1,5 +1,5 @@
 /*
- * Digital N: IntroState.js
+ * Digital 07: IntroState.js
  * Created by Zachary Ferguson
  * State Class for the introduction text
  */
@@ -17,7 +17,9 @@ IntroState.prototype =
 		/* Play the intro */
 		
 		/* Create intro text */
-		var introtext = "";
+		var introtext = "Move around to absorb blocks\n\
+			and grow.\n\n\n\n\
+			Press -> to continue.";
 		this.text = this.game.add.text(400, 300, introtext,
 			{fill:"white", font: "36px Courier", align: "center"});
 		/* Center text */
