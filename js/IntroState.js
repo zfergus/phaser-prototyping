@@ -16,6 +16,8 @@ IntroState.prototype =
 		console.log("Intro");
 		/* Play the intro */
 		
+		this.game.stage.backgroundColor = 0x404040;
+		
 		/* Create intro text */
 		var introtext = "Move around to absorb blocks\n\
 			and grow.\n\n\n\n\

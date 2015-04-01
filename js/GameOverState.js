@@ -16,7 +16,7 @@ GameOverState.prototype =
 		console.log("Game Over");
 		
 		/* Reset the background color to black */
-		this.game.stage.backgroundColor = 0x000000;
+		this.game.stage.backgroundColor = 0x404040;
 		
 		/* Create the Game Over text with the score */
 		var gameovertext = "GAME OVER\n\n\n\nPress to continue"
