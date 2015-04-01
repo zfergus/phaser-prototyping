@@ -1,1 +1,1 @@
-# Digital Assignment 06: Consume
+# Digital Assignment 07: Absorb
