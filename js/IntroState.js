@@ -30,9 +30,10 @@ IntroState.prototype =
 		/* Load controls */
 		this.cursors = this.game.input.keyboard.createCursorKeys();
 		
-		this.game.levelVals = ["(i/24 * 3.0) + 0.125","(Math.random() * 3.0) + 0.125", 
-			 "(1/i * 3.0) + 0.125"];
+		this.game.levelVals = ["(Math.random() * 3.0) + 0.125", 
+			"(i/24 * 3.0) + 0.125", "(1/(i+1) * 3.0) + 0.125"];
 		this.game.level = 0;
+		this.game.score = 0;
 	},
 	
 	/* Wait for control to continue */

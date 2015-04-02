@@ -29,6 +29,7 @@ PreloadState.prototype =
 		
 		/* Load Sounds */
 		this.game.load.audio("slime_move", "assets/slime_movement.ogg");
+		this.game.load.audio("absorb", "assets/absorb.ogg");
 	},
 	
 	/* Play the intro state */

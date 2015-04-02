@@ -21,6 +21,7 @@ function Blob(game, x, y)
 	this.alpha = 0.5;
 	/* Create the sound effects. */
 	this.movementSound = this.game.add.audio("slime_move");
+	this.absorbSound = this.game.add.audio("absorb");
 	
 	/* List of all blocks that have been absorbed by this blob. */
 	this.absorbed_blocks = [];
@@ -95,6 +96,8 @@ Blob.prototype.absorb = function(this_blob, block)
 	if(!(block.absurbed) && block.width < this.width && 
 		block.height < this.height)
 	{
+		/* Play the SFX */
+		this.absorbSound.play();
 		/* Turn of the collisions with the block. */
 		block.alive = false;
 		/* Add the block to the list of absorbed blocks. */
@@ -110,6 +113,8 @@ Blob.prototype.absorb = function(this_blob, block)
 		/* Increase the blobs size. */
 		this.width += block.width/4;
 		this.height += block.height/4;
+		
+		this.game.score += 1;
 	}
 }
 

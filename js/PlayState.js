@@ -39,9 +39,23 @@ PlayState.prototype =
 		this.previousTime = (new Date()).getTime();
 		this.startTime = this.previousTime;
 		
+		var levelText = this.game.add.text(this.game.world.width/2, 
+			this.game.world.height/2, "Level " + (this.game.level+1),
+			{fill:"white", font: "36px Courier", align: "center"});
+		levelText.anchor.setTo(0.5,0.5);
+		levelText.bringToTop();
+		this.game.time.events.add(1000, function() 
+			{
+				this.game.add.tween(levelText).to({alpha: 0}, 1000, 
+					Phaser.Easing.Linear.None, true);
+			}, this);
+		
 		this.timer = this.game.add.text(this.game.world.width-160, 
 			this.game.world.height-32, "Time: " + 
 			((new Date()).getTime() - this.startTime)/1000, 
+			{fill:"white", font: "20px Courier", align: "center"});
+		this.score = this.game.add.text(10, this.game.world.height-32, 
+			"Score: "+this.game.score,
 			{fill:"white", font: "20px Courier", align: "center"});
 	},
 	
@@ -72,36 +86,62 @@ PlayState.prototype =
 	/* Update game every frame */
 	update: function()
 	{
-		if(this.blob.absorbed_blocks.length >= 24)
+		/* If the player collects all of the blocks */
+		if(this.blob.absorbed_blocks.length >= this.blocks.length)
 		{
 			this.game.level++;
-			this.game.level %= this.game.levelVals.length;
-			this.game.state.start("play");
+			if(this.game.level < this.game.levelVals.length)
+			{
+				this.game.state.start("play");
+			}
+			else
+			{
+				this.game.overText = "Congratulations, You Won!";
+				this.game.state.start("game over");
+			}
 		}
+		
+		/* If the time runs out and the game is over. */
 		if(((new Date()).getTime() - this.startTime)/1000 >= 60.0)
 		{
+			this.game.overText = "GAME OVER";
 			this.game.state.start("game over");
 		}
 		
+		/* If the blob collides with a block. */
 		this.game.physics.arcade.collide(this.blob, this.blocks, 
 			this.blob.absorb,null, this.blob);
+		/* If the blob grew enough to overlap with a block. */
+		this.game.physics.arcade.overlap(this.blob, this.blocks, 
+			this.blob.absorb,null, this.blob);
 		
-		
+		/* Move the blob around the world */
 		this.blob.move();
 		
+		/* Pulse the blob. */
 		if((new Date()).getTime() >= this.previousTime + 500)
 		{
 			this.blob.pulse();
 			this.previousTime = (new Date()).getTime();
 		}
 		
+		/* Update the text. */
 		this.updateTime();
+		this.updateScore();
  	},
 	
+	/* Update the timer text. */
 	updateTime: function()
 	{
-		this.timer.text = "Time: " + ((new Date()).getTime() - 
-			this.startTime)/1000;
+		this.timer.text = "Time: " + ("%.2f",(60.0 + ((this.startTime - 
+			(new Date()).getTime())/1000))).toFixed(2);
+		this.timer.bringToTop();
+	},
+	
+	/* Update the score text. */
+	updateScore: function()
+	{
+		this.score.text = "Score: " + this.game.score;
 		this.timer.bringToTop();
 	}
 };

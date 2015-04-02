@@ -19,7 +19,8 @@ GameOverState.prototype =
 		this.game.stage.backgroundColor = 0x404040;
 		
 		/* Create the Game Over text with the score */
-		var gameovertext = "GAME OVER\n\n\n\nPress -> to continue"
+		var gameovertext = this.game.overText+"\n\nScore: "+ this.game.score +
+			"\n\nPress -> to play again";
 		this.text = this.game.add.text(400, 300, gameovertext, 
 			{fill:"white", font: "24px Courier", align: "center"});
 		/* Center text */
