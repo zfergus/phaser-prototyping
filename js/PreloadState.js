@@ -25,6 +25,7 @@ PreloadState.prototype =
 		
 		/* Load sprites */
 		this.game.load.spritesheet("blocks", "assets/blocks.png", 40, 40);
+		this.game.load.spritesheet("trail", "assets/slime-trail.png", 40, 40);
 		
 		/* Load Sounds */
 		this.game.load.audio("slime_move", "assets/slime_movement.ogg");

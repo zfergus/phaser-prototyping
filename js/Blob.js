@@ -18,7 +18,7 @@ function Blob(game, x, y)
 	this.anchor.setTo(0.5,0.5);
 	/* Collide with the bounds. */
 	this.body.collideWorldBounds = true;
-	
+	this.alpha = 0.5;
 	/* Create the sound effects. */
 	this.movementSound = this.game.add.audio("slime_move");
 	
@@ -69,10 +69,15 @@ Blob.prototype.move = function()
 		this.body.velocity.y = this.DEFAULT_VELOCITY;
 	}
 
-	if(this.body.velocity.x > 0 || this.body.velocity.y > 0)
+	if(this.body.velocity.x != 0 || this.body.velocity.y != 0)
 	{
 		if(!(this.movementSound.isPlaying))
 			this.movementSound.play();
+		/* Create a slime trail. */
+		if(Math.floor(Math.random()*25) == 0)
+		{
+			this.create_trail();
+		}
 	}
 	else
 	{
@@ -81,6 +86,8 @@ Blob.prototype.move = function()
 	
 	/* Move all of the absorbed blocks. */
 	this.moveAbsorbed();
+	
+
 }
 
 Blob.prototype.absorb = function(this_blob, block)
@@ -92,12 +99,14 @@ Blob.prototype.absorb = function(this_blob, block)
 		block.alive = false;
 		/* Add the block to the list of absorbed blocks. */
 		this.absorbed_blocks[this.absorbed_blocks.length] = block;
-		//this.addChild(block);
 		block.absurbed = true;
 		/* Calculate a random relative x and y for the block. */
 		block.blobX = Math.floor(Math.random() * (this.width-block.width-20)+20);
 		block.blobY = Math.floor(Math.random() * (this.height-block.height-20)+20);
 
+		// block.body.moveToXY((this.x-this.width/2) + block.blobX,
+		// (this.y-this.height/2) + block.blobY);
+		
 		/* Increase the blobs size. */
 		this.width += block.width/4;
 		this.height += block.height/4;
@@ -109,4 +118,26 @@ Blob.prototype.pulse = function()
 	this.width += this.pulseDelta;
 	this.height += this.pulseDelta;
 	this.pulseDelta = -1*this.pulseDelta;
+}
+
+Blob.prototype.create_trail = function()
+{
+	var trail = this.game.add.sprite(this.x, this.y, "trail");
+	trail.anchor.setTo(0.5,0.5);
+	trail.alpha = 0.25;
+	trail.width = this.width;
+	trail.height = this.height;
+	if(this.pulseDelta > 0)
+	{
+		trail.width -= 4;
+		trail.height -= 4;
+	}
+	else
+	{
+		trail.width -= 8;
+		trail.height -= 8;
+	}
+	trail.animations.add("fade",null,4);
+	trail.animations.play("fade", null, false, true);
+	this.bringToTop();
 }

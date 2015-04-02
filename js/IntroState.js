@@ -23,12 +23,16 @@ IntroState.prototype =
 			and grow.\n\n\n\n\
 			Press -> to continue.";
 		this.text = this.game.add.text(400, 300, introtext,
-			{fill:"white", font: "36px Courier", align: "center"});
+			{fill:"white", font: "24px Courier", align: "center"});
 		/* Center text */
 		this.text.anchor.setTo(0.5,0.5);
 		
 		/* Load controls */
 		this.cursors = this.game.input.keyboard.createCursorKeys();
+		
+		this.game.levelVals = ["(i/24 * 3.0) + 0.125","(Math.random() * 3.0) + 0.125", 
+			 "(1/i * 3.0) + 0.125"];
+		this.game.level = 0;
 	},
 	
 	/* Wait for control to continue */
