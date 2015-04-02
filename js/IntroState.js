@@ -28,7 +28,7 @@ IntroState.prototype =
 		this.text.anchor.setTo(0.5,0.5);
 		
 		/* Load controls */
-		this.cursors = this.game.input.keyboard.createCursorKeys();
+		//this.cursors = this.game.input.keyboard.createCursorKeys();
 		
 		/* Create the formulas for the levels' scaling */
 		this.game.levelVals = ["(Math.random() * 3.0) + 0.125", 
@@ -44,7 +44,8 @@ IntroState.prototype =
 	update: function()
 	{
 		/* On right arrow or pointer press */
-		if(this.cursors.right.isDown || this.game.input.activePointer.isDown)
+		//if(this.cursors.right.isDown || this.game.input.activePointer.isDown)
+		if(this.game.input.activePointer.isDown)
 		{
 			this.game.state.start("play");
 		}

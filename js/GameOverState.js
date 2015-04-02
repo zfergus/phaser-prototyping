@@ -20,21 +20,22 @@ GameOverState.prototype =
 		
 		/* Create the Game Over text with the score */
 		var gameovertext = this.game.overText+"\n\nScore: "+ this.game.score +
-			"\n\nPress -> to play again";
+			"\n\nClick to play again";
 		this.text = this.game.add.text(400, 300, gameovertext, 
 			{fill:"white", font: "24px Courier", align: "center"});
 		/* Center text */
 		this.text.anchor.setTo(0.5,0.5);
 
 		/* Load controls */
-		this.cursors = this.game.input.keyboard.createCursorKeys();
+		//this.cursors = this.game.input.keyboard.createCursorKeys();
 	},
 	
 	/* Wait for control to continue to intro state */
 	update: function()
 	{
 		/* On right arrow or pointer press */
-		if(this.cursors.right.isDown || this.game.input.activePointer.isDown)
+		//if(this.cursors.right.isDown || this.game.input.activePointer.isDown)
+		if(this.game.input.activePointer.isDown)
 		{
 			this.game.state.start("intro");
 		}
