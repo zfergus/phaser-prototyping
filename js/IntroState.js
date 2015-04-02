@@ -21,7 +21,7 @@ IntroState.prototype =
 		/* Create intro text */
 		var introtext = "Move around to absorb blocks\n\
 			and grow.\n\n\n\n\
-			Press -> to continue.";
+			Click to continue.";
 		this.text = this.game.add.text(400, 300, introtext,
 			{fill:"white", font: "24px Courier", align: "center"});
 		/* Center text */
