@@ -30,8 +30,12 @@ IntroState.prototype =
 		/* Load controls */
 		this.cursors = this.game.input.keyboard.createCursorKeys();
 		
+		/* Create the formulas for the levels' scaling */
 		this.game.levelVals = ["(Math.random() * 3.0) + 0.125", 
-			"(i/24 * 3.0) + 0.125", "(1/(i+1) * 3.0) + 0.125"];
+							   "(i/24 * 3.0) + 0.125", 
+							   "(1/(i+1) * 3.0) + 0.125",
+							   "(1/30)*((i-12)*(i-12)) + 0.125",
+							   "(1/4000)*(i*i*i) + 0.125"];
 		this.game.level = 0;
 		this.game.score = 0;
 	},
