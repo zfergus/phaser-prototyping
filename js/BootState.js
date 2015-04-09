@@ -1,5 +1,5 @@
 /*
- * Digital N: BootState.js
+ * Digital 08: BootState.js
  * Created by Zachary Ferguson
  * Game State Class for booting the main game
  */
