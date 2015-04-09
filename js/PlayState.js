@@ -15,7 +15,7 @@ PlayState.prototype =
 	{
 		console.log("Play");
 
-		this.game.stage.backgroundColor = 0x009999;		
+		this.game.stage.backgroundColor = 0x009999;
 
 		/* Constants for the phases of gameplay. */
 		this.BUILD_PHASE = 0;
@@ -67,8 +67,9 @@ PlayState.prototype =
 	update: function()
 	{
 		/* Create defender ships. */
-		if(this.game.input.activePointer.isDown && this.refresh_time <= 0 && 
-			this.gold >= 100)
+		if(this.game.input.activePointer.isDown && 
+			this.game.input.activePointer.y < (this.land.y - 40) && 
+			this.refresh_time <= 0 && this.gold >= 100)
 		{
 			this.refresh_time = 10;
 			this.gold -= 100;
@@ -82,8 +83,12 @@ PlayState.prototype =
 			this.respawn_time = 60;
 			var ship = this.attackers.create(Math.random() * 700 + 40, -40, 
 				"ship", 5);
+			if(Math.floor(Math.random() * 50) == 0)
+				ship.frame = 4;
 			ship.body.velocity.y = 100;
-			ship.health = 100;
+			ship.health = (Math.random()*50+50) + this.game.score/50;
+			if(ship.frame == 4)
+				ship.health *= 3;
 		}
 		
 		/* Count down */
@@ -118,7 +123,7 @@ PlayState.prototype =
 		this.game.physics.arcade.overlap(this.attackers, this.cannon_balls, 
 			function(attacker, ball)
 			{
-				attacker.health -= 25;
+				attacker.health -= Math.random() * 25 + 10;
 				ball.kill();
 			}, null, this);
 			
@@ -141,7 +146,7 @@ PlayState.prototype =
 			}
 		}
 		
-		if(this.lives < 0)
+		if(this.lives <= 0)
 		{
 			this.game.state.start("game over");
 		}

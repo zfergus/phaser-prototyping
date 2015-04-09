@@ -14,6 +14,7 @@ IntroState.prototype =
 	create: function()
 	{
 		console.log("Intro");
+		this.game.stage.backgroundColor = 0x1a1c1a;		
 		/* Play the intro */
 		
 		/* Create intro text */
