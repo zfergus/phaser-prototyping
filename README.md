@@ -1,4 +1,4 @@
-# Digital Assignment 06: SpaceSim
+# Digital Assignment 09: SpaceSim (Update 01)
 
 Controls: Use the UP arrow to turn on the engines and thrust forwards, 
 and the LEFT and Right arrows to rotate clockwise and counter-clockwise 
