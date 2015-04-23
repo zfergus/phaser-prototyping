@@ -24,6 +24,7 @@ PreloadState.prototype =
 			Phaser.Tilemap.TILED_JSON);
 		
 		/* Load images */
+		this.game.load.image("key", "assets/key.png");
 		this.game.load.image("title-screen", "assets/title-screen.png");
 		this.game.load.image("playB", "assets/playB.png");
 		
@@ -32,7 +33,12 @@ PreloadState.prototype =
 		this.game.load.spritesheet("blade", "assets/blade.png", 40, 40);
 		
 		/* Load Sounds */
+		this.game.load.audio("hurt", "assets/hurt.wav");
+		this.game.load.audio("pickup", "assets/pickup.wav");
+		this.game.load.audio("bg-music", "assets/music.ogg");
 		
+		this.music = this.game.add.sound("bg-music", 1, true);
+		this.music.play();
 	},
 	
 	/* Play the intro state */

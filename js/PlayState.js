@@ -36,6 +36,10 @@ PlayState.prototype =
 		this.blades.collideWorldBounds = true;
 		this.createBlades();
 		
+		/* Create the Key */
+		this.key = this.game.add.sprite(23*40, 25*40, "key");
+		this.game.physics.arcade.enable(this.key);
+		
 		/* Load controls */
 		this.cursors = this.game.input.keyboard.createCursorKeys();
 		
@@ -57,6 +61,12 @@ PlayState.prototype =
 		lightSprite.blendMode = Phaser.blendModes.MULTIPLY;	
 		
 		/* BORROWED CODE END */
+		
+		this.healthText = this.game.add.text(20, 0, "Health: " + 
+			this.player.health, {fill:"white", font: "12px Courier", 
+			align: "center"});
+		this.healthText.anchor.setTo(0.5,1.0);
+		this.player.addChild(this.healthText);
 	},
 	
 	/* Creates the player sprite.                                        */
@@ -78,17 +88,24 @@ PlayState.prototype =
 		
 		/* Enable physics on the player */
 		this.game.physics.arcade.enable(player);
+		player.body.setSize(24, 36, 8, 4)
 		
 		/* Collide the player with the world bounds */
 		player.body.collideWorldBounds = true;
 		player.SPEED = 160;
+		
+		player.health = 100;
+		
+		player.hurtSound = this.game.add.sound("hurt");
+		
+		player.hasKey = false;
 		
 		return player;
 	},
 	
 	createBlades: function()
 	{
-		var positions = [[1,5],[1,8],[9,9],[18,8],[20,15],[17,19],[28,18]];
+		var positions = [[1,5],[1,8],[18,8],[20,15],[17,19],[28,18]];
 		for(var i in positions)
 		{
 			//console.log(pos);
@@ -105,21 +122,43 @@ PlayState.prototype =
 	update: function()
 	{
 		this.game.physics.arcade.collide(this.player, this.walls);
+		
+		this.game.physics.arcade.collide(this.key, this.player, 
+			function()
+			{
+				this.key.kill();
+				this.player.hasKey = true;
+				this.game.add.sound("pickup").play();
+			},null, this);
+		
 		this.game.physics.arcade.collide(this.player, this.exit, 
 			function()
 			{
-				this.game.game_over_text = "Congratulations you escaped the \
-					maze!";
-				this.game.state.start("game over");
+				if(this.player.hasKey)
+				{
+					this.game.game_over_text = 
+						"Congratulations you escaped\nthe maze!";
+					this.game.state.start("game over");
+				}
 			}, null, this);
 		
 		this.game.physics.arcade.collide(this.blades, this.walls);
 		
-		this.game.physics.arcade.collide(this.player, this.blades, 
+		this.game.physics.arcade.overlap(this.player, this.blades, 
 			function()
 			{
-				this.game.game_over_text = "Game Over\n\nYou died in the maze";				
-				this.game.state.start("game over");
+				this.player.health--;
+				this.healthText.text = "Health: " + this.player.health;
+				if(!this.player.hurtSound.isPlaying)
+				{
+					this.player.hurtSound.play();
+				}
+				if(this.player.health <= 0)
+				{
+					this.game.game_over_text = 
+						"Game Over\n\nYou died in the maze";				
+					this.game.state.start("game over");
+				}
 			}, null, this);
 		
 		this.controlPlayer();
