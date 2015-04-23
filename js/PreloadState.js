@@ -25,6 +25,8 @@ PreloadState.prototype =
 		
 		/* Load images */
 		this.game.load.image("blade", "assets/blade.png");
+		this.game.load.image("title-screen", "assets/title-screen.png");
+		this.game.load.image("playB", "assets/playB.png");
 		
 		/* Load sprites */
 		this.game.load.spritesheet("player", "assets/player.png", 40, 40);
