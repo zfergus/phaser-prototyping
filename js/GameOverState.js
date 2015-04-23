@@ -20,7 +20,7 @@ GameOverState.prototype =
 		
 		/* Create the Game Over text with the score */
 		//var gameovertext = "GAME OVER\n\n\n\nPress to continue";
-		var gameovertext = this.game.game_over_text;
+		var gameovertext = this.game.game_over_text + "\n\nClick to continue.";
 		this.text = this.game.add.text(400, 300, gameovertext, 
 			{fill:"white", font: "36px Courier", align: "center"});
 		/* Center text */
@@ -34,7 +34,8 @@ GameOverState.prototype =
 	update: function()
 	{
 		/* On right arrow or pointer press */
-		if(this.cursors.right.isDown || this.game.input.activePointer.isDown)
+		//if(this.cursors.right.isDown || this.game.input.activePointer.isDown)
+		if(this.game.input.activePointer.isDown)
 		{
 			this.game.state.start("intro");
 		}

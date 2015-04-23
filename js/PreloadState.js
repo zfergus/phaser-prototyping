@@ -24,12 +24,12 @@ PreloadState.prototype =
 			Phaser.Tilemap.TILED_JSON);
 		
 		/* Load images */
-		this.game.load.image("blade", "assets/blade.png");
 		this.game.load.image("title-screen", "assets/title-screen.png");
 		this.game.load.image("playB", "assets/playB.png");
 		
 		/* Load sprites */
 		this.game.load.spritesheet("player", "assets/player.png", 40, 40);
+		this.game.load.spritesheet("blade", "assets/blade.png", 40, 40);
 		
 		/* Load Sounds */
 		

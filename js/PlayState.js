@@ -30,13 +30,19 @@ PlayState.prototype =
 		/* Create the players sprite. */
 		this.player = this.createPlayer(200,0);
 		
+		/* Create the blades. */
+		this.blades = this.game.add.group();
+		this.blades.enableBody = true;
+		this.blades.collideWorldBounds = true;
+		this.createBlades();
+		
 		/* Load controls */
 		this.cursors = this.game.input.keyboard.createCursorKeys();
 		
 		/* LIGHTING CODE BORROWED FROM                  */
 		/* HTTP://GAMEMECHANICEXPLORER.COM/#LIGHTING-1. */
 		
-		// The radius of the circle of light
+		//The radius of the circle of light
 		this.LIGHT_RADIUS = 100;
 
 		// Create the shadow texture
@@ -51,10 +57,6 @@ PlayState.prototype =
 		lightSprite.blendMode = Phaser.blendModes.MULTIPLY;	
 		
 		/* BORROWED CODE END */
-		
-		this.blades = this.game.add.group();
-		this.blades.enableBody = true;
-		this.createBlades();
 	},
 	
 	/* Creates the player sprite.                                        */
@@ -86,7 +88,17 @@ PlayState.prototype =
 	
 	createBlades: function()
 	{
-		
+		var positions = [[1,5],[1,8],[9,9],[18,8],[20,15],[17,19],[28,18]];
+		for(var i in positions)
+		{
+			//console.log(pos);
+			var blade = this.blades.create(positions[i][0] * 40, 
+				positions[i][1] * 40, "blade");
+			blade.body.velocity.x = 300;
+			blade.animations.add("rotate", [2,1,0], 32, true);
+			blade.animations.play("rotate");
+			blade.body.bounce.set(1);
+		}
 	},
 	
 	/* Update game every frame. */
@@ -101,11 +113,20 @@ PlayState.prototype =
 				this.game.state.start("game over");
 			}, null, this);
 		
+		this.game.physics.arcade.collide(this.blades, this.walls);
+		
+		this.game.physics.arcade.collide(this.player, this.blades, 
+			function()
+			{
+				this.game.game_over_text = "Game Over\n\nYou died in the maze";				
+				this.game.state.start("game over");
+			}, null, this);
+		
 		this.controlPlayer();
 		
 		if(this.LIGHT_RADIUS > 40)
 		{
-			this.LIGHT_RADIUS -= 0.05;
+			this.LIGHT_RADIUS -= 0.01;
 		}
 		
 		// Update the shadow texture each frame
