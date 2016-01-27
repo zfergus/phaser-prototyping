@@ -1,5 +1,5 @@
 /*
- * SpaceSim: GameOverState.js
+ * SpaceSim: Ship.js
  * Created by Zachary Ferguson
  * The Ship class that inherits from the Phaser.Sprite class.
  */
