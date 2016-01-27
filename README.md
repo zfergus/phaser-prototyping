@@ -1,8 +1,3 @@
-#Digital Assignment 01 for CS325 (Introduction to Game Design)
-
-Created by Zachary Ferguson.
-This is a git hub repository for my digital assignment 01 for CS325. 
-
 # Doggies (Digital Assignment 01)
 
 This is the GitHub repository for the game "Doggies". This repository was created by Zachary Ferguson for CS325 Digital Assignment 01. 
@@ -38,4 +33,3 @@ Class definition for Dog adapted from the phaser example Tanks.
   Howl sound effect from: http://soundbible.com/130-Werewolf-Howl.html.
   
 Prototype Closest Other Game: This game is inspired by classic Nintendo games for the NES and SNES. This game uses some code and assets from the Phaser tutorial "Tutorial: Making your first Phaser game" which can be found here.
->>>>>>> origin/master
