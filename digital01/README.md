@@ -1,4 +1,4 @@
-# Doggies (Digital Assignment 01)
+# Digital Assignment 01: Doggies
 
 This is the GitHub repository for the game "Doggies". This repository was created by Zachary Ferguson for CS325 Digital Assignment 01. 
 
