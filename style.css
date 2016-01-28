@@ -97,7 +97,7 @@ footer
     width: 100%;
 	color: white;
 	text-align: center;
-	font-size: 9px;
+	font-size: 12px;
 	padding: 20px 0px;
 }
 
@@ -106,15 +106,15 @@ a:visited {color: #99388c; text-decoration:none;} /* visited link    */
 a:hover {color: #801D71;  text-decoration:none;}  /* mouse over link */
 a:active {text-decoration:none;}                  /* selected link   */
 
-@media screen and (max-width: px)
+@media screen and (max-width:767px)
 {
 	body
 	{
-		font-size: 22px;
+		font-size: 15px;
 	}
 	
 	section.preview
 	{
-		line-height: 30px;
+		line-height: 18px;
 	}
 }
