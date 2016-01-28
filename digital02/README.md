@@ -1,4 +1,4 @@
-# Mystery of the Stolen Kittens
+# Digital Assignment 02: Mystery of the Stolen Kittens
 
 URL: http://zfergus2.github.io/digital02
 
