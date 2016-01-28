@@ -1,0 +1,107 @@
+/*
+ * Created by Zachary Ferguson
+ */
+ 
+html 
+{
+    position: relative;
+    min-height: 100%;
+}
+ 
+body
+{
+	width:100%;
+	margin:0px;
+	padding: 0px;
+	background-color: #383838;
+	font-family: Open Sans, Arial;
+	
+	font-size: 22px;
+	
+	color: white;
+}
+ 
+header
+{
+	text-align: center;
+	padding: 20px 0px;
+	font-size: 40px;
+	font-weight: bold;
+	
+	width: 100%;
+	margin: 2px auto;
+	
+	color: white;
+}
+
+article
+{
+    margin: 40px auto;
+	margin-bottom: 120px;
+}
+
+section.preview
+{
+	max-width:800px;
+	margin: 0 auto 40px auto;
+	overflow:hidden;
+	
+	background-color:white;
+	border-radius:5px;
+	color: #383838;
+	border:0px;
+	
+	line-height: 30px;
+}
+
+section.preview > a > img
+{
+	max-width: 280px;
+	max-height: 158px;
+	float: left;
+	display:inline;
+}
+
+section.preview > div.text
+{
+	margin: 10px 0px 0px 300px;
+	padding-right: 20px;
+}
+
+section.preview > div.text > a.title
+{
+	padding-bottom:10px;
+	
+	
+	font-weight:bold;
+	font-style:strong;
+}
+
+section.preview > div.text > a.title:hover
+{
+	 text-decoration:none;
+}
+
+section.preview > div.text > p
+{	
+	clear:right;
+	font-size: 0.8em;
+	line-height:1.4em;
+	margin-top:10px;
+}
+
+footer
+{
+	position:absolute;
+    bottom: 0;
+    width: 100%;
+	color: white;
+	text-align: center;
+	font-size: 9px;
+	padding: 20px 0px;
+}
+
+a:link {color: #99388c; text-decoration:none;}    /* unvisited link  */
+a:visited {color: #99388c; text-decoration:none;} /* visited link    */ 
+a:hover {color: #801D71;  text-decoration:none;}   /* mouse over link */
+a:active {text-decoration:none;}  /* selected link   */
