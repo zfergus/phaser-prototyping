@@ -9,13 +9,19 @@ html
     min-height: 100%;
 }
  
+@font-face
+{
+	font-family: OpenSans;
+    src: url(assets/fonts/OpenSans.ttf);
+}
+ 
 body
 {
 	width:100%;
 	margin:0px;
 	padding: 0px;
 	background-color: #383838;
-	font-family: Open Sans, Arial;
+	font-family: OpenSans, Arial;
 	
 	font-size: 22px;
 	
