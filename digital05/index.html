@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Traffic Jam</title>
+    <script src="js/phaser.js"></script>
+	<script src="js/BootState.js"></script>
+	<script src="js/PreloadState.js"></script>
+	<script src="js/IntroState.js"></script>
+	<script src="js/PlayState.js"></script>
+	<script src="js/GameOverState.js"></script>
+    <script src="js/main.js"></script>
+	<link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+<style>
+body
+{
+    color: #777;
+	/*background-color: #FEF9BC;*/
+    font-family: "Avenir", Verdana, sans-serif;
+}
+#readme
+{
+    margin-top: 10px;
+}
+/* Center the game canvas */
+canvas 
+{
+   display : block;
+   margin : auto;
+}
+</style>
+
+</head>
+<body>
+<div id="game"></div>
+<div id="readme">
+<center><h2>Traffic Jam</h2>
+<strong>Controls:</strong> Use the arrow keys to direct your car and avoid 
+traffic as you accelerate.</center>
+<ul>
+
+<li><strong>High Concept:</strong>
+Escape the traffic jam by weaving in and out of traffic in your new sports car.
+</li>
+
+<li><strong>Player Experience Goals:</strong>
+This game is designed to produce a experience of close calls and quick reactions
+for the player. The automatic acceleration of the car forces the player to react
+quickly and puts them in a state of flow as they swerve around the map.
+</li>
+
+<li><strong>Genre:</strong>
+This game mostly draws elements from the puzzle genre, but also incorporates 
+mechanics from the racing genre.
+</li>
+
+<li><strong>Game play:</strong>
+The player controls a yellow sports car by using the right and left arrows to 
+move in their respective direction. The car automatically accelerates forward up
+to a maximum speed. The player's car is surrounded by traffic and in order to 
+get through he/she must swerve around them. Any head on collisions will damage 
+the player's car. If the player's car takes more than 100 damage they will have 
+totalled it and loose the game. If the player makes it to the front of the 
+traffic they will win. The player is being timed as well but it is only used for
+determining high scores.
+</li>
+
+<li><strong>Prototype goal:</strong>
+The goal of this game is to create a quick but challenging game that requires 
+concentration and precision. This game is designed to put the player in a state 
+of "flow."
+</li>
+
+<li><strong>Features:</strong>
+Unlike most racing games there are no opponent or clock to race against. Instead
+this game is more of a reaction puzzle racing game that requires precise motion.
+</li>
+
+<li><strong>Setting/Premise:</strong>
+You are a new proud owner of a fast yellow sports car, but you are currently 
+stuck in traffic, unable to test your new rides power. You have had enough of 
+sitting and decide to make your own route through. You decide to cut in between 
+traffic to try and get ahead.
+</li>
+
+<li><strong>Story:</strong>
+The dramatic tension arises from your inability to drive fast and enjoy life. 
+Fed up with waiting around you have to break some laws, and maybe some fenders,
+to have some fun.
+</li>
+
+<li><strong>Target Audience:</strong>
+The main demographic for this game is fans of puzzle runner games that have the
+player avoiding obstacles as they progress forward endlessly.
+</li>
+
+<li><strong>Play time:</strong>
+This game is a quick game that can be beat in a matter of minutes.
+</li>
+
+<li><strong>Strategies:</strong>
+The player will need to have fast reflexes and a quick finger to move in between
+the cars and succeed.
+</li>
+
+<li><strong>Prototype Assets:</strong>
+The game sprites and images are self created, and the following are used with 
+the permission of the author:
+<ul>
+	<li>
+		The music is "The Night" by DJ Davidouille:<br>
+		<a href = "https://www.jamendo.com/en/track/1163911/the-night-david33fr-mayne-2014" 
+		target = "blank">
+		https://www.jamendo.com/en/track/1163911/the-night-david33fr-mayne-2014
+		</a>
+	</li>
+	<li>
+		Car start up sfx by MAJ061785:<br> 
+		<a href = "http://www.freesound.org/people/MAJ061785/sounds/85517/" 
+			target = "blank">
+			http://www.freesound.org/people/MAJ061785/sounds/85517/
+		</a>
+	</li>
+	<li>
+		Traffic jam voice provided by shawshank73:<br>
+		<a href = "http://www.freesound.org/people/shawshank73/sounds/74984/" 
+			target = "blank">
+			http://www.freesound.org/people/shawshank73/sounds/74984/
+		</a>
+	</li>
+	<li>
+		Car beeps and signals borrowed from Robinhood76:<br>
+		<a href = "http://www.freesound.org/people/Robinhood76/sounds/106785/" 
+			target = "blank">
+			http://www.freesound.org/people/Robinhood76/sounds/106785/
+		</a>
+	</li>
+	<li>
+		Carsh crash sound effects created by squareal:<br>
+		<a href = "http://www.freesound.org/people/squareal/sounds/237375/" 
+		target = "blank">
+		http://www.freesound.org/people/squareal/sounds/237375/
+		</a>
+	</li>
+</ul>
+</li>
+
+<li><strong>Prototype Closest Other Game:</strong>
+Some machanics for the cars acceleration and movement borrowed from the Game 
+Mechanic Explorer example <a href = "http://gamemechanicexplorer.com/#thrust-2"
+target = "blank">"Spaceship Motion - With Drag"</a>
+</li>
+
+</ul>
+</div>
+</body>
+</html>
