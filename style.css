@@ -38,7 +38,8 @@ header
 	width: 100%;
 	margin: 2px auto;
 	
-	color: white;
+	color: #383838;
+	background-color: white;
 }
 
 article
@@ -100,9 +101,10 @@ section.preview > div.text > p
 footer
 {
 	position:absolute;
-    bottom: 0;
-    width: 100%;
-	color: white;
+	bottom: 0;
+	width: 100%;
+	color: #383838;
+	background-color:white;
 	text-align: center;
 	font-size: 12px;
 	padding: 20px 0px;
