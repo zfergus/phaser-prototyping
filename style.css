@@ -38,8 +38,7 @@ header
 	width: 100%;
 	margin: 2px auto;
 	
-	color: #383838;
-	background-color: white;
+	color: white;
 }
 
 article
@@ -103,8 +102,7 @@ footer
 	position:absolute;
 	bottom: 0;
 	width: 100%;
-	color: #383838;
-	background-color:white;
+	color: white;
 	text-align: center;
 	font-size: 12px;
 	padding: 20px 0px;
