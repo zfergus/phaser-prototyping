@@ -35,10 +35,10 @@ body {
 
 header {
     text-align: center;
-    padding: 20px 0px;
+    padding: 20px 25px;
     font-size: 44pt;
     font-weight: bold;
-    width: 100%;
+    /* width: 100%; */
     margin: 2px auto;
     color: white;
     /* text-shadow: 1px 1px 2px rgba(182, 27, 242, 0.4), 1px -1px 2px rgba(182, 27, 242, 0.4), -1px 1px 2px rgba(182, 27, 242, 0.4), -1px -1px 2px rgba(182, 27, 242, 0.4), 0 0 20px rgba(0, 134, 255, 0.75); */
@@ -170,6 +170,14 @@ a:active {
 /* selected link   */
 
 @media screen and (max-width:700px) {
+    header {
+        font-size: 36pt;
+    }
+    article {
+        padding-left: 25px;
+        padding-right: 25px;
+        padding-bottom: 65px;
+    }
     .video-container {
         padding-bottom: calc(56.25%);
         width: 100%;
@@ -199,5 +207,8 @@ a:active {
         margin-top: 0;
         margin-bottom: 10px;
         padding: 0px;
+    }
+    footer {
+        font-size: 7pt;
     }
 }

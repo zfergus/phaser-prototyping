@@ -1,156 +1,175 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>Mystery of the Stolen Kittens</title>
     <script src="js/phaser.js"></script>
-	<script src="js/BootState.js"></script>
-	<script src="js/PreloadState.js"></script>
-	<script src="js/IntroState.js"></script>
-	<script src="js/OverworldState.js"></script>
-	<script src="js/NonPlayerCharacter.js"></script>
-	<script src="js/main.js"></script>
-	<link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-<style>
-body
-{
-    color: black;
-	background-color: #F9DAA4;
-    font-family: "Avenir", Verdana, sans-serif;
-}
-#readme
-{
-    width: 800px;
-    margin: 10px auto;
-	
-	padding: 0px 20px;
-	
-	text-align: justify;
-    text-justify: inter-word;
-}
-a:link    {text-decoration:none;} /* unvisited link  */
-a:visited {text-decoration:none;} /* visited link    */ 
-a:hover   {text-decoration:none;} /* mouse over link */
-a:active  {text-decoration:none;} /* selected link   */
-/* Center the game canvas */
-canvas 
-{
-   display : block;
-   margin : auto;
-}
-</style>
+    <script src="js/BootState.js"></script>
+    <script src="js/PreloadState.js"></script>
+    <script src="js/IntroState.js"></script>
+    <script src="js/OverworldState.js"></script>
+    <script src="js/NonPlayerCharacter.js"></script>
+    <script src="js/main.js"></script>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, inital-scale=1">
+
+    <style>
+        body {
+            color: black;
+            background-color: #F9DAA4;
+            font-family: "Avenir", Verdana, sans-serif;
+        }
+
+        #readme {
+            width: 800px;
+            margin: 10px auto;
+
+            padding: 0px 20px;
+
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        a:link {
+            text-decoration: none;
+        }
+
+        /* unvisited link  */
+
+        a:visited {
+            text-decoration: none;
+        }
+
+        /* visited link    */
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        /* mouse over link */
+
+        a:active {
+            text-decoration: none;
+        }
+
+        /* selected link   */
+
+        /* Center the game canvas */
+
+        canvas {
+            display: block;
+            margin: auto;
+        }
+    </style>
 
 </head>
+
 <body>
-<div id="game"></div>
-<div id="readme">
-<center><h2>Mystery of the Stolen Kittens</h2></center>
-<br>
-<center><strong>Controls:</strong> Use the arrow keys to move around the world
-and approach characters to interact with them. </center>
-<ul>
+    <div id="game"></div>
+    <div id="readme">
+        <center>
+            <h2>Mystery of the Stolen Kittens</h2></center>
+        <br>
+        <center><strong>Controls:</strong> Use the arrow keys to move around the world and
+            approach characters to interact with them. </center>
+        <ul>
 
-<li><strong>High Concept:</strong>
-Find the stolen box of kittens for the princess.
-</li>
+            <li><strong>High Concept:</strong> Find the stolen box of kittens for the
+                princess.
+            </li>
 
-<li><strong>Player Experience Goals:</strong>
-This game is designed to be a puzzle RPG that involves the player thinking and 
-interacting with the virtual world to solve mysteries. The intent is to cause 
-the to strengthen there circuital think skills.
-</li>
+            <li><strong>Player Experience Goals:</strong> This game is designed to be
+                a puzzle RPG that involves the player thinking and interacting with
+                the virtual world to solve mysteries. The intent is to cause the
+                to strengthen there circuital think skills.
+            </li>
 
-<li><strong>Genre:</strong>
-This game fits into the top down RPG genre, but also incorporates mechanics from
-the mystery and puzzle solving genres. 
-</li>
+            <li><strong>Genre:</strong> This game fits into the top down RPG genre, but
+                also incorporates mechanics from the mystery and puzzle solving genres.
+            </li>
 
-<li><strong>Game play:</strong>
-To play this game use the arrow keys to move around the world and approach 
-characters to interact with them. Talk to the various character of the world to 
-gain clues about who stole the kittens. Once enough clues have been found you 
-can find the little ones. In future developments more playable area may be added
-as well as more characters and mysteries.
-</li>
+            <li><strong>Game play:</strong> To play this game use the arrow keys to move
+                around the world and approach characters to interact with them. Talk
+                to the various character of the world to gain clues about who stole
+                the kittens. Once enough clues have been found you can find the little
+                ones. In future developments more playable area may be added as well
+                as more characters and mysteries.
+            </li>
 
-<li><strong>Prototype goal:</strong>
-The goal of this game is to have the player interact with the NPC's in order to 
-solve mysteries and complete the game.
-</li>
+            <li><strong>Prototype goal:</strong> The goal of this game is to have the
+                player interact with the NPC's in order to solve mysteries and complete
+                the game.
+            </li>
 
-<li><strong>Features:</strong>
-This game uniquely features a way to interact with the non-player characters in
-the world. This is a key feature of the game and a core mechanic. 
-</li>
+            <li><strong>Features:</strong> This game uniquely features a way to interact
+                with the non-player characters in the world. This is a key feature
+                of the game and a core mechanic.
+            </li>
 
-<li><strong>Setting/Premise:</strong>
-You, the mercenary of the royal family have travelled to the Eastern Desert to
-search for a box of stolen kittens. This town is more than just a rural oasis,
-however, it is the start of the black silk road, the corrupt black market.
-</li>
+            <li><strong>Setting/Premise:</strong> You, the mercenary of the royal family
+                have travelled to the Eastern Desert to search for a box of stolen
+                kittens. This town is more than just a rural oasis, however, it is
+                the start of the black silk road, the corrupt black market.
+            </li>
 
-<li><strong>Story:</strong>
-You are an retired general for the federation military. After seeing the horrors
-of war, you wanted nothing but to live your last days in peace at the local 
-tavern. When the princess' new born kittens go missing you decide to sober up 
-for one last good deed. Hired as a royal mercenary, you travel to the desert town
-to the east, the entrance to the black silk road. You figure you might be 
-able to find some leads. Little do you know, this case is just the beginning and 
-soon you cannot just stand by, you must put a stop to the cruelties of this world.
-</li>
+            <li><strong>Story:</strong> You are an retired general for the federation
+                military. After seeing the horrors of war, you wanted nothing but
+                to live your last days in peace at the local tavern. When the princess'
+                new born kittens go missing you decide to sober up for one last good
+                deed. Hired as a royal mercenary, you travel to the desert town to
+                the east, the entrance to the black silk road. You figure you might
+                be able to find some leads. Little do you know, this case is just
+                the beginning and soon you cannot just stand by, you must put a stop
+                to the cruelties of this world.
+            </li>
 
-<li><strong>Target Audience:</strong>
-This game is target at fans of fantasy RPG's and lovers of cute kittens.
-</li>
+            <li><strong>Target Audience:</strong> This game is target at fans of fantasy
+                RPG's and lovers of cute kittens.
+            </li>
 
-<li><strong>Play time:</strong>
-This is a short game that can be explored in a few minutes. This is just a 
-prologue, though, and can be expanded on in future episodes.
-</li>
+            <li><strong>Play time:</strong> This is a short game that can be explored
+                in a few minutes. This is just a prologue, though, and can be expanded
+                on in future episodes.
+            </li>
 
-<li><strong>Strategies:</strong>
-Talk to the various town members in order to gain clues. Gain enough clues to 
-find out where the kittens are hidden. When the kittens are revealed follow 
-their meows to locate them.
-</li>
+            <li><strong>Strategies:</strong> Talk to the various town members in order
+                to gain clues. Gain enough clues to find out where the kittens are
+                hidden. When the kittens are revealed follow their meows to locate
+                them.
+            </li>
 
-<li><strong>Prototype Assets:</strong>
-The character sprites were created using the following online tool:<br>
-<a href = "http://www.geocities.jp/kurororo4/looseleaf/" target = "blank">
-http://www.geocities.jp/kurororo4/looseleaf/</a><br>
-Tile set borrowed from the phaser examples:<br>
-<a href = "http://examples.phaser.io/assets/tilemaps/tiles/tmw_desert_spacing.png"
-target = "blank">
-http://examples.phaser.io/assets/tilemaps/tiles/tmw_desert_spacing.png</a><br>
-Sound Effects provided by lolamadeus:<br>
-<a href = "http://www.freesound.org/people/lolamadeus/sounds/196251/"
-target = "blank">
-http://www.freesound.org/people/lolamadeus/sounds/196251/</a><br>
-Other desert tile sheet assets borrowed from team4-trynity:<br>
-<a href = "http://goo.gl/ubGuxG" target = "blank">
+            <li><strong>Prototype Assets:</strong> The character sprites were created
+                using the following online tool:<br>
+                <a href="http://www.geocities.jp/kurororo4/looseleaf/" target="blank">
+http://www.geocities.jp/kurororo4/looseleaf/</a><br> Tile set borrowed
+                from the phaser examples:<br>
+                <a href="http://examples.phaser.io/assets/tilemaps/tiles/tmw_desert_spacing.png"
+                    target="blank">
+http://examples.phaser.io/assets/tilemaps/tiles/tmw_desert_spacing.png</a><br>                Sound Effects provided by lolamadeus:<br>
+                <a href="http://www.freesound.org/people/lolamadeus/sounds/196251/" target="blank">
+http://www.freesound.org/people/lolamadeus/sounds/196251/</a><br>                Other desert tile sheet assets borrowed from team4-trynity:<br>
+                <a href="http://goo.gl/ubGuxG" target="blank">
 http://team4-trynity.googlecode.com/svn/trunk/Aeona%20Sprint%202/Tilesets/Desert
-</a><br>
-Music by Conway Hambone:<br>
-<a href = "https://www.jamendo.com/en/track/949555/southwestern" 
-target = "blank">
+</a><br> Music by Conway Hambone:<br>
+                <a href="https://www.jamendo.com/en/track/949555/southwestern" target="blank">
 https://www.jamendo.com/en/track/949555/southwestern
-</a><br>
-Some code borrowed from the Phaser tutorial:<br>
-<a href = "http://www.emanueleferonato.com/2014/08/28/phaser-tutorial-understanding-phaser-states/" 
-	taget = "blank">
+</a><br> Some code borrowed from the Phaser tutorial:<br>
+                <a href="http://www.emanueleferonato.com/2014/08/28/phaser-tutorial-understanding-phaser-states/"
+                    taget="blank">
 http://www.emanueleferonato.com/2014/08/28/phaser-tutorial-understanding-phaser-states/
-</a><br>
-Ouch sound provided by work2survive:<br>
-<a href = "http://www.flashkit.com/soundfx/People/Fighting/Hurt2-kayden_r-8955/index.php" 
-target ="blank">http://www.flashkit.com/soundfx/People/Fighting/Hurt2-kayden_r-8955/index.php</a>
-</li>
+</a><br> Ouch sound provided by work2survive:<br>
+                <a href="http://www.flashkit.com/soundfx/People/Fighting/Hurt2-kayden_r-8955/index.php"
+                    target="blank">http://www.flashkit.com/soundfx/People/Fighting/Hurt2-kayden_r-8955/index.php</a>
+            </li>
 
-<li><strong>Prototype Closest Other Game:</strong>
-This game is inspired by the top down RPG games like Pokemon and Harvest Moon. 
-It is a original creation and does not borrow code from any Phaser examples. 
-</li>
+            <li><strong>Prototype Closest Other Game:</strong> This game is inspired
+                by the top down RPG games like Pokemon and Harvest Moon. It is a
+                original creation and does not borrow code from any Phaser examples.
+            </li>
 
-</ul>
-</div>
+        </ul>
+    </div>
 </body>
+
 </html>
