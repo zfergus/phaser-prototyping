@@ -3,6 +3,10 @@
  * Style based off of phaser.io's css.
  */
 
+:root {
+    --text-color: #505050;
+}
+
 html {
     position: relative;
     min-height: 100%;
@@ -22,13 +26,11 @@ html {
 }
 
 body {
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    font-family: "Open Sans", Arial;
-    font-size: 22px;
-    /* color: white; */
+    margin: auto;
     background-color: #e1e4f0;
+    font-family: "Open Sans", Arial;
+    color: var(--text-color);
+    font-size: 14pt;
 }
 
 header {
@@ -39,22 +41,53 @@ header {
     width: 100%;
     margin: 2px auto;
     color: white;
-    text-shadow: 1px 1px 2px rgba(182, 27, 242, 0.4), 1px -1px 2px rgba(182, 27, 242, 0.4), -1px 1px 2px rgba(182, 27, 242, 0.4), -1px -1px 2px rgba(182, 27, 242, 0.4), 0 0 20px rgba(0, 134, 255, 0.75);
-    /* background-color: #f0f2f8; */
-    /* box-shadow: 0 0 2px 2px rgba(166, 168, 178, 0.5); */
+    /* text-shadow: 1px 1px 2px rgba(182, 27, 242, 0.4), 1px -1px 2px rgba(182, 27, 242, 0.4), -1px 1px 2px rgba(182, 27, 242, 0.4), -1px -1px 2px rgba(182, 27, 242, 0.4), 0 0 20px rgba(0, 134, 255, 0.75); */
+    text-shadow: 2px 2px 4px rgba(182, 27, 242, 0.4), 2px -2px 4px rgba(182, 27, 242, 0.4), -2px 2px 4px rgba(182, 27, 242, 0.4), -2px -2px 4px rgba(182, 27, 242, 0.4), 0 0 40px rgba(0, 134, 255, 0.75);
+    background-color: #f0f2f8;
+    box-shadow: 0 0 2px 2px rgba(166, 168, 178, 0.5);
+    margin: 0;
+}
+
+header .subheading {
+    color: var(--text-color);
+    margin-top: 5px;
+    margin-bottom: 0;
+    text-align: center;
+    font-size: 13pt;
+    text-shadow: none;
 }
 
 article {
-    margin: 40px auto;
-    margin-bottom: 120px;
+    margin: auto;
+    padding: 20px 50px 85px;
+    max-width: 1000px;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: calc(56.25% * 0.75);
+    padding-top: -1px;
+    height: 0;
+    width: 75%;
+    /* max-width: 750px; */
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 section.preview {
-    max-width: 1000px;
     margin: 0 auto 40px auto;
     overflow: hidden;
     background-color: #f0f2f8;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0 0 2px 2px rgba(166, 168, 178, 0.5);
     color: #383838;
     border: 0px;
@@ -78,13 +111,12 @@ section.preview .text {
     border: var(--border);
     display: inline-block;
     vertical-align: middle;
-    max-width: calc(100% - 300px - 10px - 10px);
+    max-width: calc(100% - 300px - 10px - 15px);
 }
 
 section.preview .title {
     padding-bottom: 10px;
     font-weight: bold;
-    font-style: strong;
 }
 
 section.preview .title:hover {
@@ -93,7 +125,7 @@ section.preview .title:hover {
 
 section.preview .text p {
     clear: right;
-    font-size: 0.8em;
+    font-size: 14pt;
     line-height: 1.4em;
     margin-top: 10px;
 }
@@ -102,12 +134,12 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    color: black;
+    color: var(--text-color);
+    /* background: linear-gradient(#e1e4f0, #b4b6bf); */
+    background-color: #f0f2f8;
     text-align: center;
-    font-size: 12px;
-    padding: 20px 0px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    font-size: 9pt;
+    padding: 5px 0px;
 }
 
 a:link {
@@ -137,11 +169,35 @@ a:active {
 
 /* selected link   */
 
-@media screen and (max-width:767px) {
-    body {
-        font-size: 15px;
+@media screen and (max-width:700px) {
+    .video-container {
+        padding-bottom: calc(56.25%);
+        width: 100%;
     }
     section.preview {
-        line-height: 18px;
+        margin: 20px 0;
+    }
+    section.preview img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+        padding-right: 0;
+        padding-bottom: 10px;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+    section.preview .text {
+        max-width: 100%;
+        display: block;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    section.preview p.title {
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 10px;
+        padding: 0px;
     }
 }
