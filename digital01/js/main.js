@@ -89,8 +89,8 @@ window.onload = function()
 	};
 
 	/* The game object */
-    var game = new Phaser.Game( 800, 600, Phaser.AUTO, "game",
-		{ preload: preload, create: create, update: update } );
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, "game",
+		{preload: preload, create: create, update: update});
 
 	/* Load the game assets. */
     function preload()
@@ -164,6 +164,10 @@ window.onload = function()
 
     function create()
 	{
+		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+		game.scale.maxWidth = 800;
+		game.scale.maxHeight = 600;
+
 		/* Stretch out the world */
 		game.world.setBounds(0, 0, 8000, 600);
 
