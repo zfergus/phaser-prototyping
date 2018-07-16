@@ -1,0 +1,137 @@
+/*
+Style of a game page for each of the digital games.
+Written by: Zachary Ferguson
+*/
+
+:root {
+    --bg-color: white;
+    --text-color: black;
+    --font-family: "Avenir", Verdana, sans-serif;
+    --btn-text-color: #444;
+    --btn-bg-color: #eee;
+    --btn-active-text-color: #444;
+    --btn-active-bg-color: #ccc;
+    --readme-text-color: var(--text-color);
+    --readme-bg-color: #f1f1f1;
+    --link-color: #99388c;
+    --visited-link-color: var(--visited-link-color);
+    --hover-link-color: var(--visited-link-color);
+    --active-link-color: var(--visited-link-color);
+}
+
+body {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    font-family: var(--font-family);
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 14pt;
+    transition: background-color 0.2s ease-out;
+}
+
+article {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#readme-btn {
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+    text-align: left;
+    border: none;
+    outline: none;
+    padding: 2px 18px;
+}
+
+#readme-btn:not(.active) {
+    color: var(--btn-text-color);
+    background-color: var(--btn-bg-color);
+}
+
+.active, #readme-btn:hover {
+    color: var(--btn-active-text-color);
+    background-color: var(--btn-active-bg-color);
+}
+
+#readme-btn:after {
+    /* Unicode character for "plus" sign (+) */
+    content: '\25BE';
+    color: var(--btn-text-color);
+    float: right;
+    margin-left: 5px;
+}
+
+#readme-btn.active:after {
+    /* Unicode character for "minus" sign (-) */
+    content: "\25AC";
+}
+
+#readme {
+    padding: 0;
+    margin-top: 10px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease;
+    color: var(--readme-text-color);
+    background-color: var(--readme-bg-color);
+    margin-top: 0;
+}
+
+ul {
+    padding-left: 30px;
+    padding-right: 20px;
+}
+
+a:link {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+a:visited {
+    color: var(--visited-link-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--hover-link-color);
+    text-decoration: none;
+}
+
+a:active {
+    color: var(--active-link-color);
+    text-decoration: none;
+}
+
+canvas {
+    /* Center the game canvas */
+    display: block;
+    margin: auto;
+}
+
+#title {
+    font-size: 24pt;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+#tagline {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+#controls {
+    text-align: center;
+}

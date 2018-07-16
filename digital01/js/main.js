@@ -164,7 +164,6 @@ window.onload = function()
 
     function create()
 	{
-		console.log(game)
 		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		game.scale.maxWidth = 800;
 		game.scale.maxHeight = 600;
@@ -545,7 +544,7 @@ window.onload = function()
 		{
 			howl.play("", 0, 10, false);
 			/* Change to night time */
-			document.body.style.background = "black";
+			document.body.classList.toggle("night");
 			/* Change the music */
 			day_music.pause("",0,1,true);
 			night_music.play("",0,1,true);
@@ -577,7 +576,7 @@ window.onload = function()
 		else /* If it is night time */
 		{
 			/* Change to day time */
-			document.body.style.background = "white";
+			document.body.classList.toggle("night");
 			/* Change the music */
 			night_music.pause("",0,1,true);
 			day_music.play("",0,1,true);

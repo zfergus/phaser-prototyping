@@ -4,18 +4,18 @@
  */
 
 "use strict";
- 
+
 function PreloadState() {};
 
-PreloadState.prototype = 
+PreloadState.prototype =
 {
 	/* Load assets */
 	preload: function()
-	{ 
+	{
 		var loadingBar = this.add.sprite(400,300,"loading");
         loadingBar.anchor.setTo(0.5,0.5);
         this.load.setPreloadSprite(loadingBar);
-		  
+
 		/* Load tile map */
 		this.game.load.image("desert", "assets/desert_tiled.png");
 		this.game.load.image("desert_town", "assets/desert_town.png");
@@ -32,13 +32,13 @@ PreloadState.prototype =
 		this.game.load.spritesheet("npc3", "assets/npc3.png", 34, 52);
 		this.game.load.spritesheet("female_npc", "assets/female_npc.png", 34, 52);
 		this.game.load.spritesheet("title", "assets/intro.png", 800, 600);
-		
+
 		/* Load Sounds */
 		this.game.load.audio("meow", "assets/kittens.ogg");
 		this.game.load.audio("ouch", "assets/ouch.ogg");
 		this.game.load.audio("bg_music", "assets/western.ogg");
 	},
-	
+
 	/* Play the intro */
 	create: function()
 	{

@@ -4,7 +4,7 @@
  */
 
 "use strict";
- 
+
 function IntroState() {};
 
 IntroState.prototype = {
@@ -16,12 +16,12 @@ IntroState.prototype = {
 		intro.animations.add("role", [0, 1, 2, 3], 0.2);
 		intro.animations.play("role");
 		this.startTime = (new Date()).getTime();
-		
+
 		/* Play the background music */
 		this.music = this.game.add.audio("bg_music", .125, true);
 		this.music.play();
 	},
-	
+
 	/* Wait 20 seconds to continue */
 	update: function()
 	{
