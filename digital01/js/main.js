@@ -164,9 +164,11 @@ window.onload = function()
 
     function create()
 	{
+		console.log(game)
 		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		game.scale.maxWidth = 800;
 		game.scale.maxHeight = 600;
+		game.scale.windowConstraints = {right: "layout", bottom: "layout"};
 
 		/* Stretch out the world */
 		game.world.setBounds(0, 0, 8000, 600);
