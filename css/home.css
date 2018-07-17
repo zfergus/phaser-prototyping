@@ -66,18 +66,19 @@ article {
 .video-container {
     position: relative;
     padding-bottom: calc(56.25% * 0.75);
-    padding-top: -1px;
     height: 0;
     width: 75%;
     /* max-width: 750px; */
     overflow: hidden;
     margin-left: auto;
     margin-right: auto;
+    /* border-radius: 10px; */
+    overflow: hidden;
 }
 
 .video-container iframe {
     position: absolute;
-    top: 0;
+    bottom: 2px;
     left: 0;
     width: 100%;
     height: 100%;
