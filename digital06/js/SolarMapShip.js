@@ -15,7 +15,6 @@ var SolarMapShip = function(game, x, y, shipCollisionGroup) {
 
     /* Create the flame as a child sprite of the ship. */
     this.burn = game.add.sprite(0, 3, "SolarMapBurn");
-    console.log(this.burn);
     this.burn.anchor.setTo(0.5, 0);
     /* Make the burn invisible*/
     this.burn.alpha = 0;

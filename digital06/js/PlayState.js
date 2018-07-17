@@ -83,7 +83,6 @@ PlayState.prototype = {
                     Math.abs(this.ship.body.velocity.x) > 30) {
                     /* explode */
                     this.thrusterSound.stop();
-                    console.log(this);
                     this.game.endMessage = "You did not even make it out of the atmosphere, mediocre.";
                     this.game.state.start("game over");
                 } else {
