@@ -13,9 +13,9 @@ Written by: Zachary Ferguson
     --btn-active-bg-color: #ccc;
     --readme-text-color: var(--text-color);
     --readme-bg-color: #f1f1f1;
-    --link-color: #99388c;
-    --visited-link-color: var(--visited-link-color);
-    --hover-link-color: var(--visited-link-color);
+    --link-color: cornflowerblue;
+    --visited-link-color: mediumpurple;
+    --hover-link-color: blueviolet;
     --active-link-color: var(--visited-link-color);
 }
 
@@ -24,7 +24,7 @@ body {
     background-color: var(--bg-color);
     font-family: var(--font-family);
     margin: 0;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     font-size: 14pt;
     transition: background-color 0.2s ease-out;
 }
@@ -35,9 +35,10 @@ article {
     margin-right: auto;
     padding-left: 20px;
     padding-right: 20px;
+    font-size: 13pt;
 }
 
-#readme-btn {
+#changes-btn, #readme-btn {
     font-family: inherit;
     font-size: inherit;
     cursor: pointer;
@@ -53,17 +54,17 @@ article {
     padding: 2px 18px;
 }
 
-#readme-btn:not(.active) {
+#changes-btn:not(.active), #readme-btn:not(.active) {
     color: var(--btn-text-color);
     background-color: var(--btn-bg-color);
 }
 
-.active, #readme-btn:hover {
+.active, #changes-btn:hover, #readme-btn:hover {
     color: var(--btn-active-text-color);
     background-color: var(--btn-active-bg-color);
 }
 
-#readme-btn:after {
+#changes-btn:after, #readme-btn:after {
     /* Unicode character for "plus" sign (+) */
     content: '\25BE';
     color: var(--btn-text-color);
@@ -71,12 +72,12 @@ article {
     margin-left: 5px;
 }
 
-#readme-btn.active:after {
+#changes-btn.active:after, #readme-btn.active:after {
     /* Unicode character for "minus" sign (-) */
-    content: "\25AC";
+    content: "-";
 }
 
-#readme {
+#changes, #readme {
     padding: 0;
     margin-top: 10px;
     max-height: 0;
@@ -85,6 +86,7 @@ article {
     color: var(--readme-text-color);
     background-color: var(--readme-bg-color);
     margin-top: 0;
+    font-size: 12pt;
 }
 
 ul {
@@ -121,17 +123,21 @@ canvas {
 #title {
     font-size: 24pt;
     font-weight: bold;
-    text-align: center;
     margin-top: 5px;
     margin-bottom: 15px;
 }
 
+#version-num {
+    font-size: 10pt;
+    margin-top: -20px;
+    padding-top: 0;
+}
+
 #tagline {
-    text-align: center;
     font-weight: bold;
     margin-top: 5px;
 }
 
-#controls {
+#title, #version-num, #tagline, #controls {
     text-align: center;
 }

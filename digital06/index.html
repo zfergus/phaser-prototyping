@@ -1,193 +1,185 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>SpaceSim</title>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <script src="js/phaser.js"></script>
-	<script src="js/BootState.js"></script>
-	<script src="js/PreloadState.js"></script>
-	<script src="js/IntroState.js"></script>
-	<script src="js/ResourceState.js"></script>
-	<script src="js/Ship.js"></script>
-	<script src="js/PlayState.js"></script>	
-	<script src="js/CelestialBodies.js"></script>
-	<script src="js/SolarMapShip.js"></script>
-	<script src="js/SolarMapState.js"></script>
-	<script src="js/MarsExploreState.js"></script>
-	<script src="js/NeptuneExploreState.js"></script>
-	<script src="js/MoonExploreState.js"></script>
-	<script src="js/EarthExploreState.js"></script>
-	<script src="js/GameOverState.js"></script>
+    <script src="js/BootState.js"></script>
+    <script src="js/PreloadState.js"></script>
+    <script src="js/IntroState.js"></script>
+    <script src="js/ResourceState.js"></script>
+    <script src="js/Ship.js"></script>
+    <script src="js/PlayState.js"></script>
+    <script src="js/CelestialBodies.js"></script>
+    <script src="js/SolarMapShip.js"></script>
+    <script src="js/SolarMapState.js"></script>
+    <script src="js/MarsExploreState.js"></script>
+    <script src="js/NeptuneExploreState.js"></script>
+    <script src="js/MoonExploreState.js"></script>
+    <script src="js/EarthExploreState.js"></script>
+    <script src="js/GameOverState.js"></script>
     <script src="js/main.js"></script>
-	<link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-<style>
-body
-{
-    color: #FFFFFF;
-    font-family: "Avenir", Verdana, sans-serif;
-	background-color: #000;
-}
-#readme
-{
-    width: 800px;
-    margin: 10px auto;
-	
-	padding-right: 20px;
-	
-	text-align: justify;
-    text-justify: inter-word;
-}
-ul > li > ul
-{
-	text-align: left;
-}
-/* Center the game canvas */
-canvas 
-{
-   display : block;
-   margin : auto;
-}
-ul li { padding: 10px 0px; }
-a:link {color:#738FFF;text-decoration:none;}    /* unvisited link  */
-a:visited {color:#4187B2;text-decoration:none;} /* visited link    */ 
-a:hover {color:#BFCCFF;text-decoration:none;}   /* mouse over link */
-a:active {color:#99A3CC;text-decoration:none;}  /* selected link   */
-</style>
-
+    <script src="../js/toggle-readme.js"></script>
+    <meta name="viewport" content="width=device-width, inital-scale=1">
+    <link rel="stylesheet" type="text/css" href="../css/game-page.css">
+    <style>
+        :root {
+            --text-color: white;
+            --bg-color: black;
+            --readme-bg-color: #222;
+        }
+    </style>
 </head>
+
 <body>
-<div id="game"></div>
-<div id="readme">
-<center>
-<h2>SpaceSim</h2>
-<strong>Controls:</strong> Use the UP arrow to turn on the engines and thrust 
-forwards, <br>and the LEFT and Right arrows to rotate clockwise and 
-counter-clockwise respectively.
-</center>
-<ul>
+    <div id="game"></div>
+    <article>
+        <p id="title">SpaceSim</p>
+        <p id="tagline">Launch your ship into space and explore distant planets, but keep an eye
+            on your fuel.</p>
+        <p id="controls"><strong>Controls:</strong> Use the up arrow to turn on the engines and thrust
+            forwards, and the left and right arrows to rotate clockwise and counter-clockwise
+            respectively.
+        </p>
+        <button type="button" id="readme-btn">Design Documentation</button>
 
-<li><strong>High Concept:</strong><br>
-This is a space ship flight simulator that has the player launching a ship from 
-an Earth-like planet into space and to other planets all the while thinking 
-about fuel and other resources.
-</li>
+        <div id="readme">
+            <ul>
+                <li><strong>High Concept:</strong><br> This is a space ship flight simulator
+                    that has the player launching a ship from an Earth-like planet
+                    into space and to other planets all the while thinking about
+                    fuel and other resources.
+                </li>
 
-<li><strong>Player Experience Goals:</strong><br>
-The goal of this game is to have the player think critically about their 
-decisions on what resources to bring and have them learn about the physics 
-behind space ships. Also, a large goal is to create a fun game that has the 
-player coming back to try different resource loads and to travel to different 
-planets.
-</li>
+                <li><strong>Player Experience Goals:</strong><br> The goal of this game
+                    is to have the player think critically about their decisions
+                    on what resources to bring and have them learn about the physics
+                    behind space ships. Also, a large goal is to create a fun game
+                    that has the player coming back to try different resource loads
+                    and to travel to different planets.
+                </li>
 
-<li><strong>Genre:</strong><br>
-This game is a hybrid of the arcade space ship genre (<i>Asteroids</i>, 
-<i>Lunar Lander</i>, etc.), the physics simulator genre, and the <i>Oregon Trail
-</i>genre. It incorporates many physics and flight elements but there is also an
-element of resource management like in <i>Oregon Trail</i>.
-</li>
+                <li><strong>Genre:</strong><br> This game is a hybrid of the arcade space
+                    ship genre (<i>Asteroids</i>,
+                    <i>Lunar Lander</i>, etc.), the physics simulator genre, and
+                    the
+                    <i>Oregon Trail</i> genre. It incorporates many physics and flight
+                    elements but there is also an element of resource management
+                    like in <i>Oregon Trail</i>.
+                </li>
 
-<li><strong>Game play:</strong><br>
-The player starts out by deciding what resources to bring on their voyage. Each 
-resource adds more weight and therefore consumes more fuel. After the final 
-resource selection the player begins their game at the launch pad. From the 
-Earth-like planet the player can use their thrusters to get into space and 
-explore the solar system. The goal is to visit and claim all the solar bodies 
-for Science! <br>
-To visit a solar body, first go to it in the solar map and then you will be 
-taken to its high atmosphere. From there the player must successfully land on 
-the planet in order to claim it.<br>
-To control the ship use the UP arrow to turn on the engines and thrust 
-forwards, and the LEFT and Right arrows to rotate clockwise and 
-counter-clockwise respectively.
-</li>
+                <li><strong>Game play:</strong><br> The player starts out by deciding
+                    what resources to bring on their voyage. Each resource adds more
+                    weight and therefore consumes more fuel. After the final resource
+                    selection the player begins their game at the launch pad. From
+                    the Earth-like planet the player can use their thrusters to get
+                    into space and explore the solar system. The goal is to visit
+                    and claim all the solar bodies for Science! <br> To visit a solar
+                    body, first go to it in the solar map and then you will be taken
+                    to its high atmosphere. From there the player must successfully
+                    land on the planet in order to claim it.
+                    <br> To control the ship use the UP arrow to turn on the engines
+                    and thrust forwards, and the LEFT and Right arrows to rotate
+                    clockwise and counter-clockwise respectively.
+                </li>
 
-<li><strong>Prototype goal:</strong><br>
-The goal of this prototype is to incorporate more complex physics in order to 
-make a fun game that has the player thinking more mathematically about what 
-their ship is doing.
-</li>
+                <li><strong>Prototype goal:</strong><br> The goal of this prototype is
+                    to incorporate more complex physics in order to make a fun game
+                    that has the player thinking more mathematically about what their
+                    ship is doing.
+                </li>
 
-<li><strong>Features:</strong><br>
-The unique ability to traverse the solar system and visit planets with different 
-atmospheric pressures (drag), and gravitational pull (gravity) creates a 
-experience other games like <i>Lunar Landers</i> or <i>Asteroids</i>.
-</li>
+                <li><strong>Features:</strong><br> The unique ability to traverse the
+                    solar system and visit planets with different atmospheric pressures
+                    (drag), and gravitational pull (gravity) creates a experience
+                    other games like <i>Lunar Landers</i> or <i>Asteroids</i>.
+                </li>
 
-<li><strong>Setting/Premise:</strong><br>
-You are a Space Ship pilot who has been trained by the ESP, Earth Space Program,
-to fly the solar explorer the Earth Space Ship, ESS for short. You mission is to
-explore the solar system and claim the bodies in it for Science!<br>
-You have a deadly secret, however. One you would dare never tell any of your 
-supervisors.<br>
-YOU NEVER LEARNED HOW TO USE THE AUTOMATED LANDING COMPUTER! 
-</li>
+                <li><strong>Setting/Premise:</strong><br> You are a Space Ship pilot
+                    who has been trained by the ESP, Earth Space Program, to fly
+                    the solar explorer the Earth Space Ship, ESS for short. You mission
+                    is to explore the solar system and claim the bodies in it for
+                    Science!
+                    <br> You have a deadly secret, however. One you would dare never
+                    tell any of your supervisors.
+                    <br> YOU NEVER LEARNED HOW TO USE THE AUTOMATED LANDING COMPUTER!
+                </li>
 
-<li><strong>Story:</strong><br>
-As the captain of the ESS you are expected to go out and claim the solar bodies 
-for mankind, but the fact that you slept through landing training slipped by and
-now you have to try your best. Not knowing how to uses the automated landing 
-computer you figure your only chance is to land manually putting your life in 
-danger.<br>
-META: This subtle story element leads to the entire danger and dramatic tension
-of the game making it a changeling to succeed.
-</li>
+                <li><strong>Story:</strong><br> As the captain of the ESS you are expected
+                    to go out and claim the solar bodies for mankind, but the fact
+                    that you slept through landing training slipped by and now you
+                    have to try your best. Not knowing how to uses the automated
+                    landing computer you figure your only chance is to land manually
+                    putting your life in danger.
+                    <br> META: This subtle story element leads to the entire danger
+                    and dramatic tension of the game making it a changeling to succeed.
+                </li>
 
-<li><strong>Target Audience:</strong><br>
-The target audience of this game are physics fans as well as fans of resource 
-conserving games like <i>Oregon Trail</i>.
-</li>
+                <li><strong>Target Audience:</strong><br> The target audience of this
+                    game are physics fans as well as fans of resource conserving
+                    games like
+                    <i>Oregon Trail</i>.
+                </li>
 
-<li><strong>Play time:</strong><br>
-This is a game of exploration with several sights to see so the game play time 
-can be long. Play time also depends on how quickly the player masters the 
-physics and is able successfully land on their first try.<br>
-Certain parts of the game take longer (ex. the Solar Map) because the ship is 
-slowed down in order to simulate the vast distance between points.
-</li>
+                <li><strong>Play time:</strong><br> This is a game of exploration with
+                    several sights to see so the game play time can be long. Play
+                    time also depends on how quickly the player masters the physics
+                    and is able successfully land on their first try.<br> Certain
+                    parts of the game take longer (ex. the Solar Map) because the
+                    ship is slowed down in order to simulate the vast distance between
+                    points.
+                </li>
 
-<li><strong>Strategies:</strong><br>
-The best strategy is to reserve fuel as much as possible and bring as much as 
-possible. Fuel becomes key especially when in the solar map and it is very 
-important to preserve it.<br>
-It is important also to explore different solar bodies and discover their 
-secrets in order to be successful.
-</li>
+                <li><strong>Strategies:</strong><br> The best strategy is to reserve
+                    fuel as much as possible and bring as much as possible. Fuel
+                    becomes key especially when in the solar map and it is very important
+                    to preserve it.
+                    <br> It is important also to explore different solar bodies and
+                    discover their secrets in order to be successful.
+                </li>
 
-<li><strong>Prototype Assets:</strong><br>
-The artwork and animations are all self created.<br>
-The following other assets were borrowed from the linked sites and creators:
-<ul>
-	<li>
-		Space Shuttle Launch sound effect created by CGEffex:<br>
-		<a href = "http://www.freesound.org/people/CGEffex/sounds/93078/"
-		target = "blank">http://www.freesound.org/people/CGEffex/sounds/93078/
+                <li><strong>Prototype Assets:</strong><br> The artwork and animations
+                    are all self created.<br> The following other assets were borrowed
+                    from the linked sites and creators:
+                    <ul>
+                        <li>
+                            Space Shuttle Launch sound effect created by CGEffex:<br>
+                            <a href="http://www.freesound.org/people/CGEffex/sounds/93078/" target="blank">http://www.freesound.org/people/CGEffex/sounds/93078/
 		</a>
-	</li>
-	<li>
-		Background Solar Map music created by Stellardrone(Song title: Billions 
-		And BillionsAlbum artwork):<br>
-		<a href = "https://www.jamendo.com/en/track/771558/billions-and-\
-			billions" target = "blank">
+                        </li>
+                        <li>
+                            Background Solar Map music created by Stellardrone(Song title: Billions And BillionsAlbum
+                            artwork):
+                            <br>
+                            <a href="https://www.jamendo.com/en/track/771558/billions-and-\
+			billions" target="blank">
 		https://www.jamendo.com/en/track/771558/billions-and-billions
 		</a>
-	</li>
-</ul>
-</li>
+                        </li>
+                    </ul>
+                </li>
 
-<li><strong>Prototype Closest Other Game:</strong><br>
-This game is inspired by many other games including </i>Lunar Lander</i>, <i>
-Kerbal Space Program</i>, and <i>Oregon Trail</i>. It incorporates gameplay 
-elements form each game to create a unique and fun take on the arcade space 
-simulator.<br>
-Some of the physics and ship mechanics are borrowed from the Game Mechanic 
-Explorer: <a href = "http://gamemechanicexplorer.com/#thrust-1" 
-target = "blank">Space Ship Motion</a> examples as well as the Phaser P2 Physics
-example, <a href = "http://phaser.io/examples/v2/p2-physics/collision-groups" 
-target = "blank">Collision Groups</a>.
-</li>
+                <li><strong>Prototype Closest Other Game:</strong><br> This game is inspired
+                    by many other games including </i>Lunar Lander</i>, <i>
+Kerbal Space Program</i>, and <i>Oregon Trail</i>. It incorporates gameplay elements
+                    form each game to create a unique and fun take on the arcade
+                    space simulator.
+                    <br> Some of the physics and ship mechanics are borrowed from
+                    the Game Mechanic Explorer: <a href="http://gamemechanicexplorer.com/#thrust-1"
+                        target="blank">Space Ship Motion</a> examples as well as the
+                    Phaser P2 Physics example, <a href="http://phaser.io/examples/v2/p2-physics/collision-groups"
+                        target="blank">Collision Groups</a>.
+                </li>
 
-</ul>
-</div>
+            </ul>
+
+        </div>
+        <script>
+            init_readme_btn();
+        </script>
+    </article>
 </body>
+
 </html>
