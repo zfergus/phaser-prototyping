@@ -57,11 +57,16 @@ article {
 #changes-btn:not(.active), #readme-btn:not(.active) {
     color: var(--btn-text-color);
     background-color: var(--btn-bg-color);
+    border-radius: 10px;
 }
 
 .active, #changes-btn:hover, #readme-btn:hover {
     color: var(--btn-active-text-color);
     background-color: var(--btn-active-bg-color);
+}
+
+.active {
+    border-radius: 10px 10px 0 0;
 }
 
 #changes-btn:after, #readme-btn:after {
@@ -87,6 +92,7 @@ article {
     background-color: var(--readme-bg-color);
     margin-top: 0;
     font-size: 12pt;
+    border-radius: 0 0 10px 10px;
 }
 
 ul {
