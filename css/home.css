@@ -16,12 +16,12 @@ html {
 
 @font-face {
     font-family: "Open Sans";
-    src: url("assets/fonts/OpenSans.ttf");
+    src: url("../assets/fonts/OpenSans.ttf");
 }
 
 @font-face {
     font-family: "Open Sans";
-    src: url("assets/fonts/OpenSans-Bold.ttf");
+    src: url("../assets/fonts/OpenSans-Bold.ttf");
     font-weight: bold;
 }
 
