@@ -14,8 +14,8 @@ Written by: Zachary Ferguson
     --readme-text-color: var(--text-color);
     --readme-bg-color: #f1f1f1;
     --link-color: cornflowerblue;
-    --visited-link-color: mediumpurple;
-    --hover-link-color: blueviolet;
+    --visited-link-color: blueviolet;
+    --hover-link-color: mediumpurple;
     --active-link-color: var(--visited-link-color);
 }
 
@@ -51,13 +51,13 @@ article {
     text-align: left;
     border: none;
     outline: none;
-    padding: 2px 18px;
+    padding: 9px 18px;
 }
 
 #changes-btn:not(.active), #readme-btn:not(.active) {
     color: var(--btn-text-color);
     background-color: var(--btn-bg-color);
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .active, #changes-btn:hover, #readme-btn:hover {
@@ -66,7 +66,7 @@ article {
 }
 
 .active {
-    border-radius: 10px 10px 0 0;
+    border-radius: 5px 5px 0 0;
 }
 
 #changes-btn:after, #readme-btn:after {
@@ -92,7 +92,7 @@ article {
     background-color: var(--readme-bg-color);
     margin-top: 0;
     font-size: 12pt;
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 5px 5px;
 }
 
 ul {
