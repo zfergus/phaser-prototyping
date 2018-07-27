@@ -84,6 +84,24 @@ article {
     height: 100%;
 }
 
+.logos {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    margin-bottom: 15px;
+}
+
+.logos img {
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.logos img:hover {
+    transform: scale(1.1);
+}
+
 section.preview {
     margin: 0 auto 40px auto;
     overflow: hidden;
@@ -93,22 +111,17 @@ section.preview {
     color: #383838;
     border: 0px;
     line-height: 30px;
+    position: relative;
 }
 
-section.preview img {
+section.preview .teaser {
     max-width: 300px;
-    /* max-height: 158px; */
-    /* float: left;
-    display: inline;
-    margin-right: 15px; */
     padding: 0px;
     margin-right: 10px;
     vertical-align: middle;
 }
 
 section.preview .text {
-    /* margin: 10px 0px 0px 300px;
-    padding-right: 20px; */
     border: var(--border);
     display: inline-block;
     vertical-align: middle;
@@ -116,9 +129,9 @@ section.preview .text {
 }
 
 section.preview .title {
-    padding-bottom: 10px;
     font-weight: bold;
     font-size: 15pt;
+    margin-bottom: 10px;
 }
 
 section.preview .title:hover {
@@ -129,6 +142,26 @@ section.preview .text p {
     clear: right;
     line-height: 1.4em;
     margin-top: 10px;
+}
+
+section.preview .text p:not(.title) {
+    margin-top: 0;
+    margin-bottom: 48px;
+}
+
+.controls-icons {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: fit-content;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.controls-icon, .controls-icons img {
+    /* width: 40px; */
+    height: 28px;
+    margin: 0;
 }
 
 footer {
@@ -186,7 +219,7 @@ a:active {
     section.preview {
         margin: 20px 0;
     }
-    section.preview img {
+    section.preview .teaser {
         display: block;
         margin-left: auto;
         margin-right: auto;
@@ -202,12 +235,27 @@ a:active {
         display: block;
         margin-left: 10px;
         margin-right: 10px;
+        padding-bottom: 20px
+    }
+    section.preview .text p {
+        margin-bottom: 0;
     }
     section.preview p.title {
         text-align: center;
         margin-top: 0;
         margin-bottom: 10px;
         padding: 0px;
+    }
+    section.preview .text p:not(.title) {
+        margin-bottom: 0;
+    }
+    .controls-icons {
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10px;
+        display: block;
+        position: relative;
     }
     footer {
         font-size: 7pt;
