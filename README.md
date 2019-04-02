@@ -1,6 +1,6 @@
 # Phaser-Prototyping
 
-<img src="./assets/img/phaser/digital01.png" width="100%" title="Prototyping in Phaser">
+<p align="center"><img src="./assets/img/phaser/digital01.png" width="75%" title="Prototyping in Phaser"></p>
 
 **Game prototyping using Phaser, a HTML5 game engine.**
 
@@ -15,7 +15,3 @@ able to run in most modern web browsers.
 
 ## See
 Phaser's Github page: [https://github.com/photonstorm/phaser](https://github.com/photonstorm/phaser)
-
-<!-- ## ToDo
-
-* Update game pages to link back to the main page -->
