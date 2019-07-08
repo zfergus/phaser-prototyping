@@ -2,7 +2,6 @@
  * Created by Zachary Ferguson
  * Style based off of phaser.io's css.
  */
-
 :root {
     --text-color: #505050;
 }
@@ -13,7 +12,6 @@ html {
 }
 
 /* Define Open Sans font */
-
 @font-face {
     font-family: "Open Sans";
     src: url("../assets/fonts/OpenSans.ttf");
@@ -88,6 +86,7 @@ article {
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
+    width: -moz-fit-content;
     margin-bottom: 15px;
 }
 
@@ -155,6 +154,7 @@ section.preview .text p:not(.title) {
     right: 0;
     bottom: 0;
     width: fit-content;
+    width: -moz-fit-content;
     margin-right: 10px;
     margin-bottom: 5px;
 }
@@ -183,43 +183,43 @@ a:link {
 }
 
 /* unvisited link  */
-
 a:visited {
     color: #99388c;
     text-decoration: none;
 }
 
 /* visited link    */
-
 a:hover {
     color: #801D71;
     text-decoration: none;
 }
 
 /* mouse over link */
-
 a:active {
     text-decoration: none;
 }
 
 /* selected link   */
-
 @media screen and (max-width:700px) {
     header {
         font-size: 36pt;
     }
+
     article {
         padding-left: 25px;
         padding-right: 25px;
         padding-bottom: 65px;
     }
+
     .video-container {
         padding-bottom: calc(56.25%);
         width: 100%;
     }
+
     section.preview {
         margin: 20px 0;
     }
+
     section.preview .teaser {
         display: block;
         margin-left: auto;
@@ -231,6 +231,7 @@ a:active {
         max-width: 100%;
         height: auto;
     }
+
     section.preview .text {
         max-width: 100%;
         display: block;
@@ -238,18 +239,22 @@ a:active {
         margin-right: 10px;
         padding-bottom: 20px
     }
+
     section.preview .text p {
         margin-bottom: 0;
     }
+
     section.preview p.title {
         text-align: center;
         margin-top: 0;
         margin-bottom: 10px;
         padding: 0px;
     }
+
     section.preview .text p:not(.title) {
         margin-bottom: 0;
     }
+
     .controls-icons {
         float: none;
         margin-left: auto;
@@ -258,6 +263,7 @@ a:active {
         display: block;
         position: relative;
     }
+
     footer {
         font-size: 7pt;
     }
