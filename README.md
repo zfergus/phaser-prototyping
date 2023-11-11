@@ -5,7 +5,7 @@
 **Game prototyping using Phaser, a HTML5 game engine.**
 
 View pages and play games:
-[http://zfergus.me/phaser-prototyping](http://zfergus.me/phaser-prototyping)
+[https://phaser.zferg.us/](https://phaser.zferg.us/)
 
 These are game prototypes I created in the Phaser HTML5 game engine over the
 course of a semester. Each prototype was designed and implemented in about
